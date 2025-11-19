@@ -19,7 +19,9 @@ namespace WinForm_Paint_Gr12
 
         private void mainForm_Load(object sender, EventArgs e)
         {
-
+            //system-setup
+            //drawing
+            //ui-layer
         }
     }
 }
