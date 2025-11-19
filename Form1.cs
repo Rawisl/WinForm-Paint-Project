@@ -20,7 +20,9 @@ namespace WinForm_Paint_Gr12
         private void mainForm_Load(object sender, EventArgs e)
         {
             //system-setup
+
             /*test push comment - 1*/
+            //con me m beo
 
             //drawing
 
