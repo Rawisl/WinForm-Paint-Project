@@ -25,6 +25,10 @@ namespace WinForm_Paint_Gr12
             //drawing
 
             //ui-layer
+
+            //Tao moi them dong nay ne
+
+            //Voi dong nay
         }
     }
 }
