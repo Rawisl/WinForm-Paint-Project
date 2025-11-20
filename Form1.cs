@@ -31,6 +31,8 @@ namespace WinForm_Paint_Gr12
             //Tao moi them dong nay ne
 
             //Voi dong nay
+
+            //Hello World!!!
         }
     }
 }
