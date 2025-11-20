@@ -1,6 +1,6 @@
 ﻿namespace WinForm_Paint_Gr12
 {
-    partial class ToolsPanel
+    partial class StatusPanel
     {
         /// <summary> 
         /// Required designer variable.
@@ -33,21 +33,19 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(424, 103);
+            this.button1.Location = new System.Drawing.Point(48, 75);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 24);
+            this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 0;
             this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // ToolsPanel
+            // StatusPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.button1);
-            this.Name = "ToolsPanel";
-            this.Size = new System.Drawing.Size(746, 232);
+            this.Name = "StatusPanel";
             this.ResumeLayout(false);
 
         }

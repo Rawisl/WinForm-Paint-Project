@@ -28,22 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.toolsPanel1 = new WinForm_Paint_Gr12.ToolsPanel();
+            this.statusPanel1 = new WinForm_Paint_Gr12.StatusPanel();
             this.SuspendLayout();
             // 
-            // toolsPanel1
+            // statusPanel1
             // 
-            this.toolsPanel1.Location = new System.Drawing.Point(371, 119);
-            this.toolsPanel1.Name = "toolsPanel1";
-            this.toolsPanel1.Size = new System.Drawing.Size(150, 150);
-            this.toolsPanel1.TabIndex = 0;
+            this.statusPanel1.Location = new System.Drawing.Point(250, 170);
+            this.statusPanel1.Name = "statusPanel1";
+            this.statusPanel1.Size = new System.Drawing.Size(150, 150);
+            this.statusPanel1.TabIndex = 0;
             // 
             // mainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.toolsPanel1);
+            this.Controls.Add(this.statusPanel1);
             this.Name = "mainForm";
             this.Text = "Paint";
             this.Load += new System.EventHandler(this.mainForm_Load);
@@ -53,7 +53,7 @@
 
         #endregion
 
-        private ToolsPanel toolsPanel1;
+        private StatusPanel statusPanel1;
     }
 }
 

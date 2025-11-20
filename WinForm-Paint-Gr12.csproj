@@ -52,8 +52,26 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Form_Test_StatusPanel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_Test_StatusPanel.Designer.cs">
+      <DependentUpon>Form_Test_StatusPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_Test_ToolsPanel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_Test_ToolsPanel.Designer.cs">
+      <DependentUpon>Form_Test_ToolsPanel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StatusPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="StatusPanel.Designer.cs">
+      <DependentUpon>StatusPanel.cs</DependentUpon>
+    </Compile>
     <Compile Include="ToolsPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -62,6 +80,12 @@
     </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_Test_StatusPanel.resx">
+      <DependentUpon>Form_Test_StatusPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_Test_ToolsPanel.resx">
+      <DependentUpon>Form_Test_ToolsPanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -72,6 +96,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="StatusPanel.resx">
+      <DependentUpon>StatusPanel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ToolsPanel.resx">
       <DependentUpon>ToolsPanel.cs</DependentUpon>
     </EmbeddedResource>

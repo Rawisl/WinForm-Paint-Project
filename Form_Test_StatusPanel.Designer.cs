@@ -1,13 +1,13 @@
 ﻿namespace WinForm_Paint_Gr12
 {
-    partial class ToolsPanel
+    partial class Form_Test_StatusPanel
     {
-        /// <summary> 
+        /// <summary>
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary> 
+        /// <summary>
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
@@ -20,40 +20,38 @@
             base.Dispose(disposing);
         }
 
-        #region Component Designer generated code
+        #region Windows Form Designer generated code
 
-        /// <summary> 
-        /// Required method for Designer support - do not modify 
+        /// <summary>
+        /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
+            this.statusPanel1 = new WinForm_Paint_Gr12.StatusPanel();
             this.SuspendLayout();
             // 
-            // button1
+            // statusPanel1
             // 
-            this.button1.Location = new System.Drawing.Point(424, 103);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 24);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.statusPanel1.Location = new System.Drawing.Point(47, 12);
+            this.statusPanel1.Name = "statusPanel1";
+            this.statusPanel1.Size = new System.Drawing.Size(150, 150);
+            this.statusPanel1.TabIndex = 0;
             // 
-            // ToolsPanel
+            // Form_Test_StatusPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.button1);
-            this.Name = "ToolsPanel";
-            this.Size = new System.Drawing.Size(746, 232);
+            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.statusPanel1);
+            this.Name = "Form_Test_StatusPanel";
+            this.Text = "Form_Test_StatusPanel";
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
+        private StatusPanel statusPanel1;
     }
 }
