@@ -32,5 +32,10 @@ namespace WinForm_Paint_Gr12
 
             //Voi dong nay
         }
+
+        //private void toolsPanel1_Load(object sender, EventArgs e)
+        //{
+
+        //}
     }
 }
