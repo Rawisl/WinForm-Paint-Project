@@ -15,6 +15,7 @@ namespace WinForm_Paint_Gr12
         public ToolsPanel()
         {
             InitializeComponent();
+            //Thiết kế nút, chức năng nút,...
         }
 
         private void button1_Click(object sender, EventArgs e)
