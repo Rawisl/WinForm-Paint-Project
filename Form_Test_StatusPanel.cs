@@ -15,6 +15,7 @@ namespace WinForm_Paint_Gr12
         public Form_Test_StatusPanel()
         {
             InitializeComponent();
+            //Dùng để kéo 2 StatusPanel.cs và PropertiesPanel.cs về để test.
         }
     }
 }

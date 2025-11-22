@@ -15,6 +15,7 @@ namespace WinForm_Paint_Gr12
         public StatusPanel()
         {
             InitializeComponent();
+            //Thiết kế nút, chức năng nút,...
         }
     }
 }
