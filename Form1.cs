@@ -37,7 +37,7 @@ namespace WinForm_Paint_Gr12
 
         //private void toolsPanel1_Load(object sender, EventArgs e)
         //{
-
+        //
         //}
     }
 }
