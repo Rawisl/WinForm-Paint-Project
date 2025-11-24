@@ -18,7 +18,7 @@ namespace WinForm_Paint_Gr12
             //Thiết kế nút, chức năng nút,...
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void ToolsPanel_Load(object sender, EventArgs e)
         {
 
         }
