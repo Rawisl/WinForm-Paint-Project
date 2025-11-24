@@ -96,6 +96,9 @@
     <EmbeddedResource Include="Form_Test_ToolsPanel.resx">
       <DependentUpon>Form_Test_ToolsPanel.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PropertiesPanel.resx">
+      <DependentUpon>PropertiesPanel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
