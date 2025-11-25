@@ -19,7 +19,7 @@ namespace WinForm_Paint_Gr12
         }
 
         //Hàm in ra tọa độ khi di chuyển chuột
-        public void UpdateMousePosition(int x, int y)
+        public void updateMousePosition(int x, int y)
         {
             //In ra label chứa tọa độ chuột
             lblMousePosition.Text = $"X:{x},Y:{y}";
@@ -29,7 +29,7 @@ namespace WinForm_Paint_Gr12
         private void StatusPanel_MouseMove(object sender, MouseEventArgs e)
         {
             //Lấy tọa độ chuột truyền vào hàm in
-            UpdateMousePosition(e.X, e.Y);
+            updateMousePosition(e.X, e.Y);
         }
     }
 }
