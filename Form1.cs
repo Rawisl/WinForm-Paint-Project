@@ -15,6 +15,8 @@ namespace WinForm_Paint_Gr12
     {
         private Bitmap _mainbitmap; //giấy vẽ chính
         private HistoryManager _historyManager;
+        private bool isChanged = false; //tạo cờ đánh dấu giấy đó bị vẽ nét mới lên chưa
+
         //hàm riêng để tạo tờ giấy vẽ mới
         private void createNewCanvas(int width, int height)
         {
@@ -36,21 +38,15 @@ namespace WinForm_Paint_Gr12
             //gắn giấy vẽ vô ảnh
             pictureBox1.Image = _mainbitmap;
         }
+
         public mainForm()
         {
             InitializeComponent();
 
             int defaultWidth = 800;
             int defaultHeight = 400;
-            //tạo tờ giấy với kích thước bằng kích thước mặc định đã set ban đầu
-            _mainbitmap = new Bitmap(defaultWidth, defaultHeight);
-
-            //tô tờ giấy màu trắng (vì mặc định của bitmap là trong suốt)
-            using (Graphics g = Graphics.FromImage(_mainbitmap))
-            {
-                g.Clear(Color.White);
-            }
-            pictureBox1.Image = _mainbitmap;
+            //tạo giấy vẽ mới có kích thước mặc định tự set
+            createNewCanvas(defaultWidth, defaultHeight);
         }
 
         private void mainForm_Load(object sender, EventArgs e)
@@ -127,25 +123,39 @@ namespace WinForm_Paint_Gr12
                 {
                     MessageBox.Show("Không mở được file này: " + ex.Message);
                 }
+                isChanged = false;
             }
+            this.Text = System.IO.Path.GetFileName(ofd.FileName) + " - Paint App";
         }
 
         private void new_menu_Click(object sender, EventArgs e)
         {
-            //xuất ra thông báo xác nhận tạo hay không
-            DialogResult res = MessageBox.Show("Bạn có muốn tạo trang mới không? Hình cũ sẽ mất nếu chưa được lưu!", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            //chọn yes thì tạo giấy mới
-            if (res == DialogResult.Yes)
+            if (isChanged)
             {
-                using (NewCanvasDialog dlg = new NewCanvasDialog())
+                DialogResult res = MessageBox.Show(
+                    "Bạn có muốn tạo trang mới không? Hình cũ sẽ mất nếu chưa được lưu!",
+                    "Xác nhận",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning);
+
+                // Nếu người dùng chọn "No" (Không muốn mất hình cũ) -> Thoát hàm ngay lập tức
+                if (res == DialogResult.No)
                 {
-                    if (dlg.ShowDialog() == DialogResult.OK)
-                    {
-                        createNewCanvas(dlg.CanvasWidth, dlg.CanvasHeight);
-                    }
+                    return;
                 }
-                //hàm xóa lịch sử trong class history <- sẽ build sau
-                //_historyManager.Clear();
+            }
+
+            using (NewCanvasDialog dlg = new NewCanvasDialog())
+            {
+                if (dlg.ShowDialog() == DialogResult.OK)
+                {
+                    createNewCanvas(dlg.CanvasWidth, dlg.CanvasHeight);
+
+                    // Xóa lịch sử Undo/Redo (nếu có)
+                    // _historyManager.Clear();
+
+                    isChanged = false;
+                }
             }
         }
 
@@ -171,12 +181,29 @@ namespace WinForm_Paint_Gr12
                 // Lưu tờ giấy (_mainbitmap) xuống ổ cứng
                 _mainbitmap.Save(sfd.FileName, format);
             }
-
+            isChanged = false;
+            this.Text = System.IO.Path.GetFileName(sfd.FileName) + " - Paint App";
         }
 
         private void canvasContainer_panel_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void mainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (isChanged == false)
+            {
+                DialogResult res = MessageBox.Show("Bạn chưa lưu file, nếu thoát sẽ mất!", "Xác nhận", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                if (res == DialogResult.OK)
+                {
+                    save_menu_Click(sender, e);
+                }
+                else if(res == DialogResult.Cancel)
+                {
+                    e.Cancel = true;
+                }
+            }
         }
 
         //private void toolsPanel1_Load(object sender, EventArgs e)

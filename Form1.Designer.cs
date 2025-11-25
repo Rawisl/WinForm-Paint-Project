@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(mainForm));
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.file_menu = new System.Windows.Forms.ToolStripMenuItem();
@@ -61,7 +62,7 @@
             this.file_menu});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1482, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(1482, 30);
             this.menuStrip1.TabIndex = 4;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -72,28 +73,31 @@
             this.new_menu,
             this.save_menu});
             this.file_menu.Name = "file_menu";
-            this.file_menu.Size = new System.Drawing.Size(46, 24);
+            this.file_menu.Size = new System.Drawing.Size(46, 26);
             this.file_menu.Text = "&File";
             this.file_menu.Click += new System.EventHandler(this.file_menu_Click);
             // 
             // open_menu
             // 
             this.open_menu.Name = "open_menu";
-            this.open_menu.Size = new System.Drawing.Size(128, 26);
+            this.open_menu.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
+            this.open_menu.Size = new System.Drawing.Size(181, 26);
             this.open_menu.Text = "&Open";
             this.open_menu.Click += new System.EventHandler(this.open_menu_Click);
             // 
             // new_menu
             // 
             this.new_menu.Name = "new_menu";
-            this.new_menu.Size = new System.Drawing.Size(128, 26);
+            this.new_menu.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
+            this.new_menu.Size = new System.Drawing.Size(181, 26);
             this.new_menu.Text = "&New";
             this.new_menu.Click += new System.EventHandler(this.new_menu_Click);
             // 
             // save_menu
             // 
             this.save_menu.Name = "save_menu";
-            this.save_menu.Size = new System.Drawing.Size(128, 26);
+            this.save_menu.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
+            this.save_menu.Size = new System.Drawing.Size(181, 26);
             this.save_menu.Text = "&Save";
             this.save_menu.Click += new System.EventHandler(this.save_menu_Click);
             // 
@@ -103,9 +107,9 @@
             this.canvasContainer_panel.BackColor = System.Drawing.SystemColors.AppWorkspace;
             this.canvasContainer_panel.Controls.Add(this.pictureBox1);
             this.canvasContainer_panel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.canvasContainer_panel.Location = new System.Drawing.Point(0, 99);
+            this.canvasContainer_panel.Location = new System.Drawing.Point(0, 101);
             this.canvasContainer_panel.Name = "canvasContainer_panel";
-            this.canvasContainer_panel.Size = new System.Drawing.Size(1482, 638);
+            this.canvasContainer_panel.Size = new System.Drawing.Size(1482, 636);
             this.canvasContainer_panel.TabIndex = 5;
             this.canvasContainer_panel.Paint += new System.Windows.Forms.PaintEventHandler(this.canvasContainer_panel_Paint);
             // 
@@ -114,7 +118,7 @@
             this.propertiesPanel1.AutoSize = true;
             this.propertiesPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.propertiesPanel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.propertiesPanel1.Location = new System.Drawing.Point(0, 70);
+            this.propertiesPanel1.Location = new System.Drawing.Point(0, 72);
             this.propertiesPanel1.Name = "propertiesPanel1";
             this.propertiesPanel1.Size = new System.Drawing.Size(1482, 29);
             this.propertiesPanel1.TabIndex = 2;
@@ -125,7 +129,7 @@
             this.toolsPanel1.AutoSize = true;
             this.toolsPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.toolsPanel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.toolsPanel1.Location = new System.Drawing.Point(0, 28);
+            this.toolsPanel1.Location = new System.Drawing.Point(0, 30);
             this.toolsPanel1.Name = "toolsPanel1";
             this.toolsPanel1.Size = new System.Drawing.Size(1482, 42);
             this.toolsPanel1.TabIndex = 1;
@@ -153,10 +157,12 @@
             this.Controls.Add(this.statusPanel1);
             this.Controls.Add(this.menuStrip1);
             this.DoubleBuffered = true;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "mainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Paint";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.mainForm_FormClosing);
             this.Load += new System.EventHandler(this.mainForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.menuStrip1.ResumeLayout(false);
