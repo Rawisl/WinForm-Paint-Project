@@ -34,6 +34,12 @@ namespace WinForm_Paint_Gr12
                 btnPickColor.BackColor = selectedColor;
             }
         }
+
+        private void trackBar1_MouseUp(object sender, MouseEventArgs e)
+        {
+            int value = trackBar1.Value;
+            MessageBox.Show("Giá trị hiện tại: " + value);
+        }
     }
 }
 

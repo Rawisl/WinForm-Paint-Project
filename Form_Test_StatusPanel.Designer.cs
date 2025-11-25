@@ -34,16 +34,18 @@
             // 
             // propertiesPanel1
             // 
-            this.propertiesPanel1.Location = new System.Drawing.Point(630, 12);
+            this.propertiesPanel1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.propertiesPanel1.Location = new System.Drawing.Point(0, 0);
             this.propertiesPanel1.Name = "propertiesPanel1";
-            this.propertiesPanel1.Size = new System.Drawing.Size(137, 51);
+            this.propertiesPanel1.Size = new System.Drawing.Size(562, 450);
             this.propertiesPanel1.TabIndex = 1;
             // 
             // statusPanel1
             // 
-            this.statusPanel1.Location = new System.Drawing.Point(47, 12);
+            this.statusPanel1.Dock = System.Windows.Forms.DockStyle.Right;
+            this.statusPanel1.Location = new System.Drawing.Point(689, 0);
             this.statusPanel1.Name = "statusPanel1";
-            this.statusPanel1.Size = new System.Drawing.Size(150, 150);
+            this.statusPanel1.Size = new System.Drawing.Size(111, 450);
             this.statusPanel1.TabIndex = 0;
             // 
             // Form_Test_StatusPanel
