@@ -40,8 +40,10 @@ namespace WinForm_Paint_Gr12
         {
             InitializeComponent();
 
-            //tạo tờ giấy với kích thước bằng kích thước màn hình
-            _mainbitmap = new Bitmap(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
+            int defaultWidth = 800;
+            int defaultHeight = 400;
+            //tạo tờ giấy với kích thước bằng kích thước mặc định đã set ban đầu
+            _mainbitmap = new Bitmap(defaultWidth, defaultHeight);
 
             //tô tờ giấy màu trắng (vì mặc định của bitmap là trong suốt)
             using (Graphics g = Graphics.FromImage(_mainbitmap))
@@ -135,9 +137,13 @@ namespace WinForm_Paint_Gr12
             //chọn yes thì tạo giấy mới
             if (res == DialogResult.Yes)
             {
-                //lấy kích thước màn hình mặc định cho giấy mới
-                createNewCanvas(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
-
+                using (NewCanvasDialog dlg = new NewCanvasDialog())
+                {
+                    if (dlg.ShowDialog() == DialogResult.OK)
+                    {
+                        createNewCanvas(dlg.CanvasWidth, dlg.CanvasHeight);
+                    }
+                }
                 //hàm xóa lịch sử trong class history <- sẽ build sau
                 //_historyManager.Clear();
             }
@@ -165,6 +171,11 @@ namespace WinForm_Paint_Gr12
                 // Lưu tờ giấy (_mainbitmap) xuống ổ cứng
                 _mainbitmap.Save(sfd.FileName, format);
             }
+
+        }
+
+        private void canvasContainer_panel_Paint(object sender, PaintEventArgs e)
+        {
 
         }
 

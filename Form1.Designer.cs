@@ -29,61 +29,30 @@
         private void InitializeComponent()
         {
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.propertiesPanel1 = new WinForm_Paint_Gr12.PropertiesPanel();
-            this.toolsPanel1 = new WinForm_Paint_Gr12.ToolsPanel();
-            this.statusPanel1 = new WinForm_Paint_Gr12.StatusPanel();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.file_menu = new System.Windows.Forms.ToolStripMenuItem();
             this.open_menu = new System.Windows.Forms.ToolStripMenuItem();
             this.new_menu = new System.Windows.Forms.ToolStripMenuItem();
             this.save_menu = new System.Windows.Forms.ToolStripMenuItem();
+            this.canvasContainer_panel = new System.Windows.Forms.Panel();
+            this.propertiesPanel1 = new WinForm_Paint_Gr12.PropertiesPanel();
+            this.toolsPanel1 = new WinForm_Paint_Gr12.ToolsPanel();
+            this.statusPanel1 = new WinForm_Paint_Gr12.StatusPanel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.menuStrip1.SuspendLayout();
+            this.canvasContainer_panel.SuspendLayout();
             this.SuspendLayout();
             // 
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.White;
-            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox1.Location = new System.Drawing.Point(0, 99);
+            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(800, 335);
+            this.pictureBox1.Size = new System.Drawing.Size(800, 400);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.pictureBox1.TabIndex = 3;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
-            // 
-            // propertiesPanel1
-            // 
-            this.propertiesPanel1.AutoSize = true;
-            this.propertiesPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.propertiesPanel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.propertiesPanel1.Location = new System.Drawing.Point(0, 70);
-            this.propertiesPanel1.Name = "propertiesPanel1";
-            this.propertiesPanel1.Size = new System.Drawing.Size(800, 29);
-            this.propertiesPanel1.TabIndex = 2;
-            this.propertiesPanel1.Load += new System.EventHandler(this.propertiesPanel1_Load);
-            // 
-            // toolsPanel1
-            // 
-            this.toolsPanel1.AutoSize = true;
-            this.toolsPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.toolsPanel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.toolsPanel1.Location = new System.Drawing.Point(0, 28);
-            this.toolsPanel1.Name = "toolsPanel1";
-            this.toolsPanel1.Size = new System.Drawing.Size(800, 42);
-            this.toolsPanel1.TabIndex = 1;
-            this.toolsPanel1.Load += new System.EventHandler(this.toolsPanel1_Load);
-            // 
-            // statusPanel1
-            // 
-            this.statusPanel1.AutoSize = true;
-            this.statusPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.statusPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.statusPanel1.Location = new System.Drawing.Point(0, 434);
-            this.statusPanel1.Name = "statusPanel1";
-            this.statusPanel1.Size = new System.Drawing.Size(800, 16);
-            this.statusPanel1.TabIndex = 0;
-            this.statusPanel1.Load += new System.EventHandler(this.statusPanel1_Load);
             // 
             // menuStrip1
             // 
@@ -92,7 +61,7 @@
             this.file_menu});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(800, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(1482, 28);
             this.menuStrip1.TabIndex = 4;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -110,30 +79,75 @@
             // open_menu
             // 
             this.open_menu.Name = "open_menu";
-            this.open_menu.Size = new System.Drawing.Size(224, 26);
+            this.open_menu.Size = new System.Drawing.Size(128, 26);
             this.open_menu.Text = "&Open";
             this.open_menu.Click += new System.EventHandler(this.open_menu_Click);
             // 
             // new_menu
             // 
             this.new_menu.Name = "new_menu";
-            this.new_menu.Size = new System.Drawing.Size(224, 26);
+            this.new_menu.Size = new System.Drawing.Size(128, 26);
             this.new_menu.Text = "&New";
             this.new_menu.Click += new System.EventHandler(this.new_menu_Click);
             // 
             // save_menu
             // 
             this.save_menu.Name = "save_menu";
-            this.save_menu.Size = new System.Drawing.Size(224, 26);
+            this.save_menu.Size = new System.Drawing.Size(128, 26);
             this.save_menu.Text = "&Save";
             this.save_menu.Click += new System.EventHandler(this.save_menu_Click);
+            // 
+            // canvasContainer_panel
+            // 
+            this.canvasContainer_panel.AutoScroll = true;
+            this.canvasContainer_panel.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.canvasContainer_panel.Controls.Add(this.pictureBox1);
+            this.canvasContainer_panel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.canvasContainer_panel.Location = new System.Drawing.Point(0, 99);
+            this.canvasContainer_panel.Name = "canvasContainer_panel";
+            this.canvasContainer_panel.Size = new System.Drawing.Size(1482, 638);
+            this.canvasContainer_panel.TabIndex = 5;
+            this.canvasContainer_panel.Paint += new System.Windows.Forms.PaintEventHandler(this.canvasContainer_panel_Paint);
+            // 
+            // propertiesPanel1
+            // 
+            this.propertiesPanel1.AutoSize = true;
+            this.propertiesPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.propertiesPanel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.propertiesPanel1.Location = new System.Drawing.Point(0, 70);
+            this.propertiesPanel1.Name = "propertiesPanel1";
+            this.propertiesPanel1.Size = new System.Drawing.Size(1482, 29);
+            this.propertiesPanel1.TabIndex = 2;
+            this.propertiesPanel1.Load += new System.EventHandler(this.propertiesPanel1_Load);
+            // 
+            // toolsPanel1
+            // 
+            this.toolsPanel1.AutoSize = true;
+            this.toolsPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.toolsPanel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.toolsPanel1.Location = new System.Drawing.Point(0, 28);
+            this.toolsPanel1.Name = "toolsPanel1";
+            this.toolsPanel1.Size = new System.Drawing.Size(1482, 42);
+            this.toolsPanel1.TabIndex = 1;
+            this.toolsPanel1.Load += new System.EventHandler(this.toolsPanel1_Load);
+            // 
+            // statusPanel1
+            // 
+            this.statusPanel1.AutoSize = true;
+            this.statusPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.statusPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.statusPanel1.Location = new System.Drawing.Point(0, 737);
+            this.statusPanel1.Name = "statusPanel1";
+            this.statusPanel1.Size = new System.Drawing.Size(1482, 16);
+            this.statusPanel1.TabIndex = 0;
+            this.statusPanel1.Load += new System.EventHandler(this.statusPanel1_Load);
             // 
             // mainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.pictureBox1);
+            this.ClientSize = new System.Drawing.Size(1482, 753);
+            this.Controls.Add(this.canvasContainer_panel);
             this.Controls.Add(this.propertiesPanel1);
             this.Controls.Add(this.toolsPanel1);
             this.Controls.Add(this.statusPanel1);
@@ -141,11 +155,14 @@
             this.DoubleBuffered = true;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "mainForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Paint";
             this.Load += new System.EventHandler(this.mainForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.canvasContainer_panel.ResumeLayout(false);
+            this.canvasContainer_panel.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -162,6 +179,7 @@
         private System.Windows.Forms.ToolStripMenuItem open_menu;
         private System.Windows.Forms.ToolStripMenuItem new_menu;
         private System.Windows.Forms.ToolStripMenuItem save_menu;
+        private System.Windows.Forms.Panel canvasContainer_panel;
     }
 }
 
