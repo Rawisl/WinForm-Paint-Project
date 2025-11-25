@@ -28,8 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.propertiesPanel1 = new WinForm_Paint_Gr12.PropertiesPanel();
             this.statusPanel1 = new WinForm_Paint_Gr12.StatusPanel();
             this.SuspendLayout();
+            // 
+            // propertiesPanel1
+            // 
+            this.propertiesPanel1.Location = new System.Drawing.Point(630, 12);
+            this.propertiesPanel1.Name = "propertiesPanel1";
+            this.propertiesPanel1.Size = new System.Drawing.Size(137, 51);
+            this.propertiesPanel1.TabIndex = 1;
             // 
             // statusPanel1
             // 
@@ -43,6 +51,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.propertiesPanel1);
             this.Controls.Add(this.statusPanel1);
             this.Name = "Form_Test_StatusPanel";
             this.Text = "Form_Test_StatusPanel";
@@ -53,5 +62,6 @@
         #endregion
 
         private StatusPanel statusPanel1;
+        private PropertiesPanel propertiesPanel1;
     }
 }

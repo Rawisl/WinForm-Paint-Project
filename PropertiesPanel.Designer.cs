@@ -28,30 +28,36 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnPickColor = new System.Windows.Forms.Button();
+            this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.SuspendLayout();
             // 
-            // button1
+            // btnPickColor
             // 
-            this.button1.Location = new System.Drawing.Point(3, 3);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnPickColor.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPickColor.Location = new System.Drawing.Point(3, 3);
+            this.btnPickColor.Name = "btnPickColor";
+            this.btnPickColor.Size = new System.Drawing.Size(130, 49);
+            this.btnPickColor.TabIndex = 0;
+            this.btnPickColor.Text = "Chọn màu";
+            this.btnPickColor.UseVisualStyleBackColor = true;
+            this.btnPickColor.Click += new System.EventHandler(this.btnPickColor_Click);
             // 
             // PropertiesPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnPickColor);
             this.Name = "PropertiesPanel";
+            this.Size = new System.Drawing.Size(450, 156);
+            this.Load += new System.EventHandler(this.PropertiesPanel_Load);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnPickColor;
+        private System.Windows.Forms.ColorDialog colorDialog1;
     }
 }

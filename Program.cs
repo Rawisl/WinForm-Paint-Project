@@ -16,8 +16,8 @@ namespace WinForm_Paint_Gr12
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new mainForm());
-            //Application.Run(new Form_Test_StatusPanel());
+            //Application.Run(new mainForm());
+            Application.Run(new Form_Test_StatusPanel());
             //Application.Run(new Form_Test_ToolsPanel());
         }
     }

@@ -16,5 +16,24 @@ namespace WinForm_Paint_Gr12
         {
             InitializeComponent();
         }
+
+        private void PropertiesPanel_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnPickColor_Click(object sender, EventArgs e)
+        {
+            //Mở cửa sổ để chọn màu
+            if (colorDialog1.ShowDialog() == DialogResult.OK)
+            {
+                //Người dùng sẽ chọn màu
+                Color selectedColor = colorDialog1.Color;
+
+                //Cập nhật màu lại cho nút bấm (do chưa có đối tượng để cập nhật màu)
+                btnPickColor.BackColor = selectedColor;
+            }
+        }
     }
 }
+
