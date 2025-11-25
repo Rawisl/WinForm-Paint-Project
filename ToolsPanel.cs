@@ -20,6 +20,21 @@ namespace WinForm_Paint_Gr12
 
         private void ToolsPanel_Load(object sender, EventArgs e)
         {
+            
+        }
+
+        private void pencilButton_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void brushButton_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
 
         }
     }
