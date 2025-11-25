@@ -16,6 +16,23 @@ namespace WinForm_Paint_Gr12
         {
             InitializeComponent();
             //Dùng để kéo 2 StatusPanel.cs và PropertiesPanel.cs về để test.
+
+            //Bắt sự kiện di chuyển chuột khi chuột đi vào PropertiesPanel
+            propertiesPanel1.MousePositionChanged += PropertiesPanel_MousePositionChanged;
+        }
+
+        //Hàm bắt sự kiện di chuyển chuột trong form và status panel
+        private void Form_Test_StatusPanel_MouseMove(object sender, MouseEventArgs e)
+        {
+            //Gọi hàm của StatusPanel.cs và truyền tọa độ của chuột vào hàm
+            statusPanel1.UpdateMousePosition(e.X, e.Y);
+        }
+
+        //Hàm bắt sự kiện di chuyển chuột trong Properties panel
+        private void PropertiesPanel_MousePositionChanged(object sender, Point p)
+        {
+            // Gọi StatusPanel để cập nhật khi chuột đang ở trong PropertiesPanel
+            statusPanel1.UpdateMousePosition(p.X, p.Y);
         }
     }
 }

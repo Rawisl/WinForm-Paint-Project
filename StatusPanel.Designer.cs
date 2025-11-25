@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.StatusLabel = new System.Windows.Forms.Label();
+            this.lblMousePosition = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // StatusLabel
@@ -40,12 +41,23 @@
             this.StatusLabel.TabIndex = 0;
             this.StatusLabel.Text = "status";
             // 
+            // lblMousePosition
+            // 
+            this.lblMousePosition.AutoSize = true;
+            this.lblMousePosition.Location = new System.Drawing.Point(5, 23);
+            this.lblMousePosition.Name = "lblMousePosition";
+            this.lblMousePosition.Size = new System.Drawing.Size(44, 16);
+            this.lblMousePosition.TabIndex = 1;
+            this.lblMousePosition.Text = "label1";
+            // 
             // StatusPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.lblMousePosition);
             this.Controls.Add(this.StatusLabel);
             this.Name = "StatusPanel";
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.StatusPanel_MouseMove);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -54,5 +66,6 @@
         #endregion
 
         private System.Windows.Forms.Label StatusLabel;
+        private System.Windows.Forms.Label lblMousePosition;
     }
 }

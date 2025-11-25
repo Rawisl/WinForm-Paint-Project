@@ -55,8 +55,11 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.propertiesPanel1);
             this.Controls.Add(this.statusPanel1);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "Form_Test_StatusPanel";
             this.Text = "Form_Test_StatusPanel";
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Form_Test_StatusPanel_MouseMove);
             this.ResumeLayout(false);
 
         }
