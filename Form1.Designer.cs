@@ -39,9 +39,9 @@
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.White;
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox1.Location = new System.Drawing.Point(0, 71);
+            this.pictureBox1.Location = new System.Drawing.Point(0, 1061);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(800, 363);
+            this.pictureBox1.Size = new System.Drawing.Size(800, 0);
             this.pictureBox1.TabIndex = 3;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
@@ -51,7 +51,7 @@
             this.propertiesPanel1.AutoSize = true;
             this.propertiesPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.propertiesPanel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.propertiesPanel1.Location = new System.Drawing.Point(0, 42);
+            this.propertiesPanel1.Location = new System.Drawing.Point(0, 1032);
             this.propertiesPanel1.Name = "propertiesPanel1";
             this.propertiesPanel1.Size = new System.Drawing.Size(800, 29);
             this.propertiesPanel1.TabIndex = 2;
@@ -61,10 +61,11 @@
             // 
             this.toolsPanel1.AutoSize = true;
             this.toolsPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.toolsPanel1.BackColor = System.Drawing.SystemColors.ControlLight;
             this.toolsPanel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.toolsPanel1.Location = new System.Drawing.Point(0, 0);
             this.toolsPanel1.Name = "toolsPanel1";
-            this.toolsPanel1.Size = new System.Drawing.Size(800, 42);
+            this.toolsPanel1.Size = new System.Drawing.Size(800, 1032);
             this.toolsPanel1.TabIndex = 1;
             this.toolsPanel1.Load += new System.EventHandler(this.toolsPanel1_Load);
             // 

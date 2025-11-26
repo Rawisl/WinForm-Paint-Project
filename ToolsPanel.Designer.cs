@@ -68,7 +68,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox1.Location = new System.Drawing.Point(52, 75);
+            this.pictureBox1.Location = new System.Drawing.Point(62, 83);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(628, 267);
             this.pictureBox1.TabIndex = 2;

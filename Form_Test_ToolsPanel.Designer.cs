@@ -28,12 +28,25 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.toolsPanel1 = new WinForm_Paint_Gr12.ToolsPanel();
             this.SuspendLayout();
+            // 
+            // toolsPanel1
+            // 
+            this.toolsPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.toolsPanel1.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.toolsPanel1.Location = new System.Drawing.Point(2, 2);
+            this.toolsPanel1.Name = "toolsPanel1";
+            this.toolsPanel1.Size = new System.Drawing.Size(796, 447);
+            this.toolsPanel1.TabIndex = 0;
             // 
             // Form_Test_ToolsPanel
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.toolsPanel1);
             this.DoubleBuffered = true;
             this.Name = "Form_Test_ToolsPanel";
             this.Text = "Form_Test_ToolsPanel";
@@ -42,5 +55,7 @@
         }
 
         #endregion
+
+        private ToolsPanel toolsPanel1;
     }
 }
