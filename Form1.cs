@@ -16,6 +16,7 @@ namespace WinForm_Paint_Gr12
         private Bitmap _mainbitmap; //giấy vẽ chính
         private HistoryManager _historyManager;
         private bool isChanged = false; //tạo cờ đánh dấu giấy đó bị vẽ nét mới lên chưa
+        private string currentFilePath = "";//khởi tạo đường dẫn file ban đầu là rỗng
 
         //hàm riêng để tạo tờ giấy vẽ mới
         private void createNewCanvas(int width, int height)
@@ -37,6 +38,31 @@ namespace WinForm_Paint_Gr12
 
             //gắn giấy vẽ vô ảnh
             pictureBox1.Image = _mainbitmap;
+        }
+
+        //hàm riêng để lưu file xuống đường dẫn filePath
+        private void saveImages(string path)
+        {
+            string ext = System.IO.Path.GetExtension(path).ToLower(); //lấy phần đuôi định dạng của file
+            ImageFormat format = ImageFormat.Png; //mặc định lưu dưới dạng png
+            switch (ext)
+            {
+                case ".jpg":
+                case ".jpeg":
+                    format = ImageFormat.Jpeg;
+                    break;
+                case ".bmp":
+                    format = ImageFormat.Bmp;
+                    break;
+            }
+            //lưu ảnh
+            _mainbitmap.Save(path, format);
+
+            //cập nhật trạng thái
+            currentFilePath = path; //lưu thành đường dẫn mới
+            isChanged = false; //lưu xong thì set lại cờ thay đổi
+
+            this.Text = System.IO.Path.GetFileName(path) + " - Paint App";
         }
 
         public mainForm()
@@ -118,14 +144,17 @@ namespace WinForm_Paint_Gr12
 
                     // Cập nhật lại khung tranh
                     pictureBox1.Image = _mainbitmap;
+
+                    currentFilePath = ofd.FileName;
+                    this.Text = System.IO.Path.GetFileName(currentFilePath) + " - Paint App";
+                    isChanged = false;
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show("Không mở được file này: " + ex.Message);
                 }
-                isChanged = false;
             }
-            this.Text = System.IO.Path.GetFileName(ofd.FileName) + " - Paint App";
+
         }
 
         private void new_menu_Click(object sender, EventArgs e)
@@ -153,38 +182,36 @@ namespace WinForm_Paint_Gr12
 
                     // Xóa lịch sử Undo/Redo (nếu có)
                     // _historyManager.Clear();
-
+                    currentFilePath = "";
+                    this.Text = "NewPaint - Paint App";
                     isChanged = false;
                 }
             }
+
         }
 
         private void save_menu_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(currentFilePath))
+            {
+                saveAsMenu_Click(sender, e); //nếu chuỗi đường dẫn trống hoặc null thì lưu mới bằng cách gọi hàm saveAs
+            }
+            else
+            {
+                saveImages(currentFilePath); //đã tồn tại đường dẫn thì lưu đè, không cần hỏi lại
+            }
+        }
+        private void saveAsMenu_Click(object sender, EventArgs e)
         {
             SaveFileDialog sfd = new SaveFileDialog();
             sfd.Filter = "PNG Image|*.png|JPEG Image|*.jpg|Bitmap Image|*.bmp"; //bộ lọc file
             sfd.Title = "Lưu tác phẩm của bạn";
             sfd.FileName = "NewPaint.png"; //tên mặc định
-
             if (sfd.ShowDialog() == DialogResult.OK)
             {
-                // Lấy phần mở rộng file để lưu đúng định dạng
-                string ext = System.IO.Path.GetExtension(sfd.FileName).ToLower();
-                ImageFormat format = ImageFormat.Png; // Mặc định
-
-                switch (ext)
-                {
-                    case ".jpg": format = ImageFormat.Jpeg; break;
-                    case ".bmp": format = ImageFormat.Bmp; break;
-                }
-
-                // Lưu tờ giấy (_mainbitmap) xuống ổ cứng
-                _mainbitmap.Save(sfd.FileName, format);
+                saveImages(sfd.FileName);
             }
-            isChanged = false;
-            this.Text = System.IO.Path.GetFileName(sfd.FileName) + " - Paint App";
         }
-
         private void canvasContainer_panel_Paint(object sender, PaintEventArgs e)
         {
 
@@ -192,19 +219,30 @@ namespace WinForm_Paint_Gr12
 
         private void mainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (isChanged == false)
+            // Chỉ hỏi khi hình CÓ thay đổi
+            if (isChanged == true)
             {
-                DialogResult res = MessageBox.Show("Bạn chưa lưu file, nếu thoát sẽ mất!", "Xác nhận", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-                if (res == DialogResult.OK)
+                DialogResult res = MessageBox.Show(
+                    "Hình chưa được lưu. Bạn có muốn lưu trước khi thoát không?",
+                    "Cảnh báo",
+                    MessageBoxButtons.YesNoCancel, // Phải dùng 3 nút: Yes, No, Cancel
+                    MessageBoxIcon.Warning);
+
+                if (res == DialogResult.Yes)
                 {
+                    // Bấm Yes -> Lưu file -> Sau đó để Form tự đóng
                     save_menu_Click(sender, e);
                 }
-                else if(res == DialogResult.Cancel)
+                else if (res == DialogResult.Cancel)
                 {
+                    // Bấm Cancel -> Hủy lệnh đóng form -> Ở lại
                     e.Cancel = true;
                 }
+                // Nếu bấm No -> Không làm gì cả -> Form tự đóng (Mất hình cũ, đúng ý người dùng)
             }
         }
+
+
 
         //private void toolsPanel1_Load(object sender, EventArgs e)
         //{

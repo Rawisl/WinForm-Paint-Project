@@ -140,13 +140,13 @@
             this.Controls.Add(this.width_num);
             this.Controls.Add(this.height_label);
             this.Controls.Add(this.width_label);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "NewCanvasDialog";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Set Bitmap Size";
+            this.Text = "Chọn size";
             ((System.ComponentModel.ISupportInitialize)(this.height_num)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.width_num)).EndInit();
             this.ResumeLayout(false);
