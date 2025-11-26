@@ -67,6 +67,12 @@
       <DependentUpon>Form_Test_ToolsPanel.cs</DependentUpon>
     </Compile>
     <Compile Include="HistoryManager.cs" />
+    <Compile Include="NewCanvasDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NewCanvasDialog.Designer.cs">
+      <DependentUpon>NewCanvasDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="PropertiesPanel.cs">
       <SubType>UserControl</SubType>
@@ -95,6 +101,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form_Test_ToolsPanel.resx">
       <DependentUpon>Form_Test_ToolsPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NewCanvasDialog.resx">
+      <DependentUpon>NewCanvasDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PropertiesPanel.resx">
       <DependentUpon>PropertiesPanel.cs</DependentUpon>

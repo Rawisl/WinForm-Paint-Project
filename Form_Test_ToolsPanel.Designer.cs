@@ -28,31 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.toolsPanel1 = new WinForm_Paint_Gr12.ToolsPanel();
-            this.toolsPanel2 = new WinForm_Paint_Gr12.ToolsPanel();
             this.SuspendLayout();
-            // 
-            // toolsPanel1
-            // 
-            this.toolsPanel1.Location = new System.Drawing.Point(3, 1);
-            this.toolsPanel1.Name = "toolsPanel1";
-            this.toolsPanel1.Size = new System.Drawing.Size(746, 47);
-            this.toolsPanel1.TabIndex = 0;
-            // 
-            // toolsPanel2
-            // 
-            this.toolsPanel2.Location = new System.Drawing.Point(12, 54);
-            this.toolsPanel2.Name = "toolsPanel2";
-            this.toolsPanel2.Size = new System.Drawing.Size(746, 337);
-            this.toolsPanel2.TabIndex = 1;
             // 
             // Form_Test_ToolsPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.toolsPanel2);
-            this.Controls.Add(this.toolsPanel1);
             this.DoubleBuffered = true;
             this.Name = "Form_Test_ToolsPanel";
             this.Text = "Form_Test_ToolsPanel";
@@ -61,8 +43,5 @@
         }
 
         #endregion
-
-        private ToolsPanel toolsPanel1;
-        private ToolsPanel toolsPanel2;
     }
 }
