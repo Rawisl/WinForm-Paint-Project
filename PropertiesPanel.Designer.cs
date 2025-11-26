@@ -28,30 +28,65 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnPickColor = new System.Windows.Forms.Button();
+            this.colorDialog1 = new System.Windows.Forms.ColorDialog();
+            this.trackBar1 = new System.Windows.Forms.TrackBar();
+            this.btnTrackbarSize = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.SuspendLayout();
             // 
-            // button1
+            // btnPickColor
             // 
-            this.button1.Location = new System.Drawing.Point(3, 3);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnPickColor.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPickColor.Location = new System.Drawing.Point(3, 3);
+            this.btnPickColor.Name = "btnPickColor";
+            this.btnPickColor.Size = new System.Drawing.Size(130, 49);
+            this.btnPickColor.TabIndex = 0;
+            this.btnPickColor.Text = "Chọn màu";
+            this.btnPickColor.UseVisualStyleBackColor = true;
+            this.btnPickColor.Click += new System.EventHandler(this.btnPickColor_Click);
+            // 
+            // trackBar1
+            // 
+            this.trackBar1.Location = new System.Drawing.Point(0, 414);
+            this.trackBar1.Name = "trackBar1";
+            this.trackBar1.Size = new System.Drawing.Size(547, 56);
+            this.trackBar1.TabIndex = 1;
+            this.trackBar1.Visible = false;
+            this.trackBar1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.trackBar1_MouseUp);
+            // 
+            // btnTrackbarSize
+            // 
+            this.btnTrackbarSize.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTrackbarSize.Location = new System.Drawing.Point(139, 3);
+            this.btnTrackbarSize.Name = "btnTrackbarSize";
+            this.btnTrackbarSize.Size = new System.Drawing.Size(178, 49);
+            this.btnTrackbarSize.TabIndex = 2;
+            this.btnTrackbarSize.Text = "Chọn độ dày";
+            this.btnTrackbarSize.UseVisualStyleBackColor = true;
+            this.btnTrackbarSize.Click += new System.EventHandler(this.btnTrackbarSize_Click);
             // 
             // PropertiesPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnTrackbarSize);
+            this.Controls.Add(this.trackBar1);
+            this.Controls.Add(this.btnPickColor);
             this.Name = "PropertiesPanel";
+            this.Size = new System.Drawing.Size(903, 484);
+            this.Load += new System.EventHandler(this.PropertiesPanel_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnPickColor;
+        private System.Windows.Forms.ColorDialog colorDialog1;
+        private System.Windows.Forms.TrackBar trackBar1;
+        private System.Windows.Forms.Button btnTrackbarSize;
     }
 }
