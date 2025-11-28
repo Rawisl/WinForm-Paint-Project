@@ -39,8 +39,10 @@ namespace WinForm_Paint_Gr12
             brushPen.Dispose(); // Dispose để giải phóng tài nguyên tăng hiệu suất tránh lãng phí
         }
 
+        // Hàm để căn giữa canvas
         public static void CenterPictureBox(Control control, Control form)
         {
+            // công thức căn chỉnh cho picturebox ở giữa
             int x = (form.Width - control.Width) / 2;
             int y = (form.Height - control.Height) / 2;
 

@@ -37,9 +37,10 @@
             // pencilButton
             // 
             this.pencilButton.Appearance = System.Windows.Forms.Appearance.Button;
+            this.pencilButton.Checked = true;
             this.pencilButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.pencilButton.Image = global::WinForm_Paint_Gr12.Properties.Resources.pencil;
-            this.pencilButton.Location = new System.Drawing.Point(4, 3);
+            this.pencilButton.Location = new System.Drawing.Point(32, 15);
             this.pencilButton.Name = "pencilButton";
             this.pencilButton.Size = new System.Drawing.Size(42, 38);
             this.pencilButton.TabIndex = 0;
@@ -53,11 +54,10 @@
             this.brushButton.Appearance = System.Windows.Forms.Appearance.Button;
             this.brushButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.brushButton.Image = global::WinForm_Paint_Gr12.Properties.Resources.brush;
-            this.brushButton.Location = new System.Drawing.Point(52, 3);
+            this.brushButton.Location = new System.Drawing.Point(80, 15);
             this.brushButton.Name = "brushButton";
             this.brushButton.Size = new System.Drawing.Size(42, 38);
             this.brushButton.TabIndex = 1;
-            this.brushButton.TabStop = true;
             this.brushButton.UseVisualStyleBackColor = true;
             this.brushButton.CheckedChanged += new System.EventHandler(this.brushButton_CheckedChanged);
             // 
@@ -66,7 +66,7 @@
             this.drawArea.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.drawArea.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.drawArea.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.drawArea.Location = new System.Drawing.Point(15, 117);
+            this.drawArea.Location = new System.Drawing.Point(32, 129);
             this.drawArea.Name = "drawArea";
             this.drawArea.Size = new System.Drawing.Size(1450, 600);
             this.drawArea.TabIndex = 2;
@@ -82,12 +82,12 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.Controls.Add(this.drawArea);
             this.Controls.Add(this.brushButton);
             this.Controls.Add(this.pencilButton);
+            this.Controls.Add(this.drawArea);
             this.DoubleBuffered = true;
             this.Name = "ToolsPanel";
-            this.Size = new System.Drawing.Size(1233, 712);
+            this.Size = new System.Drawing.Size(1211, 662);
             this.Load += new System.EventHandler(this.ToolsPanel_Load);
             this.Resize += new System.EventHandler(this.ToolsPanel_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.drawArea)).EndInit();

@@ -87,5 +87,6 @@ namespace WinForm_Paint_Gr12
         {
             DrawingLogic.CenterPictureBox(drawArea, this);
         }
+
     }
 }

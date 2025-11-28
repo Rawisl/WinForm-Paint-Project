@@ -38,7 +38,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.toolsPanel1.AutoScroll = true;
             this.toolsPanel1.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.toolsPanel1.Location = new System.Drawing.Point(2, 1);
+            this.toolsPanel1.Location = new System.Drawing.Point(1, 1);
             this.toolsPanel1.Name = "toolsPanel1";
             this.toolsPanel1.Size = new System.Drawing.Size(1211, 662);
             this.toolsPanel1.TabIndex = 0;
