@@ -17,5 +17,19 @@ namespace WinForm_Paint_Gr12
             InitializeComponent();
             //Thiết kế nút, chức năng nút,...
         }
+
+        //Hàm in ra tọa độ khi di chuyển chuột
+        public void updateMousePosition(int x, int y)
+        {
+            //In ra label chứa tọa độ chuột
+            lblMousePosition.Text = $"X:{x},Y:{y}";
+        }
+
+        //Hàm bắt sự kiện di chuyển chuột trong status panel
+        private void StatusPanel_MouseMove(object sender, MouseEventArgs e)
+        {
+            //Lấy tọa độ chuột truyền vào hàm in
+            updateMousePosition(e.X, e.Y);
+        }
     }
 }
