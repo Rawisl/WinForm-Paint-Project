@@ -130,6 +130,7 @@
             // 
             this.toolsPanel1.AutoSize = true;
             this.toolsPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.toolsPanel1.BackColor = System.Drawing.SystemColors.ControlLight;
             this.toolsPanel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.toolsPanel1.Location = new System.Drawing.Point(0, 28);
             this.toolsPanel1.Name = "toolsPanel1";

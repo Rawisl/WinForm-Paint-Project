@@ -28,32 +28,77 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
+            this.pencilButton = new System.Windows.Forms.RadioButton();
+            this.brushButton = new System.Windows.Forms.RadioButton();
+            this.drawArea = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.drawArea)).BeginInit();
             this.SuspendLayout();
             // 
-            // button1
+            // pencilButton
             // 
-            this.button1.Location = new System.Drawing.Point(15, 15);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 24);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.pencilButton.Appearance = System.Windows.Forms.Appearance.Button;
+            this.pencilButton.Checked = true;
+            this.pencilButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.pencilButton.Image = global::WinForm_Paint_Gr12.Properties.Resources.pencil;
+            this.pencilButton.Location = new System.Drawing.Point(32, 15);
+            this.pencilButton.Name = "pencilButton";
+            this.pencilButton.Size = new System.Drawing.Size(42, 38);
+            this.pencilButton.TabIndex = 0;
+            this.pencilButton.TabStop = true;
+            this.pencilButton.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.pencilButton.UseVisualStyleBackColor = true;
+            this.pencilButton.CheckedChanged += new System.EventHandler(this.pencilButton_CheckedChanged);
+            // 
+            // brushButton
+            // 
+            this.brushButton.Appearance = System.Windows.Forms.Appearance.Button;
+            this.brushButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.brushButton.Image = global::WinForm_Paint_Gr12.Properties.Resources.brush;
+            this.brushButton.Location = new System.Drawing.Point(80, 15);
+            this.brushButton.Name = "brushButton";
+            this.brushButton.Size = new System.Drawing.Size(42, 38);
+            this.brushButton.TabIndex = 1;
+            this.brushButton.UseVisualStyleBackColor = true;
+            this.brushButton.CheckedChanged += new System.EventHandler(this.brushButton_CheckedChanged);
+            // 
+            // drawArea
+            // 
+            this.drawArea.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.drawArea.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.drawArea.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.drawArea.Location = new System.Drawing.Point(32, 129);
+            this.drawArea.Name = "drawArea";
+            this.drawArea.Size = new System.Drawing.Size(1450, 600);
+            this.drawArea.TabIndex = 2;
+            this.drawArea.TabStop = false;
+            this.drawArea.Click += new System.EventHandler(this.pictureBox1_Click);
+            this.drawArea.MouseDown += new System.Windows.Forms.MouseEventHandler(this.drawArea_MouseDown);
+            this.drawArea.MouseMove += new System.Windows.Forms.MouseEventHandler(this.drawArea_MouseMove);
+            this.drawArea.MouseUp += new System.Windows.Forms.MouseEventHandler(this.drawArea_MouseUp);
             // 
             // ToolsPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.button1);
+            this.AutoScroll = true;
+            this.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.Controls.Add(this.brushButton);
+            this.Controls.Add(this.pencilButton);
+            this.Controls.Add(this.drawArea);
+            this.DoubleBuffered = true;
             this.Name = "ToolsPanel";
-            this.Size = new System.Drawing.Size(746, 47);
+            this.Size = new System.Drawing.Size(1211, 662);
+            this.Load += new System.EventHandler(this.ToolsPanel_Load);
+            this.Resize += new System.EventHandler(this.ToolsPanel_Resize);
+            ((System.ComponentModel.ISupportInitialize)(this.drawArea)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.RadioButton pencilButton;
+        private System.Windows.Forms.RadioButton brushButton;
+        private System.Windows.Forms.PictureBox drawArea;
     }
 }
