@@ -30,8 +30,6 @@
         {
             this.pencilButton = new System.Windows.Forms.RadioButton();
             this.brushButton = new System.Windows.Forms.RadioButton();
-            this.drawArea = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.drawArea)).BeginInit();
             this.SuspendLayout();
             // 
             // pencilButton
@@ -61,36 +59,17 @@
             this.brushButton.UseVisualStyleBackColor = true;
             this.brushButton.CheckedChanged += new System.EventHandler(this.brushButton_CheckedChanged);
             // 
-            // drawArea
-            // 
-            this.drawArea.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.drawArea.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.drawArea.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.drawArea.Location = new System.Drawing.Point(32, 129);
-            this.drawArea.Name = "drawArea";
-            this.drawArea.Size = new System.Drawing.Size(1450, 600);
-            this.drawArea.TabIndex = 2;
-            this.drawArea.TabStop = false;
-            this.drawArea.Click += new System.EventHandler(this.pictureBox1_Click);
-            this.drawArea.MouseDown += new System.Windows.Forms.MouseEventHandler(this.drawArea_MouseDown);
-            this.drawArea.MouseMove += new System.Windows.Forms.MouseEventHandler(this.drawArea_MouseMove);
-            this.drawArea.MouseUp += new System.Windows.Forms.MouseEventHandler(this.drawArea_MouseUp);
-            // 
             // ToolsPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.BackColor = System.Drawing.SystemColors.Control;
             this.Controls.Add(this.brushButton);
             this.Controls.Add(this.pencilButton);
-            this.Controls.Add(this.drawArea);
             this.DoubleBuffered = true;
             this.Name = "ToolsPanel";
-            this.Size = new System.Drawing.Size(1211, 662);
-            this.Load += new System.EventHandler(this.ToolsPanel_Load);
-            this.Resize += new System.EventHandler(this.ToolsPanel_Resize);
-            ((System.ComponentModel.ISupportInitialize)(this.drawArea)).EndInit();
+            this.Size = new System.Drawing.Size(209, 61);
             this.ResumeLayout(false);
 
         }
@@ -99,6 +78,5 @@
 
         private System.Windows.Forms.RadioButton pencilButton;
         private System.Windows.Forms.RadioButton brushButton;
-        private System.Windows.Forms.PictureBox drawArea;
     }
 }

@@ -16,13 +16,11 @@ namespace WinForm_Paint_Gr12
     }
     public partial class ToolsPanel : UserControl
     {
-        bool isDrawing = false;
-        Point lastPoint;
-        Bitmap drawingSurface;
+        // 1. KHAI BÁO SỰ KIỆN (EVENT)
+        public event EventHandler toolChanged;
 
-        ToolType currentTool = ToolType.Pencil;
-        Color color = Color.Black;
-        float sizeBrush = 2.0f;
+        // Biến lưu công cụ hiện tại (Public để Form1 đọc được)
+        public ToolType currentTool { get; private set; } = ToolType.Pencil;
 
         public ToolsPanel()
         {
@@ -30,63 +28,33 @@ namespace WinForm_Paint_Gr12
             //Thiết kế nút, chức năng nút,...
         }
 
-        private void ToolsPanel_Load(object sender, EventArgs e)
+        private void OnToolSelected()
         {
-            // Tạo bitmap
-            drawingSurface = new Bitmap(drawArea.Width, drawArea.Height);
-            drawArea.Image = drawingSurface;
+            // 2. KÍCH HOẠT SỰ KIỆN (BẮN TIN)
+            toolChanged?.Invoke(this, EventArgs.Empty);
         }
 
         private void pencilButton_CheckedChanged(object sender, EventArgs e)
         {
-            currentTool = ToolType.Pencil; // Chọn công cụ pencil
+            // Chỉ xử lý khi nút được CHỌN (Checked = true)
+            // (Vì RadioButton có 2 lần nhảy event: 1 lần bỏ chọn cũ, 1 lần chọn mới)
+            if (pencilButton.Checked)
+            {
+                currentTool = ToolType.Pencil;
+                OnToolSelected(); // Báo tin rằng đã đổi tool
+            }
         }
 
         private void brushButton_CheckedChanged(object sender, EventArgs e)
         {
-            currentTool = ToolType.Brush; // Chọn công cụ brush
-        }
-
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void drawArea_MouseDown(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left)
+            if (brushButton.Checked)
             {
-                isDrawing = true;
-                lastPoint = e.Location; // cập nhật vị trí điểm vẽ lúc đó
+                currentTool = ToolType.Brush;
+                OnToolSelected(); // Báo tin ngay!
             }
         }
 
-        private void drawArea_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (isDrawing)
-            {
-                Graphics g = Graphics.FromImage(drawingSurface);
 
-                if (currentTool == ToolType.Pencil)
-                    DrawingLogic.DrawPencil(g, lastPoint, e.Location, color); // Hàm từ class DrawingLogic
-                else if (currentTool == ToolType.Brush)
-                    DrawingLogic.DrawBrush(g, lastPoint, e.Location, color, sizeBrush); // Hàm từ class DrawingLogic
-                g.Dispose();
-
-                lastPoint = e.Location; // Cập nhật ví trí điểm vẽ lúc cuối
-                drawArea.Invalidate(); // Vẽ lại
-            }
-        }
-
-        private void drawArea_MouseUp(object sender, MouseEventArgs e)
-        {
-            isDrawing = false;
-        }
-
-        private void ToolsPanel_Resize(object sender, EventArgs e)
-        {
-            DrawingLogic.CenterPictureBox(drawArea, this);
-        }
 
     }
 }

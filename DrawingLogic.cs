@@ -13,13 +13,16 @@ namespace WinForm_Paint_Gr12
     {
         //Chứa các hàm toán học: g.DrawRectangle(...), g.DrawLine(...), tính toán tọa độ x, y, w, h.
 
-        public static void DrawPencil(Graphics g, Point p1, Point p2, Color color)
+        public static void DrawPencil(Graphics g, Point p1, Point p2, Color color, float width)
         {
             // Tắt làm mịn để vẽ nét sắc cạnh
             g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None;
-            
-            Pen pen = new Pen(color, 1);
+
+            Pen pen = new Pen(color, width);
             // Nối điểm cũ với điểm mới để không bị đứt khi di chuột
+            pen.StartCap = System.Drawing.Drawing2D.LineCap.Round;
+            pen.EndCap = System.Drawing.Drawing2D.LineCap.Round;
+            pen.LineJoin = System.Drawing.Drawing2D.LineJoin.Round;
             g.DrawLine(pen, p1, p2);
             pen.Dispose(); // Dispose để giải phóng tài nguyên tăng hiệu suất tránh lãng phí
         }
@@ -30,7 +33,7 @@ namespace WinForm_Paint_Gr12
             g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
 
             Pen brushPen = new Pen(color, width);
-            
+
             // Bo tròn 2 đầu bút để đoạn vẽ liền mượt (để ý khi vẽ một đoạn sẽ thấy đầu và cuối đoạn sẽ bo tròn)
             brushPen.StartCap = System.Drawing.Drawing2D.LineCap.Round;
             brushPen.EndCap = System.Drawing.Drawing2D.LineCap.Round;

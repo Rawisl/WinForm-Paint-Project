@@ -18,6 +18,15 @@ namespace WinForm_Paint_Gr12
         private bool isChanged = false; //tạo cờ đánh dấu giấy đó bị vẽ nét mới lên chưa
         private string currentFilePath = "";//khởi tạo đường dẫn file ban đầu là rỗng
 
+        bool isDrawing = false;
+        Point lastPoint;
+
+        ToolType currentTool = ToolType.Pencil;
+        Color currentColor = Color.Black;
+        float currentSize = 1.0f;
+        float sizeBrush = 2.0f;
+
+
         //hàm riêng để tạo tờ giấy vẽ mới
         private void createNewCanvas(int width, int height)
         {
@@ -65,6 +74,25 @@ namespace WinForm_Paint_Gr12
             this.Text = System.IO.Path.GetFileName(path) + " - Paint App";
         }
 
+        //Các hàm xử lý thay đổi từ màu, size từ properties panel
+        private void propertiesPanel1_colorChanged(object sender, EventArgs e)
+        {
+            // Cập nhật biến màu cục bộ ngay lập tức
+            this.currentColor = propertiesPanel1.selectedColor;
+        }
+
+        private void propertiesPanel1_sizeChanged(object sender, EventArgs e)
+        {
+            // Cập nhật biến size cục bộ ngay lập tức
+            this.currentSize = propertiesPanel1.selectedSize;
+        }
+
+        //Hàm xử lý thay đổi công cụ từ tools panel
+        private void toolsPanel1_toolChanged(object sender, EventArgs e)
+        {
+            this.currentTool = toolsPanel1.currentTool;
+        }
+
         public mainForm()
         {
             InitializeComponent();
@@ -73,6 +101,20 @@ namespace WinForm_Paint_Gr12
             int defaultHeight = 400;
             //tạo giấy vẽ mới có kích thước mặc định tự set
             createNewCanvas(defaultWidth, defaultHeight);
+
+            // --- ĐẤU DÂY SỰ KIỆN (QUAN TRỌNG) ---
+            // Khi propertiesPanel1 hét lên "ColorChanged", chạy hàm PropertiesPanel1_ColorChanged
+            if (propertiesPanel1 != null)
+            {
+                propertiesPanel1.colorChanged += propertiesPanel1_colorChanged;
+                propertiesPanel1.sizeChanged += propertiesPanel1_sizeChanged;
+            }
+
+            // Tương tự cho ToolsPanel của Đức nếu có
+            if (toolsPanel1 != null)
+            {
+                toolsPanel1.toolChanged += toolsPanel1_toolChanged;
+            }
         }
 
         private void mainForm_Load(object sender, EventArgs e)
@@ -240,6 +282,57 @@ namespace WinForm_Paint_Gr12
                 }
                 // Nếu bấm No -> Không làm gì cả -> Form tự đóng (Mất hình cũ, đúng ý người dùng)
             }
+        }
+
+        private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                isDrawing = true;
+                lastPoint = e.Location; // cập nhật vị trí điểm vẽ lúc đó
+            }
+        }
+
+        private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
+        {
+            //cập nhật tọa độ chuột cho status panel 
+            if(statusPanel1 != null)
+                statusPanel1.updateMousePosition(e.X,e.Y);
+
+            if (isDrawing)
+            {
+                // Tạo Graphics từ tờ giấy chính (_mainbitmap)
+                using (Graphics g = Graphics.FromImage(_mainbitmap)) //không dùng using thì dùng dispose cũng được, mà dùng using cho tiện
+                {
+                    // Áp dụng khử răng cưa cho nét vẽ mượt (tùy chọn)
+                    g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+
+                    // Gọi logic vẽ của Đức
+                    if (currentTool == ToolType.Pencil)
+                    {
+                        // Pencil thường không khử răng cưa và size nhỏ (1px)
+                        g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None;
+                        DrawingLogic.DrawPencil(g, lastPoint, e.Location, currentColor,currentSize);
+                    }
+                    else if (currentTool == ToolType.Brush)
+                    {
+                        //Brush thì áp dụng antialias để nhìn nét cho mềm
+                        g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+                        DrawingLogic.DrawBrush(g, lastPoint, e.Location, currentColor, currentSize);
+                    }
+                    // Các hình học khác (Line, Rect) sẽ xử lý khác (vẽ preview), chưa làm ở đây
+                }
+
+                lastPoint = e.Location; // Cập nhật vị trí cũ
+                pictureBox1.Invalidate(); // Yêu cầu PictureBox vẽ lại tờ giấy ra màn hình
+                isChanged = true; // Đánh dấu là hình đã thay đổi
+            }
+
+        }
+
+        private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
+        {
+            isDrawing = false;
         }
 
 

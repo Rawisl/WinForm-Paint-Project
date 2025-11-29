@@ -137,5 +137,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cursor_PNG11.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cursor_PNG111.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
