@@ -14,7 +14,7 @@ namespace WinForm_Paint_Gr12
     public partial class mainForm : Form
     {
         private Bitmap _mainbitmap; //giấy vẽ chính
-        private HistoryManager _historyManager;
+        private HistoryManager historyManager;
         private bool isChanged = false; //tạo cờ đánh dấu giấy đó bị vẽ nét mới lên chưa
         private string currentFilePath = "";//khởi tạo đường dẫn file ban đầu là rỗng
 
@@ -96,6 +96,9 @@ namespace WinForm_Paint_Gr12
         public mainForm()
         {
             InitializeComponent();
+
+            //khởi tạo bộ nhớ undo/redo
+            historyManager = new HistoryManager();
 
             int defaultWidth = 800;
             int defaultHeight = 400;
@@ -290,6 +293,15 @@ namespace WinForm_Paint_Gr12
             {
                 isDrawing = true;
                 lastPoint = e.Location; // cập nhật vị trí điểm vẽ lúc đó
+            }
+
+            if (e.Button == MouseButtons.Left)
+            {
+                // Lưu lại hình ảnh hiện tại trước khi bị vẽ đè lên
+                historyManager.saveSnapshot(_mainbitmap);
+
+                isDrawing = true;
+                lastPoint = e.Location;
             }
         }
 

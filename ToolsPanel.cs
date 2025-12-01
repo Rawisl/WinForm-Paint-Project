@@ -54,7 +54,5 @@ namespace WinForm_Paint_Gr12
             }
         }
 
-
-
     }
 }
