@@ -328,8 +328,6 @@ namespace WinForm_Paint_Gr12
                     }
                     else if (currentTool == ToolType.Brush)
                     {
-                        //Brush thì áp dụng antialias để nhìn nét cho mềm
-                        g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
                         DrawingLogic.DrawBrush(g, lastPoint, e.Location, currentColor, currentSize);
                     }
                     // Các hình học khác (Line, Rect) sẽ xử lý khác (vẽ preview), chưa làm ở đây
@@ -347,11 +345,51 @@ namespace WinForm_Paint_Gr12
             isDrawing = false;
         }
 
+        private void quickUndoButton_Click(object sender, EventArgs e)
+        {
+            // Gọi hàm Undo, nó sẽ trả về bức ảnh cũ (nếu có)
+            Bitmap oldImage = historyManager.undo(_mainbitmap);
 
+            if (oldImage != null)
+            {
+                // Thay thế ảnh hiện tại bằng ảnh cũ
+                // Nhớ Dispose ảnh hiện tại để tránh rò rỉ RAM trước khi gán cái mới
+                if (_mainbitmap != null) _mainbitmap.Dispose();
 
-        //private void toolsPanel1_Load(object sender, EventArgs e)
-        //{
-        //
-        //}
+                _mainbitmap = oldImage;
+                pictureBox1.Image = _mainbitmap; // Cập nhật lên khung tranh
+                pictureBox1.Invalidate(); // Vẽ lại ngay
+            }
+        }
+
+        private void quickRedoButton_Click(object sender, EventArgs e)
+        {
+            Bitmap futureImage = historyManager.redo(_mainbitmap);
+
+            if (futureImage != null)
+            {
+                if (_mainbitmap != null) _mainbitmap.Dispose();
+
+                _mainbitmap = futureImage;
+                pictureBox1.Image = _mainbitmap;
+                pictureBox1.Invalidate();
+            }
+        }
+
+        private void mainForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            // Kiểm tra phím tắt cho Undo (Ctrl + Z)
+            if (e.Control && e.KeyCode == Keys.Z)
+            {
+                // Gọi hàm xử lý Undo
+                quickUndoButton_Click(sender, e);
+            }
+            // Kiểm tra phím tắt cho Redo (Ctrl + Y)
+            if (e.Control && e.KeyCode == Keys.Y)
+            {
+                // Gọi hàm xử lý Redo
+                quickRedoButton_Click(sender, e);
+            }
+        }
     }
 }
