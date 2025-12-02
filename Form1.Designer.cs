@@ -55,6 +55,7 @@
             this.pictureBox1.TabIndex = 3;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+            this.pictureBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
             this.pictureBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseDown);
             this.pictureBox1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseMove);
             this.pictureBox1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseUp);
@@ -66,7 +67,7 @@
             this.file_menu});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1482, 30);
+            this.menuStrip1.Size = new System.Drawing.Size(1482, 28);
             this.menuStrip1.TabIndex = 4;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -78,7 +79,7 @@
             this.save_menu,
             this.saveAsMenu});
             this.file_menu.Name = "file_menu";
-            this.file_menu.Size = new System.Drawing.Size(46, 26);
+            this.file_menu.Size = new System.Drawing.Size(46, 24);
             this.file_menu.Text = "&File";
             this.file_menu.Click += new System.EventHandler(this.file_menu_Click);
             // 
@@ -121,9 +122,9 @@
             this.canvasContainer_panel.BackColor = System.Drawing.SystemColors.AppWorkspace;
             this.canvasContainer_panel.Controls.Add(this.pictureBox1);
             this.canvasContainer_panel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.canvasContainer_panel.Location = new System.Drawing.Point(0, 141);
+            this.canvasContainer_panel.Location = new System.Drawing.Point(0, 139);
             this.canvasContainer_panel.Name = "canvasContainer_panel";
-            this.canvasContainer_panel.Size = new System.Drawing.Size(1482, 573);
+            this.canvasContainer_panel.Size = new System.Drawing.Size(1482, 587);
             this.canvasContainer_panel.TabIndex = 5;
             this.canvasContainer_panel.Paint += new System.Windows.Forms.PaintEventHandler(this.canvasContainer_panel_Paint);
             // 
@@ -132,10 +133,11 @@
             this.propertiesPanel1.AutoSize = true;
             this.propertiesPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.propertiesPanel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.propertiesPanel1.Location = new System.Drawing.Point(0, 86);
+            this.propertiesPanel1.Location = new System.Drawing.Point(0, 84);
             this.propertiesPanel1.Name = "propertiesPanel1";
             this.propertiesPanel1.Size = new System.Drawing.Size(1482, 55);
             this.propertiesPanel1.TabIndex = 2;
+            this.propertiesPanel1.FontChanged += new System.EventHandler(this.propertiesPanel1_FontChanged);
             this.propertiesPanel1.Load += new System.EventHandler(this.propertiesPanel1_Load);
             // 
             // toolsPanel1
@@ -145,7 +147,7 @@
             this.toolsPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.toolsPanel1.BackColor = System.Drawing.SystemColors.ControlLight;
             this.toolsPanel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.toolsPanel1.Location = new System.Drawing.Point(0, 30);
+            this.toolsPanel1.Location = new System.Drawing.Point(0, 28);
             this.toolsPanel1.Name = "toolsPanel1";
             this.toolsPanel1.Size = new System.Drawing.Size(1482, 56);
             this.toolsPanel1.TabIndex = 1;
@@ -156,9 +158,9 @@
             this.statusPanel1.AutoSize = true;
             this.statusPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.statusPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.statusPanel1.Location = new System.Drawing.Point(0, 714);
+            this.statusPanel1.Location = new System.Drawing.Point(0, 726);
             this.statusPanel1.Name = "statusPanel1";
-            this.statusPanel1.Size = new System.Drawing.Size(1482, 39);
+            this.statusPanel1.Size = new System.Drawing.Size(1482, 27);
             this.statusPanel1.TabIndex = 0;
             this.statusPanel1.Load += new System.EventHandler(this.statusPanel1_Load);
             // 

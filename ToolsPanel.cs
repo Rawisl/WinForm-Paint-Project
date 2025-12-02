@@ -12,7 +12,7 @@ namespace WinForm_Paint_Gr12
 {
     public enum ToolType
     {
-        Pencil, Brush
+        Pencil, Brush, Text
     }
     public partial class ToolsPanel : UserControl
     {
@@ -54,7 +54,13 @@ namespace WinForm_Paint_Gr12
             }
         }
 
-
-
+        private void textButton_CheckedChanged(object sender, EventArgs e)
+        {
+            if (((RadioButton)sender).Checked)
+            {
+                currentTool = ToolType.Text;
+                OnToolSelected(); // Báo tin rằng đã đổi sang công cụ Text
+            }
+        }
     }
 }

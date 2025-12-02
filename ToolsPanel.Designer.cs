@@ -28,9 +28,34 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.pencilButton = new System.Windows.Forms.RadioButton();
+            this.textButton = new System.Windows.Forms.RadioButton();
             this.brushButton = new System.Windows.Forms.RadioButton();
+            this.pencilButton = new System.Windows.Forms.RadioButton();
             this.SuspendLayout();
+            // 
+            // textButton
+            // 
+            this.textButton.Appearance = System.Windows.Forms.Appearance.Button;
+            this.textButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.textButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.textButton.Location = new System.Drawing.Point(128, 15);
+            this.textButton.Name = "textButton";
+            this.textButton.Size = new System.Drawing.Size(42, 38);
+            this.textButton.TabIndex = 2;
+            this.textButton.UseVisualStyleBackColor = true;
+            this.textButton.CheckedChanged += new System.EventHandler(this.textButton_CheckedChanged);
+            // 
+            // brushButton
+            // 
+            this.brushButton.Appearance = System.Windows.Forms.Appearance.Button;
+            this.brushButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.brushButton.Image = global::WinForm_Paint_Gr12.Properties.Resources.brush;
+            this.brushButton.Location = new System.Drawing.Point(80, 15);
+            this.brushButton.Name = "brushButton";
+            this.brushButton.Size = new System.Drawing.Size(42, 38);
+            this.brushButton.TabIndex = 1;
+            this.brushButton.UseVisualStyleBackColor = true;
+            this.brushButton.CheckedChanged += new System.EventHandler(this.brushButton_CheckedChanged);
             // 
             // pencilButton
             // 
@@ -47,24 +72,13 @@
             this.pencilButton.UseVisualStyleBackColor = true;
             this.pencilButton.CheckedChanged += new System.EventHandler(this.pencilButton_CheckedChanged);
             // 
-            // brushButton
-            // 
-            this.brushButton.Appearance = System.Windows.Forms.Appearance.Button;
-            this.brushButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.brushButton.Image = global::WinForm_Paint_Gr12.Properties.Resources.brush;
-            this.brushButton.Location = new System.Drawing.Point(80, 15);
-            this.brushButton.Name = "brushButton";
-            this.brushButton.Size = new System.Drawing.Size(42, 38);
-            this.brushButton.TabIndex = 1;
-            this.brushButton.UseVisualStyleBackColor = true;
-            this.brushButton.CheckedChanged += new System.EventHandler(this.brushButton_CheckedChanged);
-            // 
             // ToolsPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.BackColor = System.Drawing.SystemColors.Control;
+            this.Controls.Add(this.textButton);
             this.Controls.Add(this.brushButton);
             this.Controls.Add(this.pencilButton);
             this.DoubleBuffered = true;
@@ -78,5 +92,6 @@
 
         private System.Windows.Forms.RadioButton pencilButton;
         private System.Windows.Forms.RadioButton brushButton;
+        private System.Windows.Forms.RadioButton textButton;
     }
 }

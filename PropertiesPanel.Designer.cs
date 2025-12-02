@@ -33,6 +33,13 @@
             this.trackBar1 = new System.Windows.Forms.TrackBar();
             this.btnTrackbarSize = new System.Windows.Forms.Button();
             this.showSize_Label = new System.Windows.Forms.Label();
+            this.pnlPreviewColor = new System.Windows.Forms.Panel();
+            this.btnFont = new System.Windows.Forms.Button();
+            this.lblFontPreview = new System.Windows.Forms.Label();
+            this.fontDialog1 = new System.Windows.Forms.FontDialog();
+            this.btnBold = new System.Windows.Forms.Button();
+            this.btnItalic = new System.Windows.Forms.Button();
+            this.btnUnderline = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -60,7 +67,7 @@
             // btnTrackbarSize
             // 
             this.btnTrackbarSize.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTrackbarSize.Location = new System.Drawing.Point(139, 3);
+            this.btnTrackbarSize.Location = new System.Drawing.Point(202, 3);
             this.btnTrackbarSize.Name = "btnTrackbarSize";
             this.btnTrackbarSize.Size = new System.Drawing.Size(178, 49);
             this.btnTrackbarSize.TabIndex = 2;
@@ -79,16 +86,83 @@
             this.showSize_Label.Text = "Size:";
             this.showSize_Label.Visible = false;
             // 
+            // pnlPreviewColor
+            // 
+            this.pnlPreviewColor.Location = new System.Drawing.Point(150, 20);
+            this.pnlPreviewColor.Name = "pnlPreviewColor";
+            this.pnlPreviewColor.Size = new System.Drawing.Size(37, 32);
+            this.pnlPreviewColor.TabIndex = 4;
+            // 
+            // btnFont
+            // 
+            this.btnFont.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnFont.Location = new System.Drawing.Point(386, 3);
+            this.btnFont.Name = "btnFont";
+            this.btnFont.Size = new System.Drawing.Size(118, 49);
+            this.btnFont.TabIndex = 5;
+            this.btnFont.Text = "Font";
+            this.btnFont.UseVisualStyleBackColor = true;
+            this.btnFont.Click += new System.EventHandler(this.btnFont_Click);
+            // 
+            // lblFontPreview
+            // 
+            this.lblFontPreview.AutoSize = true;
+            this.lblFontPreview.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblFontPreview.Location = new System.Drawing.Point(510, 3);
+            this.lblFontPreview.Name = "lblFontPreview";
+            this.lblFontPreview.Size = new System.Drawing.Size(35, 18);
+            this.lblFontPreview.TabIndex = 6;
+            this.lblFontPreview.Text = "Font";
+            // 
+            // btnBold
+            // 
+            this.btnBold.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBold.Location = new System.Drawing.Point(772, -2);
+            this.btnBold.Name = "btnBold";
+            this.btnBold.Size = new System.Drawing.Size(32, 26);
+            this.btnBold.TabIndex = 7;
+            this.btnBold.Text = "B";
+            this.btnBold.UseVisualStyleBackColor = true;
+            this.btnBold.Click += new System.EventHandler(this.btnBold_Click);
+            // 
+            // btnItalic
+            // 
+            this.btnItalic.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnItalic.Location = new System.Drawing.Point(810, -2);
+            this.btnItalic.Name = "btnItalic";
+            this.btnItalic.Size = new System.Drawing.Size(32, 26);
+            this.btnItalic.TabIndex = 8;
+            this.btnItalic.Text = "I";
+            this.btnItalic.UseVisualStyleBackColor = true;
+            this.btnItalic.Click += new System.EventHandler(this.btnItalic_Click);
+            // 
+            // btnUnderline
+            // 
+            this.btnUnderline.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnUnderline.Location = new System.Drawing.Point(848, -2);
+            this.btnUnderline.Name = "btnUnderline";
+            this.btnUnderline.Size = new System.Drawing.Size(32, 26);
+            this.btnUnderline.TabIndex = 9;
+            this.btnUnderline.Text = "U";
+            this.btnUnderline.UseVisualStyleBackColor = true;
+            this.btnUnderline.Click += new System.EventHandler(this.btnUnderline_Click);
+            // 
             // PropertiesPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btnUnderline);
+            this.Controls.Add(this.btnItalic);
+            this.Controls.Add(this.btnBold);
+            this.Controls.Add(this.lblFontPreview);
+            this.Controls.Add(this.btnFont);
+            this.Controls.Add(this.pnlPreviewColor);
             this.Controls.Add(this.showSize_Label);
             this.Controls.Add(this.btnTrackbarSize);
             this.Controls.Add(this.trackBar1);
             this.Controls.Add(this.btnPickColor);
             this.Name = "PropertiesPanel";
-            this.Size = new System.Drawing.Size(637, 110);
+            this.Size = new System.Drawing.Size(883, 110);
             this.Load += new System.EventHandler(this.PropertiesPanel_Load);
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             this.ResumeLayout(false);
@@ -103,5 +177,12 @@
         private System.Windows.Forms.TrackBar trackBar1;
         private System.Windows.Forms.Button btnTrackbarSize;
         private System.Windows.Forms.Label showSize_Label;
+        private System.Windows.Forms.Panel pnlPreviewColor;
+        private System.Windows.Forms.Button btnFont;
+        private System.Windows.Forms.Label lblFontPreview;
+        private System.Windows.Forms.FontDialog fontDialog1;
+        private System.Windows.Forms.Button btnBold;
+        private System.Windows.Forms.Button btnItalic;
+        private System.Windows.Forms.Button btnUnderline;
     }
 }
