@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ToolsPanel));
             this.textButton = new System.Windows.Forms.RadioButton();
             this.brushButton = new System.Windows.Forms.RadioButton();
             this.pencilButton = new System.Windows.Forms.RadioButton();
@@ -38,6 +39,7 @@
             this.textButton.Appearance = System.Windows.Forms.Appearance.Button;
             this.textButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.textButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.textButton.Image = ((System.Drawing.Image)(resources.GetObject("textButton.Image")));
             this.textButton.Location = new System.Drawing.Point(128, 15);
             this.textButton.Name = "textButton";
             this.textButton.Size = new System.Drawing.Size(42, 38);
