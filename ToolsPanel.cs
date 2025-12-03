@@ -12,7 +12,7 @@ namespace WinForm_Paint_Gr12
 {
     public enum ToolType
     {
-        Pencil, Brush
+        Pencil, Brush, Line, Rectangle, Oval
     }
     public partial class ToolsPanel : UserControl
     {
@@ -54,7 +54,31 @@ namespace WinForm_Paint_Gr12
             }
         }
 
+        private void lineButton_CheckedChanged(object sender, EventArgs e)
+        {
+            if (lineButton.Checked)
+            {
+                currentTool = ToolType.Line;
+                OnToolSelected();
+            }
+        }
 
+        private void rectangleButton_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rectangleButton.Checked)
+            {
+                currentTool = ToolType.Rectangle;
+                OnToolSelected();
+            }
+        }
 
+        private void ellipseButton_CheckedChanged(object sender, EventArgs e)
+        {
+            if (ellipseButton.Checked)
+            {
+                currentTool = ToolType.Oval;
+                OnToolSelected();
+            }
+        }
     }
 }

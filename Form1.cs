@@ -19,6 +19,7 @@ namespace WinForm_Paint_Gr12
         private string currentFilePath = "";//khởi tạo đường dẫn file ban đầu là rỗng
 
         bool isDrawing = false;
+        Point firstPoint; // dùng cho hình học, cần có điểm đầu tiên
         Point lastPoint;
 
         ToolType currentTool = ToolType.Pencil;
@@ -289,6 +290,7 @@ namespace WinForm_Paint_Gr12
             if (e.Button == MouseButtons.Left)
             {
                 isDrawing = true;
+                firstPoint = e.Location;
                 lastPoint = e.Location; // cập nhật vị trí điểm vẽ lúc đó
             }
         }
@@ -321,6 +323,18 @@ namespace WinForm_Paint_Gr12
                         DrawingLogic.DrawBrush(g, lastPoint, e.Location, currentColor, currentSize);
                     }
                     // Các hình học khác (Line, Rect) sẽ xử lý khác (vẽ preview), chưa làm ở đây
+                    else if (currentTool == ToolType.Line)
+                    {
+                        
+                    }
+                    else if (currentTool == ToolType.Rectangle)
+                    {
+
+                    }
+                    else if (currentTool == ToolType.Oval)
+                    {
+
+                    }
                 }
 
                 lastPoint = e.Location; // Cập nhật vị trí cũ
@@ -335,6 +349,46 @@ namespace WinForm_Paint_Gr12
             isDrawing = false;
         }
 
+        // Real-Time Preview chỉ vẽ hình tạm thời
+        private void pictureBox1_Paint(object sender, PaintEventArgs e)
+        {
+            if (isDrawing)
+            {
+                // Khai báo biến bool dùng để kiểm tra phím Shift
+                bool isShiftDown = (Control.ModifierKeys & Keys.Shift) == Keys.Shift;
+                
+                // dùng if else ở đây là để tách hình học với pencil, brush ra riêng không bị dính vào nhau
+                if (currentTool == ToolType.Line)
+                    DrawingLogic.DrawPencil(e.Graphics, firstPoint, lastPoint, currentColor, currentSize);
+                else if (currentTool == ToolType.Rectangle)
+                {
+                    if (isShiftDown)
+                    {
+                        Rectangle rectange = DrawingLogic.GetPerfectShape(firstPoint, lastPoint);
+                        DrawingLogic.DrawRectangle(e.Graphics, rectange, currentColor, currentSize);
+                    }
+                    else
+                    {
+                        Rectangle rectangle = DrawingLogic.GetRectangle(firstPoint, lastPoint);
+                        DrawingLogic.DrawRectangle(e.Graphics, rectangle, currentColor, currentSize);
+                    }
+                }
+                else if (currentTool == ToolType.Oval)
+                {
+                    if (isShiftDown)
+                    {
+                        Rectangle rectange = DrawingLogic.GetPerfectShape(firstPoint, lastPoint);
+                        DrawingLogic.DrawEllipse(e.Graphics, rectange, currentColor, currentSize);
+                    }
+                    else
+                    {
+                        Rectangle rectangle = DrawingLogic.GetRectangle(firstPoint, lastPoint);
+                        DrawingLogic.DrawEllipse(e.Graphics, rectangle, currentColor, currentSize);
+                    }
+                }
+            }
+        }
+        
 
 
         //private void toolsPanel1_Load(object sender, EventArgs e)
