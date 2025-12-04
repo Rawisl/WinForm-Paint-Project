@@ -144,6 +144,9 @@
     <None Include="Resources\cursor_PNG111.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\Textbox.png" />
+  </ItemGroup>
+  <ItemGroup>
     <None Include="Resources\line1.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

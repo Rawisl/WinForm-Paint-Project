@@ -137,6 +137,7 @@
             this.propertiesPanel1.Name = "propertiesPanel1";
             this.propertiesPanel1.Size = new System.Drawing.Size(1482, 55);
             this.propertiesPanel1.TabIndex = 2;
+            this.propertiesPanel1.FontChanged += new System.EventHandler(this.propertiesPanel1_FontChanged);
             this.propertiesPanel1.Load += new System.EventHandler(this.propertiesPanel1_Load);
             // 
             // toolsPanel1
