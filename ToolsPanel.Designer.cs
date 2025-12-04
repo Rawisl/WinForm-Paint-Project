@@ -77,24 +77,12 @@
             this.pencilButton.UseVisualStyleBackColor = true;
             this.pencilButton.CheckedChanged += new System.EventHandler(this.pencilButton_CheckedChanged);
             // 
-            // brushButton
-            // 
-            this.brushButton.Appearance = System.Windows.Forms.Appearance.Button;
-            this.brushButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.brushButton.Image = global::WinForm_Paint_Gr12.Properties.Resources.brush;
-            this.brushButton.Location = new System.Drawing.Point(80, 15);
-            this.brushButton.Name = "brushButton";
-            this.brushButton.Size = new System.Drawing.Size(42, 38);
-            this.brushButton.TabIndex = 1;
-            this.brushButton.UseVisualStyleBackColor = true;
-            this.brushButton.CheckedChanged += new System.EventHandler(this.brushButton_CheckedChanged);
-            // 
             // lineButton
             // 
             this.lineButton.Appearance = System.Windows.Forms.Appearance.Button;
             this.lineButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lineButton.Image = global::WinForm_Paint_Gr12.Properties.Resources.line;
-            this.lineButton.Location = new System.Drawing.Point(128, 15);
+            this.lineButton.Location = new System.Drawing.Point(176, 15);
             this.lineButton.Name = "lineButton";
             this.lineButton.Size = new System.Drawing.Size(42, 38);
             this.lineButton.TabIndex = 2;
@@ -106,7 +94,7 @@
             this.rectangleButton.Appearance = System.Windows.Forms.Appearance.Button;
             this.rectangleButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rectangleButton.Image = global::WinForm_Paint_Gr12.Properties.Resources.rectangle;
-            this.rectangleButton.Location = new System.Drawing.Point(176, 15);
+            this.rectangleButton.Location = new System.Drawing.Point(224, 15);
             this.rectangleButton.Name = "rectangleButton";
             this.rectangleButton.Size = new System.Drawing.Size(42, 38);
             this.rectangleButton.TabIndex = 3;
@@ -118,7 +106,7 @@
             this.ellipseButton.Appearance = System.Windows.Forms.Appearance.Button;
             this.ellipseButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ellipseButton.Image = global::WinForm_Paint_Gr12.Properties.Resources.elips;
-            this.ellipseButton.Location = new System.Drawing.Point(224, 15);
+            this.ellipseButton.Location = new System.Drawing.Point(272, 15);
             this.ellipseButton.Name = "ellipseButton";
             this.ellipseButton.Size = new System.Drawing.Size(42, 38);
             this.ellipseButton.TabIndex = 4;
@@ -139,7 +127,7 @@
             this.Controls.Add(this.pencilButton);
             this.DoubleBuffered = true;
             this.Name = "ToolsPanel";
-            this.Size = new System.Drawing.Size(299, 70);
+            this.Size = new System.Drawing.Size(352, 70);
             this.ResumeLayout(false);
 
         }

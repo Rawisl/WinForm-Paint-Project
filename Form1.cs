@@ -533,15 +533,11 @@ namespace WinForm_Paint_Gr12
             }
 
             //Thêm code logic vẽ review Line, Rectangle trong tương lai
-        }
-        // Real-Time Preview chỉ vẽ hình tạm thời
-        private void pictureBox1_Paint(object sender, PaintEventArgs e)
-        {
             if (isDrawing)
             {
                 // Khai báo biến bool dùng để kiểm tra phím Shift
                 bool isShiftDown = (Control.ModifierKeys & Keys.Shift) == Keys.Shift;
-                
+
                 // dùng if else ở đây là để tách hình học với pencil, brush ra riêng không bị dính vào nhau
                 if (currentTool == ToolType.Line)
                     DrawingLogic.DrawPencil(e.Graphics, firstPoint, lastPoint, currentColor, currentSize);
@@ -573,6 +569,7 @@ namespace WinForm_Paint_Gr12
                 }
             }
         }
+        // Real-Time Preview chỉ vẽ hình tạm thời
         
 
 
