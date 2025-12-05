@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -53,6 +54,62 @@ namespace WinForm_Paint_Gr12
             if (y < 0) y = 0;
 
             control.Location = new Point(x, y);
+        }
+
+        public static void DrawRectangle(Graphics g, Rectangle r, Color color, float width)
+        {
+            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None;
+
+            using (Pen pen = new Pen(color, width))
+            {
+                g.DrawRectangle(pen, r);
+            }
+        }
+
+        // Hàm tính kích cỡ và toạ độ của hình chữ nhật
+        public static Rectangle GetRectangle(Point p1, Point p2)
+        {
+            // tính toạ độ x, y bên góc trái của hình chữ nhật
+            int x = Math.Min(p1.X, p2.X);
+            int y = Math.Min(p1.Y, p2.Y);
+
+            // tính chiều dài chiều rộng hcn
+            int width = Math.Abs(p1.X - p2.X);
+            int height = Math.Abs(p1.Y - p2.Y);
+
+            return new Rectangle(x, y, width, height);
+        }
+
+        public static void DrawEllipse(Graphics g, Rectangle rect, Color color, float width)
+        {
+            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None;
+
+            using (Pen pen = new Pen(color, width))
+            {
+                g.DrawEllipse(pen, rect);
+            }
+        }
+
+        // Hàm tính lại kích cỡ và toạ độ để vẽ hình vuông hay tròn tỉ lệ 1:1
+        public static Rectangle GetPerfectShape(Point p1, Point p2)
+        {
+            int x = Math.Min(p1.X, p2.X);
+            int y = Math.Min(p1.Y, p2.Y);
+            int width = Math.Abs(p1.X - p2.X);
+            int height = Math.Abs(p1.Y - p2.Y);
+
+            int size = Math.Min(width, height); // tính size cho tỉ lệ 1:1
+
+            // tính lại toạ độ khi thay đổi width với height bằng size
+            if (p1.X > p2.X)
+                x = p1.X - size;
+            if (p1.Y > p2.Y)
+                y = p1.Y - size;
+
+            width = size;
+            height = size;
+
+            return new Rectangle(x, y, width, height);
         }
     }
 }
