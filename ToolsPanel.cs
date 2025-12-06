@@ -12,7 +12,7 @@ namespace WinForm_Paint_Gr12
 {
     public enum ToolType
     {
-        Pencil, Brush, Text, Line, Rectangle, Oval
+        Eraser, Pencil, Brush, Text, Line, Rectangle, Oval
     }
     public partial class ToolsPanel : UserControl
     {
@@ -86,6 +86,15 @@ namespace WinForm_Paint_Gr12
             {
                 currentTool = ToolType.Text;
                 OnToolSelected(); // Báo tin rằng đã đổi sang công cụ Text
+            }
+        }
+
+        private void eraserButton_CheckedChanged(object sender, EventArgs e)
+        {
+            if(eraserButton.Checked)
+            {
+                currentTool = ToolType.Eraser;
+                OnToolSelected();
             }
         }
     }
