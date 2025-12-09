@@ -63,6 +63,7 @@ namespace WinForm_Paint_Gr12
             // Lấy hình ảnh từ Resources (Chúng ta ép kiểu từ kiểu tài nguyên sang Bitmap).
             Bitmap pencilBitmap = (Bitmap)Properties.Resources.pencil;
             Bitmap brushBitmap = (Bitmap)Properties.Resources.brush;
+            Bitmap eraserBitmap = (Bitmap)Properties.Resources.eraser;
 
             try
             {
@@ -74,14 +75,19 @@ namespace WinForm_Paint_Gr12
                 // Hotspot (Chiều rộng / 2, Chiều cao / 2) đặt điểm nóng ở trung tâm cọ.
                 Cursor customBrush = CreateCursor(brushBitmap, brushBitmap.Width / 2, brushBitmap.Height / 2);
 
+                //Tạo Cursor cho Eraser
+                // HotSpot (Chiều rộng /2, chiều cao /2) đặt điểm nóng ở trung tâm cọ
+                Cursor customEraser = CreateCursor(eraserBitmap,eraserBitmap.Width / 2, eraserBitmap.Height / 2);
+
                 // Thêm các con trỏ tùy chỉnh vào Dictionary để sử dụng sau này.
                 CursorMap.Add(ToolType.Pencil, customPencil);
                 CursorMap.Add(ToolType.Brush, customBrush);
-
-                // --- Có thể thêm các công cụ mặc định khác tại đây ---
-                // CursorMap.Add(ToolType.Eraser, Cursors.Cross);
-                // CursorMap.Add(ToolType.Text, Cursors.IBeam);
-                // CursorMap.Add(ToolType.None, Cursors.Default);
+                CursorMap.Add(ToolType.Eraser, customEraser);
+                CursorMap.Add(ToolType.Oval, Cursors.Cross);
+                CursorMap.Add(ToolType.Rectangle, Cursors.Cross);
+                CursorMap.Add(ToolType.Line, Cursors.Cross);
+                CursorMap.Add(ToolType.Text, Cursors.Cross);
+                
 
             }
             catch (Exception ex)
@@ -91,6 +97,11 @@ namespace WinForm_Paint_Gr12
                 System.Diagnostics.Debug.WriteLine($"Lỗi tạo Cursor tùy chỉnh: {ex.Message}");
                 CursorMap.Add(ToolType.Pencil, Cursors.Cross);
                 CursorMap.Add(ToolType.Brush, Cursors.Cross);
+                CursorMap.Add(ToolType.Eraser, Cursors.Cross);
+                CursorMap.Add(ToolType.Oval, Cursors.Cross);
+                CursorMap.Add(ToolType.Rectangle, Cursors.Cross);
+                CursorMap.Add(ToolType.Line, Cursors.Cross);
+                CursorMap.Add(ToolType.Text, Cursors.Cross);
             }
         }
 
