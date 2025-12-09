@@ -83,6 +83,38 @@ namespace WinForm_Paint_Gr12
             this.Text = System.IO.Path.GetFileName(path) + " - Paint App";
         }
 
+        //hàm riêng để xử lý resize
+        private void resizeCanvas(int newWidth, int newHeight)
+        {
+            //lưu vô lịch sử để lỡ resize lộn size còn undo được
+            if(historyManager != null)
+            {
+                historyManager.saveSnapshot(_mainbitmap);
+            }
+            //tạo giấy mới
+            Bitmap newCanvas = new Bitmap(newWidth, newHeight);
+
+            using (Graphics g = Graphics.FromImage(newCanvas))
+            {
+                //tô nền trắng cho giấy mới
+                g.Clear(Color.White);
+                //vẽ lại hình cũ vô giấy mới
+                if (_mainbitmap != null)
+                    g.DrawImage(_mainbitmap, 0, 0);
+            }
+
+            //xóa giấy cũ để giải phóng RAM
+            if (_mainbitmap != null)
+                _mainbitmap.Dispose();
+
+            //gán giấy mới vào thành bitmap chính
+            _mainbitmap = newCanvas;
+            pictureBox1.Image = _mainbitmap;
+
+            //đánh dấu là đã bị thay đổi
+            isChanged = true;
+        }
+
         //Các hàm xử lý thay đổi từ màu, size từ properties panel
         private void propertiesPanel1_colorChanged(object sender, EventArgs e)
         {
@@ -215,8 +247,8 @@ namespace WinForm_Paint_Gr12
                 {
                     createNewCanvas(dlg.CanvasWidth, dlg.CanvasHeight);
 
-                    // Xóa lịch sử Undo/Redo (nếu có)
-                    // _historyManager.Clear();
+                    //historyManager.Clear();
+
                     currentFilePath = "";
                     this.Text = "NewPaint - Paint App";
                     isChanged = false;
@@ -246,10 +278,6 @@ namespace WinForm_Paint_Gr12
             {
                 saveImages(sfd.FileName);
             }
-        }
-        private void canvasContainer_panel_Paint(object sender, PaintEventArgs e)
-        {
-
         }
 
         private void mainForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -632,6 +660,18 @@ namespace WinForm_Paint_Gr12
             {
                 // Gọi hàm xử lý Redo
                 quickRedoButton_Click(sender, e);
+            }
+        }
+
+        private void resizeButton_Click(object sender, EventArgs e)
+        {
+            using (resizeCanvasDialog dlg = new resizeCanvasDialog())
+            {
+                dlg.setLabel_CurrentSize(_mainbitmap.Width, _mainbitmap.Height);
+                if(dlg.ShowDialog() == DialogResult.OK)
+                {
+                        resizeCanvas(dlg.CanvasWidth, dlg.CanvasHeight);
+                }
             }
         }
     }

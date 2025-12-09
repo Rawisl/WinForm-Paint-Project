@@ -63,9 +63,19 @@ namespace WinForm_Paint_Gr12.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap brush {
+        internal static System.Drawing.Bitmap Brush_Icon {
             get {
-                object obj = ResourceManager.GetObject("brush", resourceCulture);
+                object obj = ResourceManager.GetObject("Brush_Icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Cursor_Icon {
+            get {
+                object obj = ResourceManager.GetObject("Cursor_Icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -93,9 +103,9 @@ namespace WinForm_Paint_Gr12.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap elips {
+        internal static System.Drawing.Bitmap Ellipse_Icon {
             get {
-                object obj = ResourceManager.GetObject("elips", resourceCulture);
+                object obj = ResourceManager.GetObject("Ellipse_Icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -103,9 +113,9 @@ namespace WinForm_Paint_Gr12.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap eraser {
+        internal static System.Drawing.Bitmap Eraser_Icon {
             get {
-                object obj = ResourceManager.GetObject("eraser", resourceCulture);
+                object obj = ResourceManager.GetObject("Eraser_Icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -113,9 +123,9 @@ namespace WinForm_Paint_Gr12.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap fill {
+        internal static System.Drawing.Bitmap Fill_Bucket_Icon {
             get {
-                object obj = ResourceManager.GetObject("fill", resourceCulture);
+                object obj = ResourceManager.GetObject("Fill_Bucket_Icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -123,9 +133,9 @@ namespace WinForm_Paint_Gr12.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap line {
+        internal static System.Drawing.Bitmap Line_Icon {
             get {
-                object obj = ResourceManager.GetObject("line", resourceCulture);
+                object obj = ResourceManager.GetObject("Line_Icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -133,9 +143,9 @@ namespace WinForm_Paint_Gr12.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap pencil {
+        internal static System.Drawing.Bitmap Pencil_Icon {
             get {
-                object obj = ResourceManager.GetObject("pencil", resourceCulture);
+                object obj = ResourceManager.GetObject("Pencil_Icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -143,9 +153,9 @@ namespace WinForm_Paint_Gr12.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap rectangle {
+        internal static System.Drawing.Bitmap Rectangle_Icon {
             get {
-                object obj = ResourceManager.GetObject("rectangle", resourceCulture);
+                object obj = ResourceManager.GetObject("Rectangle_Icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -153,9 +163,59 @@ namespace WinForm_Paint_Gr12.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Textbox {
+        internal static System.Drawing.Bitmap Redo_Icon {
             get {
-                object obj = ResourceManager.GetObject("Textbox", resourceCulture);
+                object obj = ResourceManager.GetObject("Redo_Icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Resize_Icon {
+            get {
+                object obj = ResourceManager.GetObject("Resize_Icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Save_Icon {
+            get {
+                object obj = ResourceManager.GetObject("Save_Icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Textbox_Icon {
+            get {
+                object obj = ResourceManager.GetObject("Textbox_Icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Triangle_Icon {
+            get {
+                object obj = ResourceManager.GetObject("Triangle_Icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Undo_Icon {
+            get {
+                object obj = ResourceManager.GetObject("Undo_Icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

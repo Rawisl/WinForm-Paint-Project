@@ -35,6 +35,7 @@
             this.height_label = new System.Windows.Forms.Label();
             this.width_label = new System.Windows.Forms.Label();
             this.currentSize_label = new System.Windows.Forms.Label();
+            this.requestLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.height_num)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.width_num)).BeginInit();
             this.SuspendLayout();
@@ -43,7 +44,7 @@
             // 
             this.cancel_button.AutoSize = true;
             this.cancel_button.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.cancel_button.Location = new System.Drawing.Point(182, 177);
+            this.cancel_button.Location = new System.Drawing.Point(182, 204);
             this.cancel_button.Name = "cancel_button";
             this.cancel_button.Size = new System.Drawing.Size(70, 30);
             this.cancel_button.TabIndex = 11;
@@ -54,7 +55,7 @@
             // 
             this.OK_Button.AutoSize = true;
             this.OK_Button.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.OK_Button.Location = new System.Drawing.Point(79, 177);
+            this.OK_Button.Location = new System.Drawing.Point(79, 204);
             this.OK_Button.Name = "OK_Button";
             this.OK_Button.Size = new System.Drawing.Size(70, 30);
             this.OK_Button.TabIndex = 10;
@@ -64,7 +65,7 @@
             // height_num
             // 
             this.height_num.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.height_num.Location = new System.Drawing.Point(192, 126);
+            this.height_num.Location = new System.Drawing.Point(192, 153);
             this.height_num.Maximum = new decimal(new int[] {
             10000,
             0,
@@ -87,7 +88,7 @@
             // width_num
             // 
             this.width_num.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.width_num.Location = new System.Drawing.Point(192, 68);
+            this.width_num.Location = new System.Drawing.Point(192, 95);
             this.width_num.Maximum = new decimal(new int[] {
             10000,
             0,
@@ -111,7 +112,7 @@
             // 
             this.height_label.AutoSize = true;
             this.height_label.Font = new System.Drawing.Font("Sans Serif Collection", 10.2F, System.Drawing.FontStyle.Bold);
-            this.height_label.Location = new System.Drawing.Point(23, 116);
+            this.height_label.Location = new System.Drawing.Point(23, 143);
             this.height_label.Name = "height_label";
             this.height_label.Size = new System.Drawing.Size(153, 58);
             this.height_label.TabIndex = 7;
@@ -121,7 +122,7 @@
             // 
             this.width_label.AutoSize = true;
             this.width_label.Font = new System.Drawing.Font("Sans Serif Collection", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.width_label.Location = new System.Drawing.Point(12, 58);
+            this.width_label.Location = new System.Drawing.Point(12, 85);
             this.width_label.Name = "width_label";
             this.width_label.Size = new System.Drawing.Size(164, 58);
             this.width_label.TabIndex = 6;
@@ -129,13 +130,23 @@
             // 
             // currentSize_label
             // 
-            this.currentSize_label.Font = new System.Drawing.Font("Sans Serif Collection", 10.2F, System.Drawing.FontStyle.Bold);
+            this.currentSize_label.Font = new System.Drawing.Font("Sans Serif Collection", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.currentSize_label.Location = new System.Drawing.Point(-2, 9);
             this.currentSize_label.Name = "currentSize_label";
-            this.currentSize_label.Size = new System.Drawing.Size(337, 48);
+            this.currentSize_label.Size = new System.Drawing.Size(337, 49);
             this.currentSize_label.TabIndex = 12;
             this.currentSize_label.Text = "label1";
             this.currentSize_label.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // requestLabel
+            // 
+            this.requestLabel.Font = new System.Drawing.Font("Sans Serif Collection", 10.2F, System.Drawing.FontStyle.Bold);
+            this.requestLabel.Location = new System.Drawing.Point(-2, 43);
+            this.requestLabel.Name = "requestLabel";
+            this.requestLabel.Size = new System.Drawing.Size(337, 42);
+            this.requestLabel.TabIndex = 13;
+            this.requestLabel.Text = "Nhập kích thước mới";
+            this.requestLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // resizeCanvasDialog
             // 
@@ -143,7 +154,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.cancel_button;
-            this.ClientSize = new System.Drawing.Size(334, 217);
+            this.ClientSize = new System.Drawing.Size(334, 253);
+            this.Controls.Add(this.requestLabel);
             this.Controls.Add(this.currentSize_label);
             this.Controls.Add(this.cancel_button);
             this.Controls.Add(this.OK_Button);
@@ -172,5 +184,6 @@
         private System.Windows.Forms.Label height_label;
         private System.Windows.Forms.Label width_label;
         private System.Windows.Forms.Label currentSize_label;
+        private System.Windows.Forms.Label requestLabel;
     }
 }
