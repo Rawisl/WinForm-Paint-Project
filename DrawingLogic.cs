@@ -28,22 +28,6 @@ namespace WinForm_Paint_Gr12
             pen.Dispose(); // Dispose để giải phóng tài nguyên tăng hiệu suất tránh lãng phí
         }
 
-        public static void DrawLine(Graphics g, Point p1, Point p2, Color color, float width)
-        {
-            // Với công cụ hình học (Line), ta nên bật làm mịn (AntiAlias) để đường thẳng đẹp hơn
-            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-
-            // Sử dụng 'using' để tự động Dispose pen sau khi dùng xong (Code gọn và an toàn hơn)
-            using (Pen pen = new Pen(color, width))
-            {
-                // Bo tròn 2 đầu mút của đoạn thẳng cho đẹp (đỡ bị cụt lủn nếu nét to)
-                pen.StartCap = System.Drawing.Drawing2D.LineCap.Round;
-                pen.EndCap = System.Drawing.Drawing2D.LineCap.Round;
-
-                // Vẽ đường thẳng từ điểm đầu (MouseDown) đến điểm cuối (MouseUp)
-                g.DrawLine(pen, p1, p2);
-            }
-        }
         public static void DrawBrush(Graphics g, Point p1, Point p2, Color color, float width)
         {
             // Bật làm mịn để vẽ nét to liền
@@ -72,9 +56,26 @@ namespace WinForm_Paint_Gr12
             control.Location = new Point(x, y);
         }
 
+        public static void DrawLine(Graphics g, Point p1, Point p2, Color color, float width)
+        {
+            // Với công cụ hình học (Line), ta nên bật làm mịn (AntiAlias) để đường thẳng đẹp hơn
+            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+
+            // Sử dụng 'using' để tự động Dispose pen sau khi dùng xong (Code gọn và an toàn hơn)
+            using (Pen pen = new Pen(color, width))
+            {
+                // Bo tròn 2 đầu mút của đoạn thẳng cho đẹp (đỡ bị cụt lủn nếu nét to)
+                pen.StartCap = System.Drawing.Drawing2D.LineCap.Round;
+                pen.EndCap = System.Drawing.Drawing2D.LineCap.Round;
+
+                // Vẽ đường thẳng từ điểm đầu (MouseDown) đến điểm cuối (MouseUp)
+                g.DrawLine(pen, p1, p2);
+            }
+        }
+
         public static void DrawRectangle(Graphics g, Rectangle r, Color color, float width)
         {
-            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None;
+            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
 
             using (Pen pen = new Pen(color, width))
             {
@@ -99,11 +100,28 @@ namespace WinForm_Paint_Gr12
 
         public static void DrawEllipse(Graphics g, Rectangle rect, Color color, float width)
         {
-            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None;
+            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
 
             using (Pen pen = new Pen(color, width))
             {
                 g.DrawEllipse(pen, rect);
+            }
+        }
+
+        public static void DrawTriangle(Graphics g, Rectangle rect, Color color, float width)
+        {
+            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+
+            using (Pen pen = new Pen(color, width))
+            {
+                //bo tròn các góc nối để hình nhìn mềm hơn
+                pen.LineJoin = System.Drawing.Drawing2D.LineJoin.Round;
+
+                Point p1 = new Point(rect.X + rect.Width / 2, rect.Y); //tính tọa độ đỉnh giữa
+                Point p2 = new Point(rect.X, rect.Bottom); //góc trái (Dưới)
+                Point p3 = new Point(rect.Right, rect.Bottom); //góc phải (dưới)
+
+                g.DrawPolygon(pen, new Point[] { p1, p2, p3 });
             }
         }
 

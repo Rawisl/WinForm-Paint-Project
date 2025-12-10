@@ -32,18 +32,20 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ToolsPanel));
             this.panel1 = new System.Windows.Forms.Panel();
             this.eraserButton = new System.Windows.Forms.RadioButton();
+            this.IconList = new System.Windows.Forms.ImageList(this.components);
             this.ellipseButton = new System.Windows.Forms.RadioButton();
             this.textButton = new System.Windows.Forms.RadioButton();
             this.rectangleButton = new System.Windows.Forms.RadioButton();
             this.pencilButton = new System.Windows.Forms.RadioButton();
             this.lineButton = new System.Windows.Forms.RadioButton();
             this.brushButton = new System.Windows.Forms.RadioButton();
-            this.IconList = new System.Windows.Forms.ImageList(this.components);
+            this.triangleButton = new System.Windows.Forms.RadioButton();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.triangleButton);
             this.panel1.Controls.Add(this.eraserButton);
             this.panel1.Controls.Add(this.ellipseButton);
             this.panel1.Controls.Add(this.textButton);
@@ -51,9 +53,9 @@
             this.panel1.Controls.Add(this.pencilButton);
             this.panel1.Controls.Add(this.lineButton);
             this.panel1.Controls.Add(this.brushButton);
-            this.panel1.Location = new System.Drawing.Point(14, 3);
+            this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(356, 61);
+            this.panel1.Size = new System.Drawing.Size(434, 61);
             this.panel1.TabIndex = 6;
             // 
             // eraserButton
@@ -73,6 +75,20 @@
             this.eraserButton.UseVisualStyleBackColor = true;
             this.eraserButton.CheckedChanged += new System.EventHandler(this.eraserButton_CheckedChanged);
             // 
+            // IconList
+            // 
+            this.IconList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("IconList.ImageStream")));
+            this.IconList.TransparentColor = System.Drawing.Color.Transparent;
+            this.IconList.Images.SetKeyName(0, "Eraser_Icon.png");
+            this.IconList.Images.SetKeyName(1, "Brush_Icon.png");
+            this.IconList.Images.SetKeyName(2, "Ellipse_Icon.png");
+            this.IconList.Images.SetKeyName(3, "Fill_Bucket_Icon.png");
+            this.IconList.Images.SetKeyName(4, "Line_Icon.png");
+            this.IconList.Images.SetKeyName(5, "Pencil_Icon.png");
+            this.IconList.Images.SetKeyName(6, "Rectangle_Icon.png");
+            this.IconList.Images.SetKeyName(7, "Textbox_Icon.png");
+            this.IconList.Images.SetKeyName(8, "Triangle_Icon.png");
+            // 
             // ellipseButton
             // 
             this.ellipseButton.Appearance = System.Windows.Forms.Appearance.Button;
@@ -80,7 +96,7 @@
             this.ellipseButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.ellipseButton.ImageKey = "Ellipse_Icon.png";
             this.ellipseButton.ImageList = this.IconList;
-            this.ellipseButton.Location = new System.Drawing.Point(288, 0);
+            this.ellipseButton.Location = new System.Drawing.Point(306, 0);
             this.ellipseButton.Name = "ellipseButton";
             this.ellipseButton.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
             this.ellipseButton.Size = new System.Drawing.Size(45, 45);
@@ -97,7 +113,7 @@
             this.textButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.textButton.ImageKey = "Textbox_Icon.png";
             this.textButton.ImageList = this.IconList;
-            this.textButton.Location = new System.Drawing.Point(144, 0);
+            this.textButton.Location = new System.Drawing.Point(153, 0);
             this.textButton.Name = "textButton";
             this.textButton.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
             this.textButton.Size = new System.Drawing.Size(45, 45);
@@ -113,7 +129,7 @@
             this.rectangleButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.rectangleButton.ImageIndex = 6;
             this.rectangleButton.ImageList = this.IconList;
-            this.rectangleButton.Location = new System.Drawing.Point(240, 0);
+            this.rectangleButton.Location = new System.Drawing.Point(255, 0);
             this.rectangleButton.Name = "rectangleButton";
             this.rectangleButton.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
             this.rectangleButton.Size = new System.Drawing.Size(45, 45);
@@ -130,7 +146,7 @@
             this.pencilButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.pencilButton.ImageKey = "Pencil_Icon.png";
             this.pencilButton.ImageList = this.IconList;
-            this.pencilButton.Location = new System.Drawing.Point(48, 0);
+            this.pencilButton.Location = new System.Drawing.Point(51, 0);
             this.pencilButton.Name = "pencilButton";
             this.pencilButton.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
             this.pencilButton.Size = new System.Drawing.Size(45, 45);
@@ -147,7 +163,7 @@
             this.lineButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.lineButton.ImageKey = "Line_Icon.png";
             this.lineButton.ImageList = this.IconList;
-            this.lineButton.Location = new System.Drawing.Point(192, 0);
+            this.lineButton.Location = new System.Drawing.Point(204, 0);
             this.lineButton.Name = "lineButton";
             this.lineButton.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
             this.lineButton.Size = new System.Drawing.Size(45, 45);
@@ -163,7 +179,7 @@
             this.brushButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.brushButton.ImageIndex = 1;
             this.brushButton.ImageList = this.IconList;
-            this.brushButton.Location = new System.Drawing.Point(96, 0);
+            this.brushButton.Location = new System.Drawing.Point(102, 0);
             this.brushButton.Name = "brushButton";
             this.brushButton.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
             this.brushButton.Size = new System.Drawing.Size(45, 45);
@@ -172,19 +188,21 @@
             this.brushButton.UseVisualStyleBackColor = true;
             this.brushButton.CheckedChanged += new System.EventHandler(this.brushButton_CheckedChanged);
             // 
-            // IconList
+            // triangleButton
             // 
-            this.IconList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("IconList.ImageStream")));
-            this.IconList.TransparentColor = System.Drawing.Color.Transparent;
-            this.IconList.Images.SetKeyName(0, "Eraser_Icon.png");
-            this.IconList.Images.SetKeyName(1, "Brush_Icon.png");
-            this.IconList.Images.SetKeyName(2, "Ellipse_Icon.png");
-            this.IconList.Images.SetKeyName(3, "Fill_Bucket_Icon.png");
-            this.IconList.Images.SetKeyName(4, "Line_Icon.png");
-            this.IconList.Images.SetKeyName(5, "Pencil_Icon.png");
-            this.IconList.Images.SetKeyName(6, "Rectangle_Icon.png");
-            this.IconList.Images.SetKeyName(7, "Textbox_Icon.png");
-            this.IconList.Images.SetKeyName(8, "Triangle_Icon.png");
+            this.triangleButton.Appearance = System.Windows.Forms.Appearance.Button;
+            this.triangleButton.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.triangleButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.triangleButton.ImageKey = "Triangle_Icon.png";
+            this.triangleButton.ImageList = this.IconList;
+            this.triangleButton.Location = new System.Drawing.Point(357, 0);
+            this.triangleButton.Name = "triangleButton";
+            this.triangleButton.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
+            this.triangleButton.Size = new System.Drawing.Size(45, 45);
+            this.triangleButton.TabIndex = 6;
+            this.triangleButton.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.triangleButton.UseVisualStyleBackColor = true;
+            this.triangleButton.CheckedChanged += new System.EventHandler(this.triangleButton_CheckedChanged);
             // 
             // ToolsPanel
             // 
@@ -195,7 +213,7 @@
             this.Controls.Add(this.panel1);
             this.DoubleBuffered = true;
             this.Name = "ToolsPanel";
-            this.Size = new System.Drawing.Size(398, 77);
+            this.Size = new System.Drawing.Size(542, 77);
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -212,5 +230,6 @@
         private System.Windows.Forms.RadioButton eraserButton;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ImageList IconList;
+        private System.Windows.Forms.RadioButton triangleButton;
     }
 }
