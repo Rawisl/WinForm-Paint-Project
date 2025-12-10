@@ -54,8 +54,11 @@ namespace WinForm_Paint_Gr12
                 g.Clear(Color.White);
             }
 
+            historyManager.ClearAll();
+            historyManager.saveSnapshot(_mainbitmap);
             //gắn giấy vẽ vô ảnh
             pictureBox1.Image = _mainbitmap;
+            updateUnReButton();
         }
 
         //hàm riêng để lưu file xuống đường dẫn filePath
@@ -87,7 +90,7 @@ namespace WinForm_Paint_Gr12
         private void resizeCanvas(int newWidth, int newHeight)
         {
             //lưu vô lịch sử để lỡ resize lộn size còn undo được
-            if(historyManager != null)
+            if (historyManager != null)
             {
                 historyManager.saveSnapshot(_mainbitmap);
             }
@@ -113,6 +116,17 @@ namespace WinForm_Paint_Gr12
 
             //đánh dấu là đã bị thay đổi
             isChanged = true;
+        }
+
+        //hàm riêng để xử lý trạng thái của 2 nút undo/redo
+        private void updateUnReButton()
+        {
+            if(historyManager != null)
+            {
+                //còn undo được thì bật nút undo, tương tự với redo
+                quickUndoButton.Enabled = historyManager.CanUndo;
+                quickRedoButton.Enabled = historyManager.CanRedo;
+            }
         }
 
         //Các hàm xử lý thay đổi từ màu, size từ properties panel
@@ -247,7 +261,8 @@ namespace WinForm_Paint_Gr12
                 {
                     createNewCanvas(dlg.CanvasWidth, dlg.CanvasHeight);
 
-                    //historyManager.Clear();
+                    //giải phóng RAM bằng cách xóa sạch lịch sử bên canvas cũ
+                    historyManager.ClearAll();
 
                     currentFilePath = "";
                     this.Text = "NewPaint - Paint App";
@@ -309,7 +324,6 @@ namespace WinForm_Paint_Gr12
         {
             if (e.Button == MouseButtons.Left)
             {
-                historyManager.saveSnapshot(_mainbitmap);
                 if (currentTool == ToolType.Text) // Xử lý Text Tool
                 {
                     // Nếu đã có TextBox đang hoạt động, không làm gì cả
@@ -410,6 +424,7 @@ namespace WinForm_Paint_Gr12
 
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
+
             if (isDrawingTextBounds)
             {
                 isDrawingTextBounds = false; // Kết thúc chế độ vẽ vùng
@@ -475,6 +490,9 @@ namespace WinForm_Paint_Gr12
                         }
                     }
                 }
+
+                historyManager.saveSnapshot(_mainbitmap);
+                updateUnReButton();
                 // Logic chung cho các công cụ vẽ khác
                 pictureBox1.Invalidate();
                 isChanged = true;
@@ -538,6 +556,7 @@ namespace WinForm_Paint_Gr12
                             activeTextBox.Location.Y
                         );
                     }
+                    historyManager.saveSnapshot(_mainbitmap);
                 }
             }
             // Dọn dẹp và xóa TextBox tạm thời
@@ -623,7 +642,9 @@ namespace WinForm_Paint_Gr12
                 _mainbitmap = futureImage;
                 pictureBox1.Image = _mainbitmap;
                 pictureBox1.Invalidate();
+                updateUnReButton();
             }
+
         }
         private void quickUndoButton_Click(object sender, EventArgs e)
         {
@@ -639,6 +660,7 @@ namespace WinForm_Paint_Gr12
                 _mainbitmap = oldImage;
                 pictureBox1.Image = _mainbitmap; // Cập nhật lên khung tranh
                 pictureBox1.Invalidate(); // Vẽ lại ngay
+                updateUnReButton();
             }
 
             // 3. Dọn dẹp và xóa TextBox tạm thời
@@ -646,6 +668,7 @@ namespace WinForm_Paint_Gr12
 
             // Yêu cầu PictureBox vẽ lại để hiển thị văn bản cố định
             pictureBox1.Invalidate();
+
         }
         private void mainForm_KeyDown(object sender, KeyEventArgs e)
         {
@@ -668,9 +691,9 @@ namespace WinForm_Paint_Gr12
             using (resizeCanvasDialog dlg = new resizeCanvasDialog())
             {
                 dlg.setLabel_CurrentSize(_mainbitmap.Width, _mainbitmap.Height);
-                if(dlg.ShowDialog() == DialogResult.OK)
+                if (dlg.ShowDialog() == DialogResult.OK)
                 {
-                        resizeCanvas(dlg.CanvasWidth, dlg.CanvasHeight);
+                    resizeCanvas(dlg.CanvasWidth, dlg.CanvasHeight);
                 }
             }
         }

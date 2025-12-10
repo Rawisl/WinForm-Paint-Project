@@ -163,6 +163,7 @@ namespace WinForm_Paint_Gr12
             // quickUndoButton
             // 
             this.quickUndoButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.quickUndoButton.Enabled = false;
             this.quickUndoButton.Image = ((System.Drawing.Image)(resources.GetObject("quickUndoButton.Image")));
             this.quickUndoButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.quickUndoButton.Name = "quickUndoButton";
@@ -173,6 +174,7 @@ namespace WinForm_Paint_Gr12
             // quickRedoButton
             // 
             this.quickRedoButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.quickRedoButton.Enabled = false;
             this.quickRedoButton.Image = ((System.Drawing.Image)(resources.GetObject("quickRedoButton.Image")));
             this.quickRedoButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.quickRedoButton.Name = "quickRedoButton";
