@@ -37,6 +37,7 @@
             this.ellipseButton = new System.Windows.Forms.RadioButton();
             this.eraserButton = new System.Windows.Forms.RadioButton();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.fillButton = new System.Windows.Forms.RadioButton();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -143,16 +144,29 @@
             this.panel1.Size = new System.Drawing.Size(351, 44);
             this.panel1.TabIndex = 6;
             // 
+            // fillButton
+            // 
+            this.fillButton.Appearance = System.Windows.Forms.Appearance.Button;
+            this.fillButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.fillButton.Image = global::WinForm_Paint_Gr12.Properties.Resources.fill;
+            this.fillButton.Location = new System.Drawing.Point(463, 3);
+            this.fillButton.Name = "fillButton";
+            this.fillButton.Size = new System.Drawing.Size(42, 38);
+            this.fillButton.TabIndex = 6;
+            this.fillButton.UseVisualStyleBackColor = true;
+            this.fillButton.CheckedChanged += new System.EventHandler(this.fillButton_CheckedChanged);
+            // 
             // ToolsPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.BackColor = System.Drawing.SystemColors.Control;
+            this.Controls.Add(this.fillButton);
             this.Controls.Add(this.panel1);
             this.DoubleBuffered = true;
             this.Name = "ToolsPanel";
-            this.Size = new System.Drawing.Size(373, 59);
+            this.Size = new System.Drawing.Size(535, 59);
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -168,5 +182,6 @@
         private System.Windows.Forms.RadioButton ellipseButton;
         private System.Windows.Forms.RadioButton eraserButton;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.RadioButton fillButton;
     }
 }

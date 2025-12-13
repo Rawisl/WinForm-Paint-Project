@@ -634,5 +634,14 @@ namespace WinForm_Paint_Gr12
                 quickRedoButton_Click(sender, e);
             }
         }
+
+        private void pictureBox1_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (currentTool == ToolType.Fill)
+            {
+                DrawingLogic.Fill(_mainbitmap, e.Location, currentColor, 50);
+                pictureBox1.Invalidate();
+            }
+        }
     }
 }

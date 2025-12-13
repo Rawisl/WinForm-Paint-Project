@@ -62,6 +62,7 @@ namespace WinForm_Paint_Gr12
             this.pictureBox1.TabIndex = 3;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
+            this.pictureBox1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseClick);
             this.pictureBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseDown);
             this.pictureBox1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseMove);
             this.pictureBox1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseUp);
@@ -72,9 +73,9 @@ namespace WinForm_Paint_Gr12
             this.canvasContainer_panel.BackColor = System.Drawing.SystemColors.AppWorkspace;
             this.canvasContainer_panel.Controls.Add(this.pictureBox1);
             this.canvasContainer_panel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.canvasContainer_panel.Location = new System.Drawing.Point(0, 142);
+            this.canvasContainer_panel.Location = new System.Drawing.Point(0, 136);
             this.canvasContainer_panel.Name = "canvasContainer_panel";
-            this.canvasContainer_panel.Size = new System.Drawing.Size(1482, 584);
+            this.canvasContainer_panel.Size = new System.Drawing.Size(1482, 590);
             this.canvasContainer_panel.TabIndex = 5;
             this.canvasContainer_panel.Paint += new System.Windows.Forms.PaintEventHandler(this.canvasContainer_panel_Paint);
             // 
@@ -182,7 +183,7 @@ namespace WinForm_Paint_Gr12
             this.propertiesPanel1.AutoSize = true;
             this.propertiesPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.propertiesPanel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.propertiesPanel1.Location = new System.Drawing.Point(0, 87);
+            this.propertiesPanel1.Location = new System.Drawing.Point(0, 81);
             this.propertiesPanel1.Name = "propertiesPanel1";
             this.propertiesPanel1.Size = new System.Drawing.Size(1482, 55);
             this.propertiesPanel1.TabIndex = 2;
@@ -197,7 +198,7 @@ namespace WinForm_Paint_Gr12
             this.toolsPanel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.toolsPanel1.Location = new System.Drawing.Point(0, 31);
             this.toolsPanel1.Name = "toolsPanel1";
-            this.toolsPanel1.Size = new System.Drawing.Size(1482, 56);
+            this.toolsPanel1.Size = new System.Drawing.Size(1482, 50);
             this.toolsPanel1.TabIndex = 1;
             // 
             // statusPanel1

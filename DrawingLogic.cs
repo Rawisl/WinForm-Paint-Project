@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
@@ -149,6 +152,163 @@ namespace WinForm_Paint_Gr12
                 // Vẽ hình vuông màu trắng tại tọa độ đó
                 // (Trừ đi size/2 để tâm hình vuông trùng với con chuột)
                 g.FillRectangle(Brushes.White, x - size / 2, y - size / 2, size, size);
+            }
+        }
+
+        // LockBitmap phải kế thừa IDisposable để có thể dùng using vì using không hỗ trợ cho BitmapData
+        // có thể dùng cấu trúc try finally nhưng nó dài với code không được gọn
+        public struct LockBitmap : IDisposable
+        {
+            private readonly Bitmap bitmap;
+            public BitmapData data { get; private set; }
+
+            // cú pháp '=>' tương đương với int function { return value; }
+            public IntPtr Scan0 => data.Scan0;
+            public int Stride => data.Stride;
+            public int Width => data.Width;
+            public int Height => data.Height;
+            public int BytesPerPixel { get; private set; }
+
+            public LockBitmap(Bitmap bmp)
+            {
+                bitmap = bmp;
+                Rectangle rect = new Rectangle(0, 0, bmp.Width, bmp.Height);
+                data = bitmap.LockBits(rect, ImageLockMode.ReadWrite, bmp.PixelFormat);
+
+                BytesPerPixel = Image.GetPixelFormatSize(bmp.PixelFormat) / 8;
+            }
+
+            // kế thừa IDisposable sẽ tự động gọi hàm Dispose này và bắt buộc phải có
+            public void Dispose()
+            {
+                // sau khi làm xong trong lúc lockbits lại thì phải unlock nó ra để thả công việc cho GC tiếp tục làm
+                bitmap.UnlockBits(data);
+            }
+        }
+
+        // Hàm kiểm tra màu trong mảng byte
+        private static bool IsMatch(byte[] pixels, int idx, byte r, byte g, byte b, int tolerance)
+        {
+            // Chú ý: Thứ tự trong mảng là B-G-R
+            byte bVal = pixels[idx];
+            byte gVal = pixels[idx + 1];
+            byte rVal = pixels[idx + 2];
+
+            // Công thức Manhattan
+            // có thể dùng công thức khoảng cách euclid nhưng vì nó dùng căn bậc 2 với bình phương nên tốc độ tính toán sẽ khá chậm
+            // công thức này tính tổng độ sai lệch màu sắc giữa hai điểm ảnh
+            int delta = Math.Abs(bVal - b) + Math.Abs(gVal - g) + Math.Abs(rVal - r);
+            
+            // so sánh với dung sai
+            return delta <= tolerance;
+        }
+
+        // Hàm kiểm tra màu ở đầu hàm fill
+        private static bool CheckColor(Color c1, Color c2, int tolerance)
+        {
+            if (tolerance == 0) return c1.ToArgb() == c2.ToArgb();
+
+            int delta = Math.Abs(c1.R - c2.R) + Math.Abs(c1.G - c2.G) + Math.Abs(c1.B - c2.B);
+            return delta <= tolerance;
+        }
+
+        public static void Fill(Bitmap bmp, Point p1, Color currentColor, int tolerance)
+        {
+            // Lấy màu lúc con trỏ chỉ vào
+            Color targetColor = bmp.GetPixel(p1.X, p1.Y);
+
+            // Kiểm tra nhanh: Nếu màu trùng nhau thì nghỉ
+            if (CheckColor(targetColor, currentColor, tolerance)) return;
+
+            // Sử dụng LockBitmap
+            // Khi chạy hết khối using này, ảnh sẽ TỰ ĐỘNG được Unlock.
+            using (var lockBmp = new LockBitmap(bmp))
+            {
+                // Copy toàn bộ pixel từ ảnh ra mảng byte[] cho nhanh
+                int byteCount = lockBmp.Stride * lockBmp.Height;
+                byte[] pixels = new byte[byteCount];
+                Marshal.Copy(lockBmp.Scan0, pixels, 0, byteCount);
+
+                // Các biến cục bộ để truy xuất nhanh
+                int width = lockBmp.Width;
+                int height = lockBmp.Height;
+                int stride = lockBmp.Stride;
+                int bpp = lockBmp.BytesPerPixel; // 3 hoặc 4 byte
+
+                // Màu hiện tại con trỏ chỉ vào (tR,tG,tB) và Màu mình chọn để thay thế (cR,cG,cB,cA)
+                byte tR = targetColor.R, tG = targetColor.G, tB = targetColor.B;
+                byte cR = currentColor.R, cG = currentColor.G, cB = currentColor.B, cA = currentColor.A;
+
+                // Stack cho thuật toán
+                Stack<Point> stack = new Stack<Point>();
+                stack.Push(p1);
+
+                // Vòng lặp quét (Scanline Loop)
+                while (stack.Count > 0)
+                {
+                    Point p = stack.Pop();
+                    int x = p.X;
+                    int y = p.Y;
+                    int idx = (y * stride) + (x * bpp); // Tính index trong mảng byte
+
+                    // Di chuyển sang TRÁI tìm biên
+                    while (x >= 0 && IsMatch(pixels, idx, tR, tG, tB, tolerance))
+                    {
+                        --x;
+                        idx -= bpp;
+                    }
+
+                    // Lùi lại 1 bước vì vòng lặp trên di chuyển quá mức
+                    ++x;
+                    idx += bpp;
+
+                    // cờ để xác định tô màu và quét trên/dưới
+                    bool Above = false;
+                    bool Below = false;
+                    
+                    // Di chuyển sang PHẢI: Tô màu và quét trên/dưới
+                    while (x < width && IsMatch(pixels, idx, tR, tG, tB, tolerance))
+                    {
+                        // TÔ MÀU
+                        pixels[idx] = cB;   // Blue
+                        pixels[idx + 1] = cG;   // Green
+                        pixels[idx + 2] = cR;   // Red
+                        if (bpp == 4) pixels[idx + 3] = cA; // Alpha
+
+                        // Kiểm tra dòng trên của pixels
+                        if (y > 0)
+                        {
+                            int upIdx = idx - stride;
+                            bool match = IsMatch(pixels, upIdx, tR, tG, tB, tolerance);
+                            if (!Above && match)
+                            {
+                                stack.Push(new Point(x, y - 1));
+                                Above = true;
+                            }
+                            else if (Above && !match) Above = false;
+                        }
+
+                        // Kiểm tra dòng dưới
+                        if (y < height - 1)
+                        {
+                            int downIdx = idx + stride;
+                            bool match = IsMatch(pixels, downIdx, tR, tG, tB, tolerance);
+                            if (!Below && match)
+                            {
+                                stack.Push(new Point(x, y + 1));
+                                Below = true;
+                            }
+                            else if (Below && !match) Below = false;
+                        }
+
+                        // Dịch sang phải
+                        ++x;
+                        idx += bpp;
+                    }
+                }
+
+                // Copy ngược mảng byte đã sửa vào lại Bitmap
+                Marshal.Copy(pixels, 0, lockBmp.Scan0, byteCount);
             }
         }
     }
