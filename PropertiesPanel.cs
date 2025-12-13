@@ -57,8 +57,6 @@ namespace WinForm_Paint_Gr12
                 // Bắn tin hiệu ra ngoài cho mainForm biết
                 colorChanged?.Invoke(this, EventArgs.Empty);
             }
-
-
         }
 
         //Hàm bắt sự kiện thả chuột khi kéo trên trackBar
@@ -77,7 +75,16 @@ namespace WinForm_Paint_Gr12
             if(showSize_Label.Visible)
             {
                 showSize_Label.Text = "Size: " + trackBar1.Value;
-            }    
+            } 
+            
+            if(trackBar1.Visible == true)
+            {
+                btnTrackbarSize.BackColor = Color.Gray;
+            }
+            else
+            {
+                btnTrackbarSize.BackColor = Color.White;
+            }
         }
 
         //Chỉnh sửa Size cọ bằng cách kéo trackbar 
@@ -150,18 +157,32 @@ namespace WinForm_Paint_Gr12
             if (this.IsBold)
             {
                 style |= FontStyle.Bold;
+                btnBold.BackColor = Color.Gray;
             }
+            else{
+                btnBold.BackColor = Color.White;
+                } 
+
             if (this.IsItalic)
             {
                 style |= FontStyle.Italic;
+                btnItalic.BackColor = Color.Gray;
             }
+            else{
+                btnItalic.BackColor = Color.White;
+                }
+
             if (this.IsUnderline)
             {
                 style |= FontStyle.Underline;
+                btnUnderline.BackColor = Color.Gray;
             }
+            else{
+                btnUnderline.BackColor = Color.White;
+                }
 
-            // Tạo Font mới với kiểu đã cập nhật, giữ nguyên Tên và Kích thước
-            this.selectedFont = new Font(this.selectedFont.FontFamily, this.selectedFont.Size, style);
+                // Tạo Font mới với kiểu đã cập nhật, giữ nguyên Tên và Kích thước
+                this.selectedFont = new Font(this.selectedFont.FontFamily, this.selectedFont.Size, style);
 
             // Cập nhật Label hiển thị Font
             lblFontPreview.Text = "Font: " + this.selectedFont.Name + "\n" + "Font Size: " + this.selectedFont.Size + "\n" + "FontStyle: " + this.selectedFont.Style;
