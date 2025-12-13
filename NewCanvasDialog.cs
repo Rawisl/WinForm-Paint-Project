@@ -26,9 +26,6 @@ namespace WinForm_Paint_Gr12
             InitializeComponent();
         }
 
-        private void height_label_Click(object sender, EventArgs e)
-        {
 
-        }
     }
 }

@@ -61,8 +61,8 @@ namespace WinForm_Paint_Gr12
         static CursorManager()
         {
             // Lấy hình ảnh từ Resources (Chúng ta ép kiểu từ kiểu tài nguyên sang Bitmap).
-            Bitmap pencilBitmap = (Bitmap)Properties.Resources.pencil;
-            Bitmap brushBitmap = (Bitmap)Properties.Resources.brush;
+            Bitmap pencilBitmap = (Bitmap)Properties.Resources.Pencil_Icon;
+            Bitmap brushBitmap = (Bitmap)Properties.Resources.Brush_Icon;
 
             try
             {

@@ -57,7 +57,6 @@
             this.height_label.Size = new System.Drawing.Size(153, 58);
             this.height_label.TabIndex = 1;
             this.height_label.Text = "Chiều cao (px):";
-            this.height_label.Click += new System.EventHandler(this.height_label_Click);
             // 
             // height_num
             // 
@@ -146,7 +145,7 @@
             this.MinimizeBox = false;
             this.Name = "NewCanvasDialog";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Chọn size";
+            this.Text = "New canvas size";
             ((System.ComponentModel.ISupportInitialize)(this.height_num)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.width_num)).EndInit();
             this.ResumeLayout(false);
