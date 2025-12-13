@@ -65,6 +65,8 @@ namespace WinForm_Paint_Gr12
             Bitmap pencilBitmap = (Bitmap)Properties.Resources.Pencil_Icon;
             Bitmap brushBitmap = (Bitmap)Properties.Resources.Brush_Icon;
             Bitmap eraserBitmap = (Bitmap)Properties.Resources.Eraser_Icon;
+            Bitmap fillbucketBitmap = (Bitmap)Properties.Resources.Fill_Bucket_Icon;
+            Bitmap colorpickerBitmap = (Bitmap)Properties.Resources.Color_Picker;
 
             try
             {
@@ -80,6 +82,14 @@ namespace WinForm_Paint_Gr12
                 // HotSpot (Chiều rộng /2, chiều cao /2) đặt điểm nóng ở trung tâm cọ
                 Cursor customEraser = CreateCursor(eraserBitmap,eraserBitmap.Width / 2, eraserBitmap.Height / 2);
 
+                //Tạo Cursor cho Fill_Bucket
+                // HotSpot (Chiều rộng /2, chiều cao /2) đặt điểm nóng ở trung tâm cọ
+                Cursor customFillBucket = CreateCursor(fillbucketBitmap, fillbucketBitmap.Width / 2, fillbucketBitmap.Height / 2);
+
+                //Tạo Cursor cho Color_Picker
+                // HotSpot (Chiều rộng /2, chiều cao /2) đặt điểm nóng ở trung tâm cọ
+                Cursor customColorPicker = CreateCursor(colorpickerBitmap, colorpickerBitmap.Width / 2, colorpickerBitmap.Height / 2);
+
                 // Thêm các con trỏ tùy chỉnh vào Dictionary để sử dụng sau này.
                 CursorMap.Add(ToolType.Pencil, customPencil);
                 CursorMap.Add(ToolType.Brush, customBrush);
@@ -88,6 +98,9 @@ namespace WinForm_Paint_Gr12
                 CursorMap.Add(ToolType.Rectangle, Cursors.Cross);
                 CursorMap.Add(ToolType.Line, Cursors.Cross);
                 CursorMap.Add(ToolType.Text, Cursors.Cross);
+                CursorMap.Add(ToolType.Triangle, Cursors.Cross);
+                CursorMap.Add(ToolType.ColorPicker, customColorPicker);
+                CursorMap.Add(ToolType.Fill, customFillBucket);
                 
 
             }
@@ -103,6 +116,7 @@ namespace WinForm_Paint_Gr12
                 CursorMap.Add(ToolType.Rectangle, Cursors.Cross);
                 CursorMap.Add(ToolType.Line, Cursors.Cross);
                 CursorMap.Add(ToolType.Text, Cursors.Cross);
+                CursorMap.Add(ToolType.Triangle,Cursors.Cross);
             }
         }
 
