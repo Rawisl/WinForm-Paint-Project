@@ -121,7 +121,7 @@
             this.btnBold.Name = "btnBold";
             this.btnBold.Size = new System.Drawing.Size(32, 26);
             this.btnBold.TabIndex = 7;
-            this.btnBold.Text = "B";
+            this.btnBold.Text = "&B";
             this.btnBold.UseVisualStyleBackColor = true;
             this.btnBold.Click += new System.EventHandler(this.btnBold_Click);
             // 
@@ -132,7 +132,7 @@
             this.btnItalic.Name = "btnItalic";
             this.btnItalic.Size = new System.Drawing.Size(32, 26);
             this.btnItalic.TabIndex = 8;
-            this.btnItalic.Text = "I";
+            this.btnItalic.Text = "&I";
             this.btnItalic.UseVisualStyleBackColor = true;
             this.btnItalic.Click += new System.EventHandler(this.btnItalic_Click);
             // 
@@ -143,7 +143,7 @@
             this.btnUnderline.Name = "btnUnderline";
             this.btnUnderline.Size = new System.Drawing.Size(32, 26);
             this.btnUnderline.TabIndex = 9;
-            this.btnUnderline.Text = "U";
+            this.btnUnderline.Text = "&U";
             this.btnUnderline.UseVisualStyleBackColor = true;
             this.btnUnderline.Click += new System.EventHandler(this.btnUnderline_Click);
             // 
