@@ -12,12 +12,15 @@ namespace WinForm_Paint_Gr12
 {
     public enum ToolType
     {
-        Eraser, Pencil, Brush, Text, Line, Rectangle, Oval, Triangle, Fill, ColorPicker
+        Eraser, Pencil, Brush, Text, Line, Rectangle, Oval, Triangle, Fill, ColorPicker, Properties
     }
     public partial class ToolsPanel : UserControl
     {
         // 1. KHAI BÁO SỰ KIỆN (EVENT)
         public event EventHandler toolChanged;
+
+        // Sự kiện ẩn hiện propertiesPanel
+        public event EventHandler propertiesToggled;
 
         // Biến lưu công cụ hiện tại (Public để Form1 đọc được)
         public ToolType currentTool { get; private set; } = ToolType.Pencil;
@@ -32,6 +35,12 @@ namespace WinForm_Paint_Gr12
         {
             // 2. KÍCH HOẠT SỰ KIỆN (BẮN TIN)
             toolChanged?.Invoke(this, EventArgs.Empty);
+        }
+
+        // Hàm kích hoạt sự kiện Properties
+        private void OnPropertiesToggled()
+        {
+            propertiesToggled?.Invoke(this, EventArgs.Empty);
         }
 
         private void pencilButton_CheckedChanged(object sender, EventArgs e)
@@ -123,6 +132,12 @@ namespace WinForm_Paint_Gr12
                 currentTool = ToolType.ColorPicker;
                 OnToolSelected();
             }
+        }
+
+        private void PropertiesButton_Click(object sender, EventArgs e)
+        {
+            //Kích hoạt sự kiện Toggled
+            OnPropertiesToggled();
         }
     }
 }

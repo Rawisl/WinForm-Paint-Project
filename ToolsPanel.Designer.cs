@@ -31,6 +31,8 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ToolsPanel));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.PropertiesButton = new System.Windows.Forms.Button();
+            this.colorpickerButton = new System.Windows.Forms.RadioButton();
             this.IconList = new System.Windows.Forms.ImageList(this.components);
             this.fillButton = new System.Windows.Forms.RadioButton();
             this.triangleButton = new System.Windows.Forms.RadioButton();
@@ -41,12 +43,12 @@
             this.pencilButton = new System.Windows.Forms.RadioButton();
             this.lineButton = new System.Windows.Forms.RadioButton();
             this.brushButton = new System.Windows.Forms.RadioButton();
-            this.colorpickerButton = new System.Windows.Forms.RadioButton();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.PropertiesButton);
             this.panel1.Controls.Add(this.colorpickerButton);
             this.panel1.Controls.Add(this.fillButton);
             this.panel1.Controls.Add(this.triangleButton);
@@ -59,8 +61,32 @@
             this.panel1.Controls.Add(this.brushButton);
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(511, 61);
+            this.panel1.Size = new System.Drawing.Size(579, 61);
             this.panel1.TabIndex = 6;
+            // 
+            // PropertiesButton
+            // 
+            this.PropertiesButton.Location = new System.Drawing.Point(512, 0);
+            this.PropertiesButton.Name = "PropertiesButton";
+            this.PropertiesButton.Size = new System.Drawing.Size(52, 45);
+            this.PropertiesButton.TabIndex = 8;
+            this.PropertiesButton.UseVisualStyleBackColor = true;
+            this.PropertiesButton.Click += new System.EventHandler(this.PropertiesButton_Click);
+            // 
+            // colorpickerButton
+            // 
+            this.colorpickerButton.Appearance = System.Windows.Forms.Appearance.Button;
+            this.colorpickerButton.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.colorpickerButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.colorpickerButton.ImageKey = "Color_Picker.png";
+            this.colorpickerButton.ImageList = this.IconList;
+            this.colorpickerButton.Location = new System.Drawing.Point(459, 0);
+            this.colorpickerButton.Name = "colorpickerButton";
+            this.colorpickerButton.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
+            this.colorpickerButton.Size = new System.Drawing.Size(45, 45);
+            this.colorpickerButton.TabIndex = 7;
+            this.colorpickerButton.UseVisualStyleBackColor = true;
+            this.colorpickerButton.CheckedChanged += new System.EventHandler(this.colorpickerButton_CheckedChanged);
             // 
             // IconList
             // 
@@ -224,21 +250,6 @@
             this.brushButton.UseVisualStyleBackColor = true;
             this.brushButton.CheckedChanged += new System.EventHandler(this.brushButton_CheckedChanged);
             // 
-            // colorpickerButton
-            // 
-            this.colorpickerButton.Appearance = System.Windows.Forms.Appearance.Button;
-            this.colorpickerButton.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.colorpickerButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.colorpickerButton.ImageKey = "Color_Picker.png";
-            this.colorpickerButton.ImageList = this.IconList;
-            this.colorpickerButton.Location = new System.Drawing.Point(459, 0);
-            this.colorpickerButton.Name = "colorpickerButton";
-            this.colorpickerButton.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
-            this.colorpickerButton.Size = new System.Drawing.Size(45, 45);
-            this.colorpickerButton.TabIndex = 7;
-            this.colorpickerButton.UseVisualStyleBackColor = true;
-            this.colorpickerButton.CheckedChanged += new System.EventHandler(this.colorpickerButton_CheckedChanged);
-            // 
             // ToolsPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -248,7 +259,7 @@
             this.Controls.Add(this.panel1);
             this.DoubleBuffered = true;
             this.Name = "ToolsPanel";
-            this.Size = new System.Drawing.Size(536, 77);
+            this.Size = new System.Drawing.Size(591, 77);
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -268,5 +279,6 @@
         private System.Windows.Forms.RadioButton triangleButton;
         private System.Windows.Forms.RadioButton fillButton;
         private System.Windows.Forms.RadioButton colorpickerButton;
+        private System.Windows.Forms.Button PropertiesButton;
     }
 }
