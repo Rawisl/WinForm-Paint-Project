@@ -35,6 +35,9 @@ namespace WinForm_Paint_Gr12
         // Đối tượng TextBox tạm thời
         private TextBox activeTextBox = null;  // TextBox đang được người dùng nhập liệu/thao tác
 
+        // Biến cho tính năng Paste
+        private Bitmap pastedImage = null; // Chứa ảnh lấy từ Clipboard
+        private Point pasteLocation;       // Vị trí để vẽ ảnh preview
 
         //hàm riêng để tạo tờ giấy vẽ mới
         private void createNewCanvas(int width, int height)
@@ -54,8 +57,11 @@ namespace WinForm_Paint_Gr12
                 g.Clear(Color.White);
             }
 
+            historyManager.ClearAll();
+            historyManager.saveSnapshot(_mainbitmap);
             //gắn giấy vẽ vô ảnh
             pictureBox1.Image = _mainbitmap;
+            updateUnReButton();
         }
 
         //hàm riêng để lưu file xuống đường dẫn filePath
@@ -81,6 +87,115 @@ namespace WinForm_Paint_Gr12
             isChanged = false; //lưu xong thì set lại cờ thay đổi
 
             this.Text = System.IO.Path.GetFileName(path) + " - Paint App";
+        }
+
+        //hàm riêng để xử lý resize
+        private void resizeCanvas(int newWidth, int newHeight)
+        {
+            //lưu vô lịch sử để lỡ resize lộn size còn undo được
+            if (historyManager != null)
+            {
+                historyManager.saveSnapshot(_mainbitmap);
+            }
+            //tạo giấy mới
+            Bitmap newCanvas = new Bitmap(newWidth, newHeight);
+
+            using (Graphics g = Graphics.FromImage(newCanvas))
+            {
+                //tô nền trắng cho giấy mới
+                g.Clear(Color.White);
+                //vẽ lại hình cũ vô giấy mới
+                if (_mainbitmap != null)
+                    g.DrawImage(_mainbitmap, 0, 0);
+            }
+
+            //xóa giấy cũ để giải phóng RAM
+            if (_mainbitmap != null)
+                _mainbitmap.Dispose();
+
+            //gán giấy mới vào thành bitmap chính
+            _mainbitmap = newCanvas;
+            pictureBox1.Image = _mainbitmap;
+
+            //đánh dấu là đã bị thay đổi
+            isChanged = true;
+        }
+
+        //hàm riêng để xử lý trạng thái của 2 nút undo/redo
+        private void updateUnReButton()
+        {
+            if (historyManager != null)
+            {
+                //còn undo được thì bật nút undo, tương tự với redo
+                quickUndoButton.Enabled = historyManager.CanUndo;
+                quickRedoButton.Enabled = historyManager.CanRedo;
+            }
+        }
+
+        //hàm riêng để xử lý vẽ, tránh bị lặp code ở sự kiện paint và mouseup
+        private void processDrawing(Graphics g, Point firstPoint, Point lastPoint, ToolType currentTool)
+        {
+            // Khai báo biến bool dùng để kiểm tra phím Shift
+            bool isShiftDown = (Control.ModifierKeys & Keys.Shift) == Keys.Shift;
+
+            // dùng if else ở đây là để tách hình học với pencil, brush ra riêng không bị dính vào nhau
+            if (currentTool == ToolType.Line)
+                DrawingLogic.DrawLine(g, firstPoint, lastPoint, currentColor, currentSize);
+            else if (currentTool == ToolType.Rectangle)
+            {
+                if (isShiftDown)
+                {
+                    Rectangle rectange = DrawingLogic.GetPerfectShape(firstPoint, lastPoint);
+                    DrawingLogic.DrawRectangle(g, rectange, currentColor, currentSize);
+                }
+                else
+                {
+                    Rectangle rectangle = DrawingLogic.GetRectangle(firstPoint, lastPoint);
+                    DrawingLogic.DrawRectangle(g, rectangle, currentColor, currentSize);
+                }
+            }
+            else if (currentTool == ToolType.Oval)
+            {
+                if (isShiftDown)
+                {
+                    Rectangle rectange = DrawingLogic.GetPerfectShape(firstPoint, lastPoint);
+                    DrawingLogic.DrawEllipse(g, rectange, currentColor, currentSize);
+                }
+                else
+                {
+                    Rectangle rectangle = DrawingLogic.GetRectangle(firstPoint, lastPoint);
+                    DrawingLogic.DrawEllipse(g, rectangle, currentColor, currentSize);
+                }
+            }
+            else if (currentTool == ToolType.Triangle)
+            {
+                if (isShiftDown)
+                {
+                    // --- LOGIC TAM GIÁC ĐỀU ---
+
+                    // 1. Lấy cạnh dựa trên khoảng cách kéo chuột theo chiều ngang
+                    int width = Math.Abs(lastPoint.X - firstPoint.X);
+
+                    // 2. Tính chiều cao theo công thức tam giác đều (h = a * căn 3 / 2)
+                    // 0.866 chính là căn 3 chia 2
+                    int height = (int)(width * 0.866f);
+
+                    // 3. Xác định tọa độ góc trái trên (để vẽ được mọi hướng)
+                    int x = Math.Min(firstPoint.X, lastPoint.X);
+                    int y = Math.Min(firstPoint.Y, lastPoint.Y);
+
+                    // 4. Tạo hình chữ nhật có tỉ lệ chuẩn tam giác đều
+                    Rectangle triRect = new Rectangle(x, y, width, height);
+
+                    // 5. Vẽ
+                    DrawingLogic.DrawTriangle(g, triRect, currentColor, currentSize);
+                }
+                else
+                {
+                    Rectangle rectangle = DrawingLogic.GetRectangle(firstPoint, lastPoint);
+                    DrawingLogic.DrawTriangle(g, rectangle, currentColor, currentSize);
+                }
+            }
         }
 
         //Các hàm xử lý thay đổi từ màu, size từ properties panel
@@ -215,8 +330,9 @@ namespace WinForm_Paint_Gr12
                 {
                     createNewCanvas(dlg.CanvasWidth, dlg.CanvasHeight);
 
-                    // Xóa lịch sử Undo/Redo (nếu có)
-                    // _historyManager.Clear();
+                    //giải phóng RAM bằng cách xóa sạch lịch sử bên canvas cũ
+                    historyManager.ClearAll();
+
                     currentFilePath = "";
                     this.Text = "NewPaint - Paint App";
                     isChanged = false;
@@ -247,10 +363,6 @@ namespace WinForm_Paint_Gr12
                 saveImages(sfd.FileName);
             }
         }
-        private void canvasContainer_panel_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
 
         private void mainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -279,9 +391,33 @@ namespace WinForm_Paint_Gr12
 
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
+            // Nếu đang ở chế độ Paste và bấm chuột trái
+            if (pastedImage != null && e.Button == MouseButtons.Left)
+            {
+                // 1. In thật xuống giấy
+                using (Graphics g = Graphics.FromImage(_mainbitmap))
+                {
+                    g.DrawImage(pastedImage, pasteLocation);
+                }
+
+                // 2. Lưu lịch sử Undo (Quan trọng)
+                historyManager.saveSnapshot(_mainbitmap);
+                updateUnReButton();
+
+                // 3. Dọn dẹp: Hủy ảnh tạm
+                pastedImage.Dispose();
+                pastedImage = null;
+
+                // 4. Reset trạng thái
+                pictureBox1.Cursor = CursorManager.GetCursor(currentTool); // Trả lại con trỏ cũ
+                pictureBox1.Invalidate();
+                isChanged = true;
+
+                return; // Return để không bị vẽ chấm mực dính vào
+            }
             if (e.Button == MouseButtons.Left)
             {
-                historyManager.saveSnapshot(_mainbitmap);
+
                 if (currentTool == ToolType.Text) // Xử lý Text Tool
                 {
                     // Nếu đã có TextBox đang hoạt động, không làm gì cả
@@ -295,6 +431,21 @@ namespace WinForm_Paint_Gr12
 
                     // Đảm bảo không kích hoạt logic vẽ khác khi đang ở chế độ Text
                     isDrawing = false;
+                }
+                else if(currentTool == ToolType.ColorPicker) //logic nếu chọn pick màu
+                {
+                    //Phải đảm bảo tọa độ click nằm trong canvas
+                    if(e.X >= 0 && e.X < _mainbitmap.Width && e.Y >= 0 && e.Y < _mainbitmap.Height)
+                    {
+                        //lấy màu tại pixel đó
+                        Color pickedColor = _mainbitmap.GetPixel(e.X, e.Y);
+                        //cập nhật lại màu       
+                        currentColor = pickedColor;
+                        //cập nhật lại giao diện của cái nút hiện màu trong properties panel
+                        propertiesPanel1.UpdateColor(pickedColor);
+
+                    }
+                    return;
                 }
                 else // Logic cho Pencil/Brush/Khác
                 {
@@ -310,10 +461,18 @@ namespace WinForm_Paint_Gr12
 
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
+            if (pastedImage != null)
+            {
+                // Cập nhật vị trí ảnh (để tâm ảnh nằm ngay con chuột)
+                pasteLocation = new Point(e.X - pastedImage.Width / 2, e.Y - pastedImage.Height / 2);
+
+                pictureBox1.Invalidate(); // Vẽ lại liên tục để ảnh chạy theo
+                return; // Quan trọng: Return luôn để không dính logic vẽ hình khác
+            }
+
             //cập nhật tọa độ chuột cho status panel 
             if (statusPanel1 != null)
                 statusPanel1.updateMousePosition(e.X, e.Y);
-
 
             bool isShiftDown = (Control.ModifierKeys & Keys.Shift) == Keys.Shift;
 
@@ -370,6 +529,10 @@ namespace WinForm_Paint_Gr12
                     {
 
                     }
+                    else if (currentTool == ToolType.Triangle)
+                    {
+
+                    }
 
                 }
 
@@ -382,6 +545,7 @@ namespace WinForm_Paint_Gr12
 
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
+
             if (isDrawingTextBounds)
             {
                 isDrawingTextBounds = false; // Kết thúc chế độ vẽ vùng
@@ -420,38 +584,23 @@ namespace WinForm_Paint_Gr12
             if (isDrawing)
             {
                 isDrawing = false;
-                // === THÊM ĐOẠN NÀY ĐỂ IN HÌNH CHÍNH THỨC VÀO GIẤY ===
-                if (currentTool == ToolType.Line || currentTool == ToolType.Rectangle || currentTool == ToolType.Oval)
-                {
-                    // Mở khóa tờ giấy thật (_mainbitmap) để vẽ lần cuối
+                //// === THÊM ĐOẠN NÀY ĐỂ IN HÌNH CHÍNH THỨC VÀO GIẤY ===
+                if (currentTool == ToolType.Line || currentTool == ToolType.Rectangle || currentTool == ToolType.Oval || currentTool == ToolType.Triangle)
+                    // dùng if else ở đây là để tách hình học với pencil, brush ra riêng không bị dính vào nhau
                     using (Graphics g = Graphics.FromImage(_mainbitmap))
                     {
-                        g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-                        bool isShift = (Control.ModifierKeys & Keys.Shift) == Keys.Shift;
-
-                        if (currentTool == ToolType.Line)
-                        {
-                            DrawingLogic.DrawLine(g, firstPoint, e.Location, currentColor, currentSize);
-                        }
-                        else if (currentTool == ToolType.Rectangle)
-                        {
-                            Rectangle rect = isShift ? DrawingLogic.GetPerfectShape(firstPoint, e.Location)
-                                                     : DrawingLogic.GetRectangle(firstPoint, e.Location);
-                            DrawingLogic.DrawRectangle(g, rect, currentColor, currentSize);
-                        }
-                        else if (currentTool == ToolType.Oval)
-                        {
-                            Rectangle rect = isShift ? DrawingLogic.GetPerfectShape(firstPoint, e.Location)
-                                                     : DrawingLogic.GetRectangle(firstPoint, e.Location);
-                            DrawingLogic.DrawEllipse(g, rect, currentColor, currentSize);
-                        }
+                        processDrawing(g, firstPoint, e.Location, currentTool);
                     }
-                }
-                // Logic chung cho các công cụ vẽ khác
-                pictureBox1.Invalidate();
-                isChanged = true;
             }
+            //lưu ảnh hiện tại vào lịch sử
+            historyManager.saveSnapshot(_mainbitmap);
+            //cập nhật trạng thái nút undo redo
+            updateUnReButton();
+            // Logic chung cho các công cụ vẽ khác
+            pictureBox1.Invalidate();
+            isChanged = true;
         }
+
 
         private void propertiesPanel1_FontChanged(object sender, EventArgs e)
         {
@@ -510,6 +659,7 @@ namespace WinForm_Paint_Gr12
                             activeTextBox.Location.Y
                         );
                     }
+                    historyManager.saveSnapshot(_mainbitmap);
                 }
             }
             // Dọn dẹp và xóa TextBox tạm thời
@@ -538,6 +688,20 @@ namespace WinForm_Paint_Gr12
                 e.Graphics.DrawImage(_mainbitmap, 0, 0);
             }
 
+            // Vẽ cái ảnh đang trong clipboard vô canvas
+            if(pastedImage != null)
+            {
+                //vẽ ảnh tại vị trí chuột
+                e.Graphics.DrawImage(pastedImage, pasteLocation);
+
+                // Vẽ thêm cái khung nét đứt bao quanh cho người dùng dễ căn chỉnh
+                using (Pen dashPen = new Pen(Color.Blue, 1))
+                {
+                    dashPen.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
+                    e.Graphics.DrawRectangle(dashPen, pasteLocation.X, pasteLocation.Y, pastedImage.Width, pastedImage.Height);
+                }
+            }
+
             // Vẽ khung chữ nhật preview cho Text Tool khi đang kéo
             if (isDrawingTextBounds && currentTool == ToolType.Text)
             {
@@ -550,41 +714,41 @@ namespace WinForm_Paint_Gr12
             //Thêm code logic vẽ review Line, Rectangle trong tương lai
             if (isDrawing)
             {
-                // Khai báo biến bool dùng để kiểm tra phím Shift
-                bool isShiftDown = (Control.ModifierKeys & Keys.Shift) == Keys.Shift;
+                processDrawing(e.Graphics, firstPoint, lastPoint, currentTool);
+                // 1. Kiểm tra xem có đang dùng công cụ hình học không
+                if (currentTool == ToolType.Rectangle || currentTool == ToolType.Oval ||
+                    currentTool == ToolType.Triangle)
+                {
+                    // 2. Kiểm tra xem người dùng ĐÃ bấm Shift chưa
+                    bool isShift = (Control.ModifierKeys & Keys.Shift) == Keys.Shift;
 
-                // dùng if else ở đây là để tách hình học với pencil, brush ra riêng không bị dính vào nhau
-                if (currentTool == ToolType.Line)
-                    DrawingLogic.DrawLine(e.Graphics, firstPoint, lastPoint, currentColor, currentSize);
-                else if (currentTool == ToolType.Rectangle)
-                {
-                    if (isShiftDown)
+                    // Chỉ hiện thông báo nếu CHƯA bấm Shift
+                    if (!isShift)
                     {
-                        Rectangle rectange = DrawingLogic.GetPerfectShape(firstPoint, lastPoint);
-                        DrawingLogic.DrawRectangle(e.Graphics, rectange, currentColor, currentSize);
-                    }
-                    else
-                    {
-                        Rectangle rectangle = DrawingLogic.GetRectangle(firstPoint, lastPoint);
-                        DrawingLogic.DrawRectangle(e.Graphics, rectangle, currentColor, currentSize);
-                    }
-                }
-                else if (currentTool == ToolType.Oval)
-                {
-                    if (isShiftDown)
-                    {
-                        Rectangle rectange = DrawingLogic.GetPerfectShape(firstPoint, lastPoint);
-                        DrawingLogic.DrawEllipse(e.Graphics, rectange, currentColor, currentSize);
-                    }
-                    else
-                    {
-                        Rectangle rectangle = DrawingLogic.GetRectangle(firstPoint, lastPoint);
-                        DrawingLogic.DrawEllipse(e.Graphics, rectangle, currentColor, currentSize);
+                        string hintText = "Giữ Shift để vẽ hình đều";
+
+                        // Cài đặt font chữ và màu sắc cho thông báo
+                        using (Font font = new Font("Arial", 8))
+                        using (SolidBrush brush = new SolidBrush(Color.Gray))
+                        using (SolidBrush bgBrush = new SolidBrush(Color.FromArgb(200, 255, 255, 255))) // Nền trắng mờ
+                        {
+                            // Vị trí vẽ: Lệch sang phải và xuống dưới con chuột một chút
+                            // lastPoint chính là vị trí chuột hiện tại trong sự kiện Paint
+                            Point textPos = new Point(lastPoint.X + 15, lastPoint.Y + 15);
+
+                            // Vẽ nền mờ bên dưới chữ cho dễ đọc (Tùy chọn)
+                            SizeF textSize = e.Graphics.MeasureString(hintText, font);
+                            e.Graphics.FillRectangle(bgBrush, textPos.X, textPos.Y, textSize.Width, textSize.Height);
+
+                            // Vẽ chữ
+                            e.Graphics.DrawString(hintText, font, brush, textPos);
+                        }
                     }
                 }
             }
+
+
         }
-        // Real-Time Preview chỉ vẽ hình tạm thời
         private void quickRedoButton_Click(object sender, EventArgs e)
         {
             Bitmap futureImage = historyManager.redo(_mainbitmap);
@@ -595,7 +759,9 @@ namespace WinForm_Paint_Gr12
                 _mainbitmap = futureImage;
                 pictureBox1.Image = _mainbitmap;
                 pictureBox1.Invalidate();
+                updateUnReButton();
             }
+
         }
         private void quickUndoButton_Click(object sender, EventArgs e)
         {
@@ -611,6 +777,7 @@ namespace WinForm_Paint_Gr12
                 _mainbitmap = oldImage;
                 pictureBox1.Image = _mainbitmap; // Cập nhật lên khung tranh
                 pictureBox1.Invalidate(); // Vẽ lại ngay
+                updateUnReButton();
             }
 
             // 3. Dọn dẹp và xóa TextBox tạm thời
@@ -618,9 +785,43 @@ namespace WinForm_Paint_Gr12
 
             // Yêu cầu PictureBox vẽ lại để hiển thị văn bản cố định
             pictureBox1.Invalidate();
+
         }
         private void mainForm_KeyDown(object sender, KeyEventArgs e)
         {
+            // 1. Xử lý Paste (Ctrl + V)
+            if (e.Control && e.KeyCode == Keys.V)
+            {
+                // Kiểm tra xem trong Clipboard có chứa ảnh không
+                if (Clipboard.ContainsImage())
+                {
+                    // Lấy ảnh từ Clipboard ra
+                    Image img = Clipboard.GetImage();
+
+                    // Chuyển sang Bitmap để dễ xử lý (và dispose cái cũ nếu có)
+                    if (pastedImage != null) pastedImage.Dispose();
+                    pastedImage = new Bitmap(img);
+
+                    // Tạm dừng việc vẽ vời linh tinh khác
+                    isDrawing = false;
+
+                    // Đổi con trỏ chuột thành hình 4 mũi tên cho dễ nhận biết
+                    pictureBox1.Cursor = Cursors.SizeAll;
+
+                    // Trigger vẽ lại để hiện ảnh lên
+                    pictureBox1.Invalidate();
+                }
+            }
+
+            // 2. Xử lý Copy (Ctrl + C) - Làm luôn cho đủ bộ (Bonus)
+            if (e.Control && e.KeyCode == Keys.C)
+            {
+                if (_mainbitmap != null)
+                {
+                    Clipboard.SetImage(_mainbitmap);
+                }
+            }
+
             // Kiểm tra phím tắt cho Undo (Ctrl + Z)
             if (e.Control && e.KeyCode == Keys.Z)
             {
@@ -632,6 +833,27 @@ namespace WinForm_Paint_Gr12
             {
                 // Gọi hàm xử lý Redo
                 quickRedoButton_Click(sender, e);
+            }
+        }
+
+        private void resizeButton_Click(object sender, EventArgs e)
+        {
+            using (resizeCanvasDialog dlg = new resizeCanvasDialog())
+            {
+                dlg.setLabel_CurrentSize(_mainbitmap.Width, _mainbitmap.Height);
+                if (dlg.ShowDialog() == DialogResult.OK)
+                {
+                    resizeCanvas(dlg.CanvasWidth, dlg.CanvasHeight);
+                }
+            }
+        }
+
+        private void pictureBox1_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (currentTool == ToolType.Fill)
+            {
+                DrawingLogic.Fill(_mainbitmap, e.Location, currentColor, 50);
+                pictureBox1.Invalidate();
             }
         }
     }

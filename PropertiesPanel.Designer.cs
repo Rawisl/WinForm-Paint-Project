@@ -67,7 +67,7 @@
             // btnTrackbarSize
             // 
             this.btnTrackbarSize.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTrackbarSize.Location = new System.Drawing.Point(202, 3);
+            this.btnTrackbarSize.Location = new System.Drawing.Point(190, 3);
             this.btnTrackbarSize.Name = "btnTrackbarSize";
             this.btnTrackbarSize.Size = new System.Drawing.Size(178, 49);
             this.btnTrackbarSize.TabIndex = 2;
@@ -88,15 +88,15 @@
             // 
             // pnlPreviewColor
             // 
-            this.pnlPreviewColor.Location = new System.Drawing.Point(150, 20);
+            this.pnlPreviewColor.Location = new System.Drawing.Point(139, 3);
             this.pnlPreviewColor.Name = "pnlPreviewColor";
-            this.pnlPreviewColor.Size = new System.Drawing.Size(37, 32);
+            this.pnlPreviewColor.Size = new System.Drawing.Size(45, 45);
             this.pnlPreviewColor.TabIndex = 4;
             // 
             // btnFont
             // 
             this.btnFont.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnFont.Location = new System.Drawing.Point(386, 3);
+            this.btnFont.Location = new System.Drawing.Point(374, 3);
             this.btnFont.Name = "btnFont";
             this.btnFont.Size = new System.Drawing.Size(118, 49);
             this.btnFont.TabIndex = 5;
@@ -108,7 +108,7 @@
             // 
             this.lblFontPreview.AutoSize = true;
             this.lblFontPreview.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lblFontPreview.Location = new System.Drawing.Point(510, 3);
+            this.lblFontPreview.Location = new System.Drawing.Point(498, 6);
             this.lblFontPreview.Name = "lblFontPreview";
             this.lblFontPreview.Size = new System.Drawing.Size(35, 18);
             this.lblFontPreview.TabIndex = 6;
@@ -117,7 +117,7 @@
             // btnBold
             // 
             this.btnBold.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnBold.Location = new System.Drawing.Point(772, -2);
+            this.btnBold.Location = new System.Drawing.Point(724, 3);
             this.btnBold.Name = "btnBold";
             this.btnBold.Size = new System.Drawing.Size(32, 26);
             this.btnBold.TabIndex = 7;
@@ -128,7 +128,7 @@
             // btnItalic
             // 
             this.btnItalic.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnItalic.Location = new System.Drawing.Point(810, -2);
+            this.btnItalic.Location = new System.Drawing.Point(762, 3);
             this.btnItalic.Name = "btnItalic";
             this.btnItalic.Size = new System.Drawing.Size(32, 26);
             this.btnItalic.TabIndex = 8;
@@ -139,7 +139,7 @@
             // btnUnderline
             // 
             this.btnUnderline.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnUnderline.Location = new System.Drawing.Point(848, -2);
+            this.btnUnderline.Location = new System.Drawing.Point(800, 3);
             this.btnUnderline.Name = "btnUnderline";
             this.btnUnderline.Size = new System.Drawing.Size(32, 26);
             this.btnUnderline.TabIndex = 9;

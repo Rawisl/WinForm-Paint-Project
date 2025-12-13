@@ -54,6 +54,12 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="resizeCanvasDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="resizeCanvasDialog.Designer.cs">
+      <DependentUpon>resizeCanvasDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form_Test_StatusPanel.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -96,6 +102,9 @@
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="resizeCanvasDialog.resx">
+      <DependentUpon>resizeCanvasDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form_Test_StatusPanel.resx">
       <DependentUpon>Form_Test_StatusPanel.cs</DependentUpon>
     </EmbeddedResource>
@@ -110,8 +119,8 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>

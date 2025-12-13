@@ -169,6 +169,17 @@ namespace WinForm_Paint_Gr12
             // Bắn tín hiệu ra ngoài
             FontChanged?.Invoke(this, EventArgs.Empty);
         }
+
+        //hàm cập nhật cái khung màu hiện tại theo màu mới pick trong color picker
+        public void UpdateColor(Color newColor)
+        {
+            //cập nhật dữ liệu màu
+            this.selectedColor = newColor;
+
+            // Cập nhật giao diện cho nút hiện màu
+            pnlPreviewColor.BackColor = this.selectedColor;
+
+        }
     }
 }
 
