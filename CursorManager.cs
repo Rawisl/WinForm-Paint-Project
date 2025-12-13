@@ -117,6 +117,8 @@ namespace WinForm_Paint_Gr12
                 CursorMap.Add(ToolType.Line, Cursors.Cross);
                 CursorMap.Add(ToolType.Text, Cursors.Cross);
                 CursorMap.Add(ToolType.Triangle,Cursors.Cross);
+                CursorMap.Add(ToolType.ColorPicker, Cursors.Cross);
+                CursorMap.Add(ToolType.Fill, Cursors.Cross);
             }
         }
 
