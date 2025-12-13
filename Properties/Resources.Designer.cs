@@ -73,6 +73,16 @@ namespace WinForm_Paint_Gr12.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Color_Picker {
+            get {
+                object obj = ResourceManager.GetObject("Color_Picker", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Cursor_Icon {
             get {
                 object obj = ResourceManager.GetObject("Cursor_Icon", resourceCulture);

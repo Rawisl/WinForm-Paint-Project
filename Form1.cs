@@ -35,6 +35,9 @@ namespace WinForm_Paint_Gr12
         // Đối tượng TextBox tạm thời
         private TextBox activeTextBox = null;  // TextBox đang được người dùng nhập liệu/thao tác
 
+        // Biến cho tính năng Paste
+        private Bitmap pastedImage = null; // Chứa ảnh lấy từ Clipboard
+        private Point pasteLocation;       // Vị trí để vẽ ảnh preview
 
         //hàm riêng để tạo tờ giấy vẽ mới
         private void createNewCanvas(int width, int height)
@@ -388,8 +391,33 @@ namespace WinForm_Paint_Gr12
 
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
+            // Nếu đang ở chế độ Paste và bấm chuột trái
+            if (pastedImage != null && e.Button == MouseButtons.Left)
+            {
+                // 1. In thật xuống giấy
+                using (Graphics g = Graphics.FromImage(_mainbitmap))
+                {
+                    g.DrawImage(pastedImage, pasteLocation);
+                }
+
+                // 2. Lưu lịch sử Undo (Quan trọng)
+                historyManager.saveSnapshot(_mainbitmap);
+                updateUnReButton();
+
+                // 3. Dọn dẹp: Hủy ảnh tạm
+                pastedImage.Dispose();
+                pastedImage = null;
+
+                // 4. Reset trạng thái
+                pictureBox1.Cursor = CursorManager.GetCursor(currentTool); // Trả lại con trỏ cũ
+                pictureBox1.Invalidate();
+                isChanged = true;
+
+                return; // Return để không bị vẽ chấm mực dính vào
+            }
             if (e.Button == MouseButtons.Left)
             {
+
                 if (currentTool == ToolType.Text) // Xử lý Text Tool
                 {
                     // Nếu đã có TextBox đang hoạt động, không làm gì cả
@@ -403,6 +431,21 @@ namespace WinForm_Paint_Gr12
 
                     // Đảm bảo không kích hoạt logic vẽ khác khi đang ở chế độ Text
                     isDrawing = false;
+                }
+                else if(currentTool == ToolType.ColorPicker) //logic nếu chọn pick màu
+                {
+                    //Phải đảm bảo tọa độ click nằm trong canvas
+                    if(e.X >= 0 && e.X < _mainbitmap.Width && e.Y >= 0 && e.Y < _mainbitmap.Height)
+                    {
+                        //lấy màu tại pixel đó
+                        Color pickedColor = _mainbitmap.GetPixel(e.X, e.Y);
+                        //cập nhật lại màu       
+                        currentColor = pickedColor;
+                        //cập nhật lại giao diện của cái nút hiện màu trong properties panel
+                        propertiesPanel1.UpdateColor(pickedColor);
+
+                    }
+                    return;
                 }
                 else // Logic cho Pencil/Brush/Khác
                 {
@@ -418,10 +461,18 @@ namespace WinForm_Paint_Gr12
 
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
+            if (pastedImage != null)
+            {
+                // Cập nhật vị trí ảnh (để tâm ảnh nằm ngay con chuột)
+                pasteLocation = new Point(e.X - pastedImage.Width / 2, e.Y - pastedImage.Height / 2);
+
+                pictureBox1.Invalidate(); // Vẽ lại liên tục để ảnh chạy theo
+                return; // Quan trọng: Return luôn để không dính logic vẽ hình khác
+            }
+
             //cập nhật tọa độ chuột cho status panel 
             if (statusPanel1 != null)
                 statusPanel1.updateMousePosition(e.X, e.Y);
-
 
             bool isShiftDown = (Control.ModifierKeys & Keys.Shift) == Keys.Shift;
 
@@ -637,6 +688,20 @@ namespace WinForm_Paint_Gr12
                 e.Graphics.DrawImage(_mainbitmap, 0, 0);
             }
 
+            // Vẽ cái ảnh đang trong clipboard vô canvas
+            if(pastedImage != null)
+            {
+                //vẽ ảnh tại vị trí chuột
+                e.Graphics.DrawImage(pastedImage, pasteLocation);
+
+                // Vẽ thêm cái khung nét đứt bao quanh cho người dùng dễ căn chỉnh
+                using (Pen dashPen = new Pen(Color.Blue, 1))
+                {
+                    dashPen.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
+                    e.Graphics.DrawRectangle(dashPen, pasteLocation.X, pasteLocation.Y, pastedImage.Width, pastedImage.Height);
+                }
+            }
+
             // Vẽ khung chữ nhật preview cho Text Tool khi đang kéo
             if (isDrawingTextBounds && currentTool == ToolType.Text)
             {
@@ -724,6 +789,39 @@ namespace WinForm_Paint_Gr12
         }
         private void mainForm_KeyDown(object sender, KeyEventArgs e)
         {
+            // 1. Xử lý Paste (Ctrl + V)
+            if (e.Control && e.KeyCode == Keys.V)
+            {
+                // Kiểm tra xem trong Clipboard có chứa ảnh không
+                if (Clipboard.ContainsImage())
+                {
+                    // Lấy ảnh từ Clipboard ra
+                    Image img = Clipboard.GetImage();
+
+                    // Chuyển sang Bitmap để dễ xử lý (và dispose cái cũ nếu có)
+                    if (pastedImage != null) pastedImage.Dispose();
+                    pastedImage = new Bitmap(img);
+
+                    // Tạm dừng việc vẽ vời linh tinh khác
+                    isDrawing = false;
+
+                    // Đổi con trỏ chuột thành hình 4 mũi tên cho dễ nhận biết
+                    pictureBox1.Cursor = Cursors.SizeAll;
+
+                    // Trigger vẽ lại để hiện ảnh lên
+                    pictureBox1.Invalidate();
+                }
+            }
+
+            // 2. Xử lý Copy (Ctrl + C) - Làm luôn cho đủ bộ (Bonus)
+            if (e.Control && e.KeyCode == Keys.C)
+            {
+                if (_mainbitmap != null)
+                {
+                    Clipboard.SetImage(_mainbitmap);
+                }
+            }
+
             // Kiểm tra phím tắt cho Undo (Ctrl + Z)
             if (e.Control && e.KeyCode == Keys.Z)
             {
@@ -747,6 +845,15 @@ namespace WinForm_Paint_Gr12
                 {
                     resizeCanvas(dlg.CanvasWidth, dlg.CanvasHeight);
                 }
+            }
+        }
+
+        private void pictureBox1_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (currentTool == ToolType.Fill)
+            {
+                DrawingLogic.Fill(_mainbitmap, e.Location, currentColor, 50);
+                pictureBox1.Invalidate();
             }
         }
     }
