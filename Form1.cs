@@ -265,6 +265,7 @@ namespace WinForm_Paint_Gr12
             if (propertiesPanel1 != null)
             {
                 propertiesPanel1.Visible = !propertiesPanel1.Visible;
+                separatorPanel.Visible = !separatorPanel.Visible;
             }
         }
 

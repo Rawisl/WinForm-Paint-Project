@@ -74,7 +74,7 @@ namespace WinForm_Paint_Gr12
 
             if (showSize_Label.Visible)
             {
-                showSize_Label.Text = "Size: " + (trackBar1.Value+1);
+                showSize_Label.Text = "Size: " + (trackBar1.Value + 1);
             }
 
             if (trackBar1.Visible == true)

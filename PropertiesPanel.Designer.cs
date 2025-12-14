@@ -46,9 +46,9 @@
             // btnPickColor
             // 
             this.btnPickColor.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPickColor.Location = new System.Drawing.Point(3, 3);
+            this.btnPickColor.Location = new System.Drawing.Point(15, 3);
             this.btnPickColor.Name = "btnPickColor";
-            this.btnPickColor.Size = new System.Drawing.Size(130, 77);
+            this.btnPickColor.Size = new System.Drawing.Size(120, 60);
             this.btnPickColor.TabIndex = 0;
             this.btnPickColor.Text = "Chọn màu";
             this.btnPickColor.UseVisualStyleBackColor = true;
@@ -56,7 +56,7 @@
             // 
             // trackBar1
             // 
-            this.trackBar1.Location = new System.Drawing.Point(0, 86);
+            this.trackBar1.Location = new System.Drawing.Point(6, 87);
             this.trackBar1.Name = "trackBar1";
             this.trackBar1.Size = new System.Drawing.Size(547, 56);
             this.trackBar1.TabIndex = 1;
@@ -67,9 +67,9 @@
             // btnTrackbarSize
             // 
             this.btnTrackbarSize.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTrackbarSize.Location = new System.Drawing.Point(190, 3);
+            this.btnTrackbarSize.Location = new System.Drawing.Point(197, 3);
             this.btnTrackbarSize.Name = "btnTrackbarSize";
-            this.btnTrackbarSize.Size = new System.Drawing.Size(178, 77);
+            this.btnTrackbarSize.Size = new System.Drawing.Size(145, 60);
             this.btnTrackbarSize.TabIndex = 2;
             this.btnTrackbarSize.Text = "Chọn độ dày";
             this.btnTrackbarSize.UseVisualStyleBackColor = true;
@@ -79,7 +79,7 @@
             // 
             this.showSize_Label.AutoSize = true;
             this.showSize_Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.showSize_Label.Location = new System.Drawing.Point(553, 86);
+            this.showSize_Label.Location = new System.Drawing.Point(559, 87);
             this.showSize_Label.Name = "showSize_Label";
             this.showSize_Label.Size = new System.Drawing.Size(41, 18);
             this.showSize_Label.TabIndex = 3;
@@ -88,17 +88,18 @@
             // 
             // pnlPreviewColor
             // 
-            this.pnlPreviewColor.Location = new System.Drawing.Point(139, 21);
+            this.pnlPreviewColor.Cursor = System.Windows.Forms.Cursors.No;
+            this.pnlPreviewColor.Location = new System.Drawing.Point(141, 7);
             this.pnlPreviewColor.Name = "pnlPreviewColor";
-            this.pnlPreviewColor.Size = new System.Drawing.Size(45, 45);
+            this.pnlPreviewColor.Size = new System.Drawing.Size(50, 50);
             this.pnlPreviewColor.TabIndex = 4;
             // 
             // btnFont
             // 
             this.btnFont.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnFont.Location = new System.Drawing.Point(374, 3);
+            this.btnFont.Location = new System.Drawing.Point(353, 4);
             this.btnFont.Name = "btnFont";
-            this.btnFont.Size = new System.Drawing.Size(108, 49);
+            this.btnFont.Size = new System.Drawing.Size(108, 30);
             this.btnFont.TabIndex = 5;
             this.btnFont.Text = "Font";
             this.btnFont.UseVisualStyleBackColor = true;
@@ -109,7 +110,7 @@
             this.lblFontPreview.AutoSize = true;
             this.lblFontPreview.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblFontPreview.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFontPreview.Location = new System.Drawing.Point(488, 3);
+            this.lblFontPreview.Location = new System.Drawing.Point(479, 7);
             this.lblFontPreview.Name = "lblFontPreview";
             this.lblFontPreview.Size = new System.Drawing.Size(53, 27);
             this.lblFontPreview.TabIndex = 6;
@@ -118,7 +119,7 @@
             // btnBold
             // 
             this.btnBold.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnBold.Location = new System.Drawing.Point(374, 54);
+            this.btnBold.Location = new System.Drawing.Point(353, 37);
             this.btnBold.Name = "btnBold";
             this.btnBold.Size = new System.Drawing.Size(32, 26);
             this.btnBold.TabIndex = 7;
@@ -129,7 +130,7 @@
             // btnItalic
             // 
             this.btnItalic.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnItalic.Location = new System.Drawing.Point(412, 54);
+            this.btnItalic.Location = new System.Drawing.Point(391, 37);
             this.btnItalic.Name = "btnItalic";
             this.btnItalic.Size = new System.Drawing.Size(32, 26);
             this.btnItalic.TabIndex = 8;
@@ -140,7 +141,7 @@
             // btnUnderline
             // 
             this.btnUnderline.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnUnderline.Location = new System.Drawing.Point(450, 54);
+            this.btnUnderline.Location = new System.Drawing.Point(429, 37);
             this.btnUnderline.Name = "btnUnderline";
             this.btnUnderline.Size = new System.Drawing.Size(32, 26);
             this.btnUnderline.TabIndex = 9;
@@ -163,7 +164,7 @@
             this.Controls.Add(this.trackBar1);
             this.Controls.Add(this.btnPickColor);
             this.Name = "PropertiesPanel";
-            this.Size = new System.Drawing.Size(620, 121);
+            this.Size = new System.Drawing.Size(717, 126);
             this.Load += new System.EventHandler(this.PropertiesPanel_Load);
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             this.ResumeLayout(false);

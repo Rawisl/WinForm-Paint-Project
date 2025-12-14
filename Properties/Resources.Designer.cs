@@ -113,16 +113,6 @@ namespace WinForm_Paint_Gr12.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap double_arrows {
-            get {
-                object obj = ResourceManager.GetObject("double-arrows", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap Ellipse_Icon {
             get {
                 object obj = ResourceManager.GetObject("Ellipse_Icon", resourceCulture);
@@ -193,6 +183,16 @@ namespace WinForm_Paint_Gr12.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap right_double_arrows {
+            get {
+                object obj = ResourceManager.GetObject("right-double-arrows", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Save_Icon {
             get {
                 object obj = ResourceManager.GetObject("Save_Icon", resourceCulture);
@@ -213,9 +213,9 @@ namespace WinForm_Paint_Gr12.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap TextBox_Icon {
+        internal static System.Drawing.Bitmap Textbox_Icon {
             get {
-                object obj = ResourceManager.GetObject("TextBox_Icon", resourceCulture);
+                object obj = ResourceManager.GetObject("Textbox_Icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
