@@ -250,8 +250,21 @@ namespace WinForm_Paint_Gr12
             {
                 toolsPanel1.toolChanged += toolsPanel1_toolChanged;
 
+                // Đấu dây sự kiện Properties Toggled
+                toolsPanel1.propertiesToggled += toolsPanel1_propertiesToggled;
+
                 //Gọi hàm xử lý sự kiện để thiết lập con trỏ dựa trên ToolType mặc định
                 toolsPanel1_toolChanged(this, EventArgs.Empty);
+            }
+        }
+
+        // Hàm xử lý sự kiện PropertiesPanel Toggled
+        private void toolsPanel1_propertiesToggled(object sender, EventArgs e)
+        {
+            // Đảo ngược trạng thái Visible của propertiesPanel1
+            if (propertiesPanel1 != null)
+            {
+                propertiesPanel1.Visible = !propertiesPanel1.Visible;
             }
         }
 

@@ -73,9 +73,9 @@ namespace WinForm_Paint_Gr12.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Color_Picker {
+        internal static System.Drawing.Bitmap Color_Picker_Icon {
             get {
-                object obj = ResourceManager.GetObject("Color_Picker", resourceCulture);
+                object obj = ResourceManager.GetObject("Color_Picker_Icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -113,6 +113,16 @@ namespace WinForm_Paint_Gr12.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap double_arrows {
+            get {
+                object obj = ResourceManager.GetObject("double-arrows", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Ellipse_Icon {
             get {
                 object obj = ResourceManager.GetObject("Ellipse_Icon", resourceCulture);
@@ -136,16 +146,6 @@ namespace WinForm_Paint_Gr12.Properties {
         internal static System.Drawing.Bitmap Fill_Bucket_Icon {
             get {
                 object obj = ResourceManager.GetObject("Fill_Bucket_Icon", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Line_Icon {
-            get {
-                object obj = ResourceManager.GetObject("Line_Icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -203,9 +203,19 @@ namespace WinForm_Paint_Gr12.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Textbox_Icon {
+        internal static System.Drawing.Bitmap Straight_Line_Icon {
             get {
-                object obj = ResourceManager.GetObject("Textbox_Icon", resourceCulture);
+                object obj = ResourceManager.GetObject("Straight_Line_Icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap TextBox_Icon {
+            get {
+                object obj = ResourceManager.GetObject("TextBox_Icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

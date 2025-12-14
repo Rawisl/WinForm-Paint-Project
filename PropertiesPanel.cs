@@ -30,7 +30,7 @@ namespace WinForm_Paint_Gr12
         {
             InitializeComponent();
         }
-        
+
         private void PropertiesPanel_Load(object sender, EventArgs e)
         {
             //btnPickColor.BackColor = this.SelectedColor;
@@ -57,14 +57,12 @@ namespace WinForm_Paint_Gr12
                 // Bắn tin hiệu ra ngoài cho mainForm biết
                 colorChanged?.Invoke(this, EventArgs.Empty);
             }
-
-
         }
 
         //Hàm bắt sự kiện thả chuột khi kéo trên trackBar
         private void trackBar1_MouseUp(object sender, MouseEventArgs e)
         {
-            showSize_Label.Text = "Size: " + this.selectedSize;
+            showSize_Label.Text = "Size: " + (this.selectedSize + 1);
         }
 
         //Nút ẩn hiện trackBar
@@ -74,10 +72,19 @@ namespace WinForm_Paint_Gr12
             trackBar1.Visible = !trackBar1.Visible;
             showSize_Label.Visible = !showSize_Label.Visible;
 
-            if(showSize_Label.Visible)
+            if (showSize_Label.Visible)
             {
-                showSize_Label.Text = "Size: " + trackBar1.Value;
-            }    
+                showSize_Label.Text = "Size: " + (trackBar1.Value+1);
+            }
+
+            if (trackBar1.Visible == true)
+            {
+                btnTrackbarSize.BackColor = Color.Gray;
+            }
+            else
+            {
+                btnTrackbarSize.BackColor = Color.White;
+            }
         }
 
         //Chỉnh sửa Size cọ bằng cách kéo trackbar 
@@ -150,14 +157,31 @@ namespace WinForm_Paint_Gr12
             if (this.IsBold)
             {
                 style |= FontStyle.Bold;
+                btnBold.BackColor = Color.Gray;
             }
+            else
+            {
+                btnBold.BackColor = Color.White;
+            }
+
             if (this.IsItalic)
             {
                 style |= FontStyle.Italic;
+                btnItalic.BackColor = Color.Gray;
             }
+            else
+            {
+                btnItalic.BackColor = Color.White;
+            }
+
             if (this.IsUnderline)
             {
                 style |= FontStyle.Underline;
+                btnUnderline.BackColor = Color.Gray;
+            }
+            else
+            {
+                btnUnderline.BackColor = Color.White;
             }
 
             // Tạo Font mới với kiểu đã cập nhật, giữ nguyên Tên và Kích thước

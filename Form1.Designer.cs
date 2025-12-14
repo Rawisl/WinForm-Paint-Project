@@ -72,16 +72,17 @@ namespace WinForm_Paint_Gr12
             // canvasContainer_panel
             // 
             this.canvasContainer_panel.AutoScroll = true;
-            this.canvasContainer_panel.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.canvasContainer_panel.BackColor = System.Drawing.Color.LightGray;
             this.canvasContainer_panel.Controls.Add(this.pictureBox1);
             this.canvasContainer_panel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.canvasContainer_panel.Location = new System.Drawing.Point(0, 153);
+            this.canvasContainer_panel.Location = new System.Drawing.Point(0, 189);
             this.canvasContainer_panel.Name = "canvasContainer_panel";
-            this.canvasContainer_panel.Size = new System.Drawing.Size(1482, 573);
+            this.canvasContainer_panel.Size = new System.Drawing.Size(1482, 537);
             this.canvasContainer_panel.TabIndex = 5;
             // 
             // toolStrip
             // 
+            this.toolStrip.BackColor = System.Drawing.Color.WhiteSmoke;
             this.toolStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileButton,
@@ -202,10 +203,11 @@ namespace WinForm_Paint_Gr12
             // 
             this.propertiesPanel1.AutoSize = true;
             this.propertiesPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.propertiesPanel1.BackColor = System.Drawing.Color.WhiteSmoke;
             this.propertiesPanel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.propertiesPanel1.Location = new System.Drawing.Point(0, 97);
+            this.propertiesPanel1.Location = new System.Drawing.Point(0, 106);
             this.propertiesPanel1.Name = "propertiesPanel1";
-            this.propertiesPanel1.Size = new System.Drawing.Size(1482, 56);
+            this.propertiesPanel1.Size = new System.Drawing.Size(1482, 83);
             this.propertiesPanel1.TabIndex = 2;
             this.propertiesPanel1.FontChanged += new System.EventHandler(this.propertiesPanel1_FontChanged);
             // 
@@ -214,11 +216,11 @@ namespace WinForm_Paint_Gr12
             this.toolsPanel1.AutoScroll = true;
             this.toolsPanel1.AutoSize = true;
             this.toolsPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.toolsPanel1.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.toolsPanel1.BackColor = System.Drawing.Color.WhiteSmoke;
             this.toolsPanel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.toolsPanel1.Location = new System.Drawing.Point(0, 30);
             this.toolsPanel1.Name = "toolsPanel1";
-            this.toolsPanel1.Size = new System.Drawing.Size(1482, 67);
+            this.toolsPanel1.Size = new System.Drawing.Size(1482, 76);
             this.toolsPanel1.TabIndex = 1;
             // 
             // statusPanel1
@@ -235,6 +237,7 @@ namespace WinForm_Paint_Gr12
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1482, 753);
             this.Controls.Add(this.canvasContainer_panel);
             this.Controls.Add(this.propertiesPanel1);
