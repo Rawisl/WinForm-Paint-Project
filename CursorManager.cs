@@ -66,29 +66,29 @@ namespace WinForm_Paint_Gr12
             Bitmap brushBitmap = (Bitmap)Properties.Resources.Brush_Icon;
             Bitmap eraserBitmap = (Bitmap)Properties.Resources.Eraser_Icon;
             Bitmap fillbucketBitmap = (Bitmap)Properties.Resources.Fill_Bucket_Icon;
-            Bitmap colorpickerBitmap = (Bitmap)Properties.Resources.Color_Picker;
+            Bitmap colorpickerBitmap = (Bitmap)Properties.Resources.Color_Picker_Icon;
 
             try
             {
                 // Tạo Cursor cho Pencil:
-                // Hotspot (1, Chiều cao - 2) đặt điểm nóng gần góc dưới bên trái, khớp với đầu bút.
-                Cursor customPencil = CreateCursor(pencilBitmap, 1, pencilBitmap.Height - 2);
+                // Hotspot (2, Chiều cao - 2) đặt điểm nóng gần góc dưới bên trái, khớp với đầu bút.
+                Cursor customPencil = CreateCursor(pencilBitmap, 2, pencilBitmap.Height - 2);
 
                 // Tạo Cursor cho Brush:
-                // Hotspot (Chiều rộng / 2, Chiều cao / 2) đặt điểm nóng ở trung tâm cọ.
-                Cursor customBrush = CreateCursor(brushBitmap, brushBitmap.Width / 2, brushBitmap.Height / 2);
+                // Hotspot (1, Chiều cao - 2) đặt điểm nóng gần góc dưới bên trái, khớp với đầu bút.
+                Cursor customBrush = CreateCursor(brushBitmap, 1, brushBitmap.Height - 2);
 
                 //Tạo Cursor cho Eraser
-                // HotSpot (Chiều rộng /2, chiều cao /2) đặt điểm nóng ở trung tâm cọ
-                Cursor customEraser = CreateCursor(eraserBitmap,eraserBitmap.Width / 2, eraserBitmap.Height / 2);
+                // HotSpot (10, chiều cao - 10) đặt điểm nóng ở phần giữa dưới của hình tẩy (thủ công)
+                Cursor customEraser = CreateCursor(eraserBitmap, 10, eraserBitmap.Height - 10);
 
                 //Tạo Cursor cho Fill_Bucket
-                // HotSpot (Chiều rộng /2, chiều cao /2) đặt điểm nóng ở trung tâm cọ
-                Cursor customFillBucket = CreateCursor(fillbucketBitmap, fillbucketBitmap.Width / 2, fillbucketBitmap.Height / 2);
+                // HotSpot (2, chiều cao/2) đặt điểm nóng ở ngay miệng bucket
+                Cursor customFillBucket = CreateCursor(fillbucketBitmap, 2, fillbucketBitmap.Height / 2);
 
                 //Tạo Cursor cho Color_Picker
-                // HotSpot (Chiều rộng /2, chiều cao /2) đặt điểm nóng ở trung tâm cọ
-                Cursor customColorPicker = CreateCursor(colorpickerBitmap, colorpickerBitmap.Width / 2, colorpickerBitmap.Height / 2);
+                // HotSpot (1, chiều cao - 1) đặt điểm nóng ở ngay đầu Picker
+                Cursor customColorPicker = CreateCursor(colorpickerBitmap, 1, colorpickerBitmap.Height - 1);
 
                 // Thêm các con trỏ tùy chỉnh vào Dictionary để sử dụng sau này.
                 CursorMap.Add(ToolType.Pencil, customPencil);
@@ -101,7 +101,7 @@ namespace WinForm_Paint_Gr12
                 CursorMap.Add(ToolType.Triangle, Cursors.Cross);
                 CursorMap.Add(ToolType.ColorPicker, customColorPicker);
                 CursorMap.Add(ToolType.Fill, customFillBucket);
-                
+
 
             }
             catch (Exception ex)
@@ -116,7 +116,7 @@ namespace WinForm_Paint_Gr12
                 CursorMap.Add(ToolType.Rectangle, Cursors.Cross);
                 CursorMap.Add(ToolType.Line, Cursors.Cross);
                 CursorMap.Add(ToolType.Text, Cursors.Cross);
-                CursorMap.Add(ToolType.Triangle,Cursors.Cross);
+                CursorMap.Add(ToolType.Triangle, Cursors.Cross);
                 CursorMap.Add(ToolType.ColorPicker, Cursors.Cross);
                 CursorMap.Add(ToolType.Fill, Cursors.Cross);
             }

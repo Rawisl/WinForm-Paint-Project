@@ -88,9 +88,9 @@
             // 
             // pnlPreviewColor
             // 
-            this.pnlPreviewColor.Location = new System.Drawing.Point(139, 3);
+            this.pnlPreviewColor.Location = new System.Drawing.Point(139, 21);
             this.pnlPreviewColor.Name = "pnlPreviewColor";
-            this.pnlPreviewColor.Size = new System.Drawing.Size(45, 77);
+            this.pnlPreviewColor.Size = new System.Drawing.Size(45, 45);
             this.pnlPreviewColor.TabIndex = 4;
             // 
             // btnFont
@@ -163,7 +163,7 @@
             this.Controls.Add(this.trackBar1);
             this.Controls.Add(this.btnPickColor);
             this.Name = "PropertiesPanel";
-            this.Size = new System.Drawing.Size(620, 115);
+            this.Size = new System.Drawing.Size(620, 121);
             this.Load += new System.EventHandler(this.PropertiesPanel_Load);
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             this.ResumeLayout(false);

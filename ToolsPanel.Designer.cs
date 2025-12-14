@@ -31,9 +31,8 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ToolsPanel));
             this.panel1 = new System.Windows.Forms.Panel();
-            this.PropertiesButton = new System.Windows.Forms.Button();
-            this.colorpickerButton = new System.Windows.Forms.RadioButton();
             this.IconList = new System.Windows.Forms.ImageList(this.components);
+            this.colorpickerButton = new System.Windows.Forms.RadioButton();
             this.fillButton = new System.Windows.Forms.RadioButton();
             this.triangleButton = new System.Windows.Forms.RadioButton();
             this.eraserButton = new System.Windows.Forms.RadioButton();
@@ -43,12 +42,12 @@
             this.pencilButton = new System.Windows.Forms.RadioButton();
             this.lineButton = new System.Windows.Forms.RadioButton();
             this.brushButton = new System.Windows.Forms.RadioButton();
+            this.PropertiesButton = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.PropertiesButton);
             this.panel1.Controls.Add(this.colorpickerButton);
             this.panel1.Controls.Add(this.fillButton);
             this.panel1.Controls.Add(this.triangleButton);
@@ -59,60 +58,60 @@
             this.panel1.Controls.Add(this.pencilButton);
             this.panel1.Controls.Add(this.lineButton);
             this.panel1.Controls.Add(this.brushButton);
-            this.panel1.Location = new System.Drawing.Point(3, 3);
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(579, 61);
+            this.panel1.Size = new System.Drawing.Size(533, 49);
             this.panel1.TabIndex = 6;
-            // 
-            // PropertiesButton
-            // 
-            this.PropertiesButton.Location = new System.Drawing.Point(512, 0);
-            this.PropertiesButton.Name = "PropertiesButton";
-            this.PropertiesButton.Size = new System.Drawing.Size(52, 45);
-            this.PropertiesButton.TabIndex = 8;
-            this.PropertiesButton.UseVisualStyleBackColor = true;
-            this.PropertiesButton.Click += new System.EventHandler(this.PropertiesButton_Click);
-            // 
-            // colorpickerButton
-            // 
-            this.colorpickerButton.Appearance = System.Windows.Forms.Appearance.Button;
-            this.colorpickerButton.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.colorpickerButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.colorpickerButton.ImageKey = "Color_Picker.png";
-            this.colorpickerButton.ImageList = this.IconList;
-            this.colorpickerButton.Location = new System.Drawing.Point(459, 0);
-            this.colorpickerButton.Name = "colorpickerButton";
-            this.colorpickerButton.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
-            this.colorpickerButton.Size = new System.Drawing.Size(45, 45);
-            this.colorpickerButton.TabIndex = 7;
-            this.colorpickerButton.UseVisualStyleBackColor = true;
-            this.colorpickerButton.CheckedChanged += new System.EventHandler(this.colorpickerButton_CheckedChanged);
             // 
             // IconList
             // 
             this.IconList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("IconList.ImageStream")));
             this.IconList.TransparentColor = System.Drawing.Color.Transparent;
-            this.IconList.Images.SetKeyName(0, "Eraser_Icon.png");
-            this.IconList.Images.SetKeyName(1, "Brush_Icon.png");
-            this.IconList.Images.SetKeyName(2, "Ellipse_Icon.png");
-            this.IconList.Images.SetKeyName(3, "Fill_Bucket_Icon.png");
-            this.IconList.Images.SetKeyName(4, "Line_Icon.png");
-            this.IconList.Images.SetKeyName(5, "Pencil_Icon.png");
-            this.IconList.Images.SetKeyName(6, "Rectangle_Icon.png");
-            this.IconList.Images.SetKeyName(7, "Textbox_Icon.png");
-            this.IconList.Images.SetKeyName(8, "Triangle_Icon.png");
-            this.IconList.Images.SetKeyName(9, "Color_Picker.png");
+            this.IconList.Images.SetKeyName(0, "Color_Picker_Icon.png");
+            this.IconList.Images.SetKeyName(1, "Fill_Bucket_Icon.png");
+            this.IconList.Images.SetKeyName(2, "Triangle_Icon.png");
+            this.IconList.Images.SetKeyName(3, "Ellipse_Icon.png");
+            this.IconList.Images.SetKeyName(4, "Rectangle_Icon.png");
+            this.IconList.Images.SetKeyName(5, "Straight_Line_Icon.png");
+            this.IconList.Images.SetKeyName(6, "TextBox_Icon.png");
+            this.IconList.Images.SetKeyName(7, "Brush_Icon.png");
+            this.IconList.Images.SetKeyName(8, "Pencil_Icon.png");
+            this.IconList.Images.SetKeyName(9, "Eraser_Icon.png");
+            // 
+            // colorpickerButton
+            // 
+            this.colorpickerButton.Appearance = System.Windows.Forms.Appearance.Button;
+            this.colorpickerButton.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.colorpickerButton.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke;
+            this.colorpickerButton.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(205)))), ((int)(((byte)(230)))), ((int)(((byte)(247)))));
+            this.colorpickerButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.colorpickerButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.colorpickerButton.ImageKey = "Color_Picker_Icon.png";
+            this.colorpickerButton.ImageList = this.IconList;
+            this.colorpickerButton.Location = new System.Drawing.Point(477, 0);
+            this.colorpickerButton.Margin = new System.Windows.Forms.Padding(4);
+            this.colorpickerButton.Name = "colorpickerButton";
+            this.colorpickerButton.Padding = new System.Windows.Forms.Padding(0, 0, 1, 0);
+            this.colorpickerButton.Size = new System.Drawing.Size(45, 45);
+            this.colorpickerButton.TabIndex = 7;
+            this.colorpickerButton.UseVisualStyleBackColor = true;
+            this.colorpickerButton.CheckedChanged += new System.EventHandler(this.colorpickerButton_CheckedChanged);
             // 
             // fillButton
             // 
             this.fillButton.Appearance = System.Windows.Forms.Appearance.Button;
             this.fillButton.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.fillButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.fillButton.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke;
+            this.fillButton.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(205)))), ((int)(((byte)(230)))), ((int)(((byte)(247)))));
+            this.fillButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.fillButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.fillButton.ImageKey = "Fill_Bucket_Icon.png";
             this.fillButton.ImageList = this.IconList;
-            this.fillButton.Location = new System.Drawing.Point(408, 0);
+            this.fillButton.Location = new System.Drawing.Point(424, 0);
+            this.fillButton.Margin = new System.Windows.Forms.Padding(4);
             this.fillButton.Name = "fillButton";
-            this.fillButton.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
+            this.fillButton.Padding = new System.Windows.Forms.Padding(0, 0, 1, 0);
             this.fillButton.Size = new System.Drawing.Size(45, 45);
             this.fillButton.TabIndex = 6;
             this.fillButton.UseVisualStyleBackColor = true;
@@ -122,12 +121,16 @@
             // 
             this.triangleButton.Appearance = System.Windows.Forms.Appearance.Button;
             this.triangleButton.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.triangleButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.triangleButton.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke;
+            this.triangleButton.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(205)))), ((int)(((byte)(230)))), ((int)(((byte)(247)))));
+            this.triangleButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.triangleButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.triangleButton.ImageKey = "Triangle_Icon.png";
             this.triangleButton.ImageList = this.IconList;
-            this.triangleButton.Location = new System.Drawing.Point(357, 0);
+            this.triangleButton.Location = new System.Drawing.Point(371, 0);
+            this.triangleButton.Margin = new System.Windows.Forms.Padding(4);
             this.triangleButton.Name = "triangleButton";
-            this.triangleButton.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
+            this.triangleButton.Padding = new System.Windows.Forms.Padding(0, 0, 1, 0);
             this.triangleButton.Size = new System.Drawing.Size(45, 45);
             this.triangleButton.TabIndex = 6;
             this.triangleButton.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -138,13 +141,17 @@
             // 
             this.eraserButton.Appearance = System.Windows.Forms.Appearance.Button;
             this.eraserButton.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.eraserButton.FlatAppearance.BorderSize = 0;
-            this.eraserButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.eraserButton.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke;
+            this.eraserButton.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(205)))), ((int)(((byte)(230)))), ((int)(((byte)(247)))));
+            this.eraserButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.eraserButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.eraserButton.ImageKey = "Eraser_Icon.png";
             this.eraserButton.ImageList = this.IconList;
             this.eraserButton.Location = new System.Drawing.Point(0, 0);
+            this.eraserButton.Margin = new System.Windows.Forms.Padding(4);
             this.eraserButton.Name = "eraserButton";
-            this.eraserButton.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
+            this.eraserButton.Padding = new System.Windows.Forms.Padding(0, 0, 1, 0);
+            this.eraserButton.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.eraserButton.Size = new System.Drawing.Size(45, 45);
             this.eraserButton.TabIndex = 5;
             this.eraserButton.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -155,12 +162,16 @@
             // 
             this.ellipseButton.Appearance = System.Windows.Forms.Appearance.Button;
             this.ellipseButton.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.ellipseButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.ellipseButton.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke;
+            this.ellipseButton.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(205)))), ((int)(((byte)(230)))), ((int)(((byte)(247)))));
+            this.ellipseButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.ellipseButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ellipseButton.ImageKey = "Ellipse_Icon.png";
             this.ellipseButton.ImageList = this.IconList;
-            this.ellipseButton.Location = new System.Drawing.Point(306, 0);
+            this.ellipseButton.Location = new System.Drawing.Point(318, 0);
+            this.ellipseButton.Margin = new System.Windows.Forms.Padding(4);
             this.ellipseButton.Name = "ellipseButton";
-            this.ellipseButton.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
+            this.ellipseButton.Padding = new System.Windows.Forms.Padding(0, 0, 1, 0);
             this.ellipseButton.Size = new System.Drawing.Size(45, 45);
             this.ellipseButton.TabIndex = 4;
             this.ellipseButton.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -172,12 +183,16 @@
             this.textButton.Appearance = System.Windows.Forms.Appearance.Button;
             this.textButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.textButton.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.textButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.textButton.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke;
+            this.textButton.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(205)))), ((int)(((byte)(230)))), ((int)(((byte)(247)))));
+            this.textButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.textButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.textButton.ImageKey = "Textbox_Icon.png";
             this.textButton.ImageList = this.IconList;
-            this.textButton.Location = new System.Drawing.Point(153, 0);
+            this.textButton.Location = new System.Drawing.Point(159, 0);
+            this.textButton.Margin = new System.Windows.Forms.Padding(4);
             this.textButton.Name = "textButton";
-            this.textButton.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
+            this.textButton.Padding = new System.Windows.Forms.Padding(0, 0, 1, 0);
             this.textButton.Size = new System.Drawing.Size(45, 45);
             this.textButton.TabIndex = 2;
             this.textButton.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -188,12 +203,16 @@
             // 
             this.rectangleButton.Appearance = System.Windows.Forms.Appearance.Button;
             this.rectangleButton.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.rectangleButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.rectangleButton.ImageIndex = 6;
+            this.rectangleButton.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke;
+            this.rectangleButton.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(205)))), ((int)(((byte)(230)))), ((int)(((byte)(247)))));
+            this.rectangleButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.rectangleButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rectangleButton.ImageKey = "Rectangle_Icon.png";
             this.rectangleButton.ImageList = this.IconList;
-            this.rectangleButton.Location = new System.Drawing.Point(255, 0);
+            this.rectangleButton.Location = new System.Drawing.Point(265, 0);
+            this.rectangleButton.Margin = new System.Windows.Forms.Padding(4);
             this.rectangleButton.Name = "rectangleButton";
-            this.rectangleButton.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
+            this.rectangleButton.Padding = new System.Windows.Forms.Padding(0, 0, 1, 0);
             this.rectangleButton.Size = new System.Drawing.Size(45, 45);
             this.rectangleButton.TabIndex = 3;
             this.rectangleButton.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -205,12 +224,16 @@
             this.pencilButton.Appearance = System.Windows.Forms.Appearance.Button;
             this.pencilButton.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.pencilButton.Checked = true;
-            this.pencilButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.pencilButton.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke;
+            this.pencilButton.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(205)))), ((int)(((byte)(230)))), ((int)(((byte)(247)))));
+            this.pencilButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.pencilButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.pencilButton.ImageKey = "Pencil_Icon.png";
             this.pencilButton.ImageList = this.IconList;
-            this.pencilButton.Location = new System.Drawing.Point(51, 0);
+            this.pencilButton.Location = new System.Drawing.Point(53, 0);
+            this.pencilButton.Margin = new System.Windows.Forms.Padding(4);
             this.pencilButton.Name = "pencilButton";
-            this.pencilButton.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
+            this.pencilButton.Padding = new System.Windows.Forms.Padding(0, 0, 1, 0);
             this.pencilButton.Size = new System.Drawing.Size(45, 45);
             this.pencilButton.TabIndex = 0;
             this.pencilButton.TabStop = true;
@@ -222,12 +245,17 @@
             // 
             this.lineButton.Appearance = System.Windows.Forms.Appearance.Button;
             this.lineButton.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lineButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.lineButton.ImageKey = "Line_Icon.png";
+            this.lineButton.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke;
+            this.lineButton.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(205)))), ((int)(((byte)(230)))), ((int)(((byte)(247)))));
+            this.lineButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.lineButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.lineButton.ImageKey = "Straight_Line_Icon.png";
             this.lineButton.ImageList = this.IconList;
-            this.lineButton.Location = new System.Drawing.Point(204, 0);
+            this.lineButton.Location = new System.Drawing.Point(212, 0);
+            this.lineButton.Margin = new System.Windows.Forms.Padding(4);
             this.lineButton.Name = "lineButton";
-            this.lineButton.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
+            this.lineButton.Padding = new System.Windows.Forms.Padding(0, 0, 1, 0);
+            this.lineButton.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.lineButton.Size = new System.Drawing.Size(45, 45);
             this.lineButton.TabIndex = 2;
             this.lineButton.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -238,37 +266,54 @@
             // 
             this.brushButton.Appearance = System.Windows.Forms.Appearance.Button;
             this.brushButton.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.brushButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.brushButton.ImageIndex = 1;
+            this.brushButton.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke;
+            this.brushButton.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(205)))), ((int)(((byte)(230)))), ((int)(((byte)(247)))));
+            this.brushButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.brushButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.brushButton.ImageKey = "Brush_Icon.png";
             this.brushButton.ImageList = this.IconList;
-            this.brushButton.Location = new System.Drawing.Point(102, 0);
+            this.brushButton.Location = new System.Drawing.Point(106, 0);
+            this.brushButton.Margin = new System.Windows.Forms.Padding(4);
             this.brushButton.Name = "brushButton";
-            this.brushButton.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
+            this.brushButton.Padding = new System.Windows.Forms.Padding(0, 0, 1, 0);
             this.brushButton.Size = new System.Drawing.Size(45, 45);
             this.brushButton.TabIndex = 1;
             this.brushButton.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.brushButton.UseVisualStyleBackColor = true;
             this.brushButton.CheckedChanged += new System.EventHandler(this.brushButton_CheckedChanged);
             // 
+            // PropertiesButton
+            // 
+            this.PropertiesButton.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke;
+            this.PropertiesButton.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(205)))), ((int)(((byte)(230)))), ((int)(((byte)(247)))));
+            this.PropertiesButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.PropertiesButton.Image = global::WinForm_Paint_Gr12.Properties.Resources.double_arrows;
+            this.PropertiesButton.Location = new System.Drawing.Point(4, 53);
+            this.PropertiesButton.Margin = new System.Windows.Forms.Padding(4);
+            this.PropertiesButton.Name = "PropertiesButton";
+            this.PropertiesButton.Padding = new System.Windows.Forms.Padding(0, 0, 1, 0);
+            this.PropertiesButton.Size = new System.Drawing.Size(35, 28);
+            this.PropertiesButton.TabIndex = 8;
+            this.PropertiesButton.UseVisualStyleBackColor = true;
+            this.PropertiesButton.Click += new System.EventHandler(this.PropertiesButton_Click);
+            // 
             // ToolsPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.BackColor = System.Drawing.SystemColors.Control;
+            this.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.Controls.Add(this.PropertiesButton);
             this.Controls.Add(this.panel1);
             this.DoubleBuffered = true;
             this.Name = "ToolsPanel";
-            this.Size = new System.Drawing.Size(591, 77);
+            this.Size = new System.Drawing.Size(537, 83);
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.RadioButton pencilButton;
-        private System.Windows.Forms.RadioButton brushButton;
         private System.Windows.Forms.RadioButton textButton;
         private System.Windows.Forms.RadioButton lineButton;
         private System.Windows.Forms.RadioButton rectangleButton;
@@ -279,6 +324,8 @@
         private System.Windows.Forms.RadioButton triangleButton;
         private System.Windows.Forms.RadioButton fillButton;
         private System.Windows.Forms.RadioButton colorpickerButton;
+        private System.Windows.Forms.RadioButton brushButton;
+        private System.Windows.Forms.RadioButton pencilButton;
         private System.Windows.Forms.Button PropertiesButton;
     }
 }
