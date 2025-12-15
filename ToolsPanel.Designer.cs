@@ -32,6 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ToolsPanel));
             this.panel1 = new System.Windows.Forms.Panel();
             this.IconList = new System.Windows.Forms.ImageList(this.components);
+            this.PropertiesButton = new System.Windows.Forms.Button();
             this.colorpickerButton = new System.Windows.Forms.RadioButton();
             this.fillButton = new System.Windows.Forms.RadioButton();
             this.triangleButton = new System.Windows.Forms.RadioButton();
@@ -42,7 +43,6 @@
             this.pencilButton = new System.Windows.Forms.RadioButton();
             this.lineButton = new System.Windows.Forms.RadioButton();
             this.brushButton = new System.Windows.Forms.RadioButton();
-            this.PropertiesButton = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -58,7 +58,7 @@
             this.panel1.Controls.Add(this.pencilButton);
             this.panel1.Controls.Add(this.lineButton);
             this.panel1.Controls.Add(this.brushButton);
-            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Location = new System.Drawing.Point(0, 30);
             this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(533, 49);
@@ -78,6 +78,21 @@
             this.IconList.Images.SetKeyName(7, "Brush_Icon.png");
             this.IconList.Images.SetKeyName(8, "Pencil_Icon.png");
             this.IconList.Images.SetKeyName(9, "Eraser_Icon.png");
+            // 
+            // PropertiesButton
+            // 
+            this.PropertiesButton.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke;
+            this.PropertiesButton.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(205)))), ((int)(((byte)(230)))), ((int)(((byte)(247)))));
+            this.PropertiesButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.PropertiesButton.Image = global::WinForm_Paint_Gr12.Properties.Resources.right_double_arrows;
+            this.PropertiesButton.Location = new System.Drawing.Point(541, 44);
+            this.PropertiesButton.Margin = new System.Windows.Forms.Padding(4);
+            this.PropertiesButton.Name = "PropertiesButton";
+            this.PropertiesButton.Padding = new System.Windows.Forms.Padding(0, 0, 1, 0);
+            this.PropertiesButton.Size = new System.Drawing.Size(28, 35);
+            this.PropertiesButton.TabIndex = 8;
+            this.PropertiesButton.UseVisualStyleBackColor = true;
+            this.PropertiesButton.Click += new System.EventHandler(this.PropertiesButton_Click);
             // 
             // colorpickerButton
             // 
@@ -282,21 +297,6 @@
             this.brushButton.UseVisualStyleBackColor = true;
             this.brushButton.CheckedChanged += new System.EventHandler(this.brushButton_CheckedChanged);
             // 
-            // PropertiesButton
-            // 
-            this.PropertiesButton.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke;
-            this.PropertiesButton.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(205)))), ((int)(((byte)(230)))), ((int)(((byte)(247)))));
-            this.PropertiesButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.PropertiesButton.Image = global::WinForm_Paint_Gr12.Properties.Resources.double_arrows;
-            this.PropertiesButton.Location = new System.Drawing.Point(4, 53);
-            this.PropertiesButton.Margin = new System.Windows.Forms.Padding(4);
-            this.PropertiesButton.Name = "PropertiesButton";
-            this.PropertiesButton.Padding = new System.Windows.Forms.Padding(0, 0, 1, 0);
-            this.PropertiesButton.Size = new System.Drawing.Size(35, 28);
-            this.PropertiesButton.TabIndex = 8;
-            this.PropertiesButton.UseVisualStyleBackColor = true;
-            this.PropertiesButton.Click += new System.EventHandler(this.PropertiesButton_Click);
-            // 
             // ToolsPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -307,7 +307,7 @@
             this.Controls.Add(this.panel1);
             this.DoubleBuffered = true;
             this.Name = "ToolsPanel";
-            this.Size = new System.Drawing.Size(537, 83);
+            this.Size = new System.Drawing.Size(588, 92);
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
