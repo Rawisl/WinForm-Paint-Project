@@ -81,7 +81,7 @@ namespace WinForm_Paint_Gr12
             this.canvasContainer_panel.Location = new System.Drawing.Point(0, 152);
             this.canvasContainer_panel.Name = "canvasContainer_panel";
             this.canvasContainer_panel.Size = new System.Drawing.Size(1482, 574);
-            this.canvasContainer_panel.TabIndex = 5;
+            this.canvasContainer_panel.TabIndex = 3;
             // 
             // toolStrip
             // 
@@ -98,7 +98,7 @@ namespace WinForm_Paint_Gr12
             this.toolStrip.Location = new System.Drawing.Point(0, 0);
             this.toolStrip.Name = "toolStrip";
             this.toolStrip.Size = new System.Drawing.Size(1482, 30);
-            this.toolStrip.TabIndex = 6;
+            this.toolStrip.TabIndex = 0;
             this.toolStrip.Text = "toolStrip1";
             // 
             // fileButton
@@ -232,7 +232,7 @@ namespace WinForm_Paint_Gr12
             this.propertiesPanel1.Location = new System.Drawing.Point(598, 0);
             this.propertiesPanel1.Name = "propertiesPanel1";
             this.propertiesPanel1.Size = new System.Drawing.Size(882, 120);
-            this.propertiesPanel1.TabIndex = 1;
+            this.propertiesPanel1.TabIndex = 2;
             this.propertiesPanel1.Visible = false;
             // 
             // toolsPanel1
@@ -243,7 +243,7 @@ namespace WinForm_Paint_Gr12
             this.toolsPanel1.Location = new System.Drawing.Point(0, 0);
             this.toolsPanel1.Name = "toolsPanel1";
             this.toolsPanel1.Size = new System.Drawing.Size(598, 120);
-            this.toolsPanel1.TabIndex = 0;
+            this.toolsPanel1.TabIndex = 1;
             // 
             // statusPanel1
             // 

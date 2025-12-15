@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.btnPickColor = new System.Windows.Forms.Button();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.trackBar1 = new System.Windows.Forms.TrackBar();
@@ -40,6 +41,7 @@
             this.btnBold = new System.Windows.Forms.Button();
             this.btnItalic = new System.Windows.Forms.Button();
             this.btnUnderline = new System.Windows.Forms.Button();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -59,10 +61,10 @@
             this.trackBar1.Location = new System.Drawing.Point(6, 87);
             this.trackBar1.Name = "trackBar1";
             this.trackBar1.Size = new System.Drawing.Size(547, 56);
-            this.trackBar1.TabIndex = 1;
+            this.trackBar1.TabIndex = 7;
+            this.toolTip1.SetToolTip(this.trackBar1, "Chỉnh độ dày");
             this.trackBar1.Visible = false;
-            this.trackBar1.Scroll += new System.EventHandler(this.trackBar1_Scroll);
-            this.trackBar1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.trackBar1_MouseUp);
+            this.trackBar1.ValueChanged += new System.EventHandler(this.trackBar1_ValueChanged);
             // 
             // btnTrackbarSize
             // 
@@ -70,7 +72,7 @@
             this.btnTrackbarSize.Location = new System.Drawing.Point(197, 3);
             this.btnTrackbarSize.Name = "btnTrackbarSize";
             this.btnTrackbarSize.Size = new System.Drawing.Size(145, 60);
-            this.btnTrackbarSize.TabIndex = 2;
+            this.btnTrackbarSize.TabIndex = 1;
             this.btnTrackbarSize.Text = "Chọn độ dày";
             this.btnTrackbarSize.UseVisualStyleBackColor = true;
             this.btnTrackbarSize.Click += new System.EventHandler(this.btnTrackbarSize_Click);
@@ -82,17 +84,18 @@
             this.showSize_Label.Location = new System.Drawing.Point(559, 87);
             this.showSize_Label.Name = "showSize_Label";
             this.showSize_Label.Size = new System.Drawing.Size(41, 18);
-            this.showSize_Label.TabIndex = 3;
+            this.showSize_Label.TabIndex = 0;
             this.showSize_Label.Text = "Size:";
             this.showSize_Label.Visible = false;
             // 
             // pnlPreviewColor
             // 
+            this.pnlPreviewColor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlPreviewColor.Cursor = System.Windows.Forms.Cursors.No;
             this.pnlPreviewColor.Location = new System.Drawing.Point(141, 7);
             this.pnlPreviewColor.Name = "pnlPreviewColor";
             this.pnlPreviewColor.Size = new System.Drawing.Size(50, 50);
-            this.pnlPreviewColor.TabIndex = 4;
+            this.pnlPreviewColor.TabIndex = 0;
             // 
             // btnFont
             // 
@@ -100,8 +103,9 @@
             this.btnFont.Location = new System.Drawing.Point(353, 4);
             this.btnFont.Name = "btnFont";
             this.btnFont.Size = new System.Drawing.Size(108, 30);
-            this.btnFont.TabIndex = 5;
+            this.btnFont.TabIndex = 3;
             this.btnFont.Text = "Font";
+            this.toolTip1.SetToolTip(this.btnFont, "Chỉnh Font");
             this.btnFont.UseVisualStyleBackColor = true;
             this.btnFont.Click += new System.EventHandler(this.btnFont_Click);
             // 
@@ -113,7 +117,7 @@
             this.lblFontPreview.Location = new System.Drawing.Point(479, 7);
             this.lblFontPreview.Name = "lblFontPreview";
             this.lblFontPreview.Size = new System.Drawing.Size(53, 27);
-            this.lblFontPreview.TabIndex = 6;
+            this.lblFontPreview.TabIndex = 0;
             this.lblFontPreview.Text = "Font";
             // 
             // btnBold
@@ -122,8 +126,9 @@
             this.btnBold.Location = new System.Drawing.Point(353, 37);
             this.btnBold.Name = "btnBold";
             this.btnBold.Size = new System.Drawing.Size(32, 26);
-            this.btnBold.TabIndex = 7;
+            this.btnBold.TabIndex = 4;
             this.btnBold.Text = "&B";
+            this.toolTip1.SetToolTip(this.btnBold, "In đậm");
             this.btnBold.UseVisualStyleBackColor = true;
             this.btnBold.Click += new System.EventHandler(this.btnBold_Click);
             // 
@@ -133,8 +138,9 @@
             this.btnItalic.Location = new System.Drawing.Point(391, 37);
             this.btnItalic.Name = "btnItalic";
             this.btnItalic.Size = new System.Drawing.Size(32, 26);
-            this.btnItalic.TabIndex = 8;
+            this.btnItalic.TabIndex = 5;
             this.btnItalic.Text = "&I";
+            this.toolTip1.SetToolTip(this.btnItalic, "In nghiêng");
             this.btnItalic.UseVisualStyleBackColor = true;
             this.btnItalic.Click += new System.EventHandler(this.btnItalic_Click);
             // 
@@ -144,8 +150,9 @@
             this.btnUnderline.Location = new System.Drawing.Point(429, 37);
             this.btnUnderline.Name = "btnUnderline";
             this.btnUnderline.Size = new System.Drawing.Size(32, 26);
-            this.btnUnderline.TabIndex = 9;
+            this.btnUnderline.TabIndex = 6;
             this.btnUnderline.Text = "&U";
+            this.toolTip1.SetToolTip(this.btnUnderline, "gạch chân");
             this.btnUnderline.UseVisualStyleBackColor = true;
             this.btnUnderline.Click += new System.EventHandler(this.btnUnderline_Click);
             // 
@@ -186,5 +193,6 @@
         private System.Windows.Forms.Button btnBold;
         private System.Windows.Forms.Button btnItalic;
         private System.Windows.Forms.Button btnUnderline;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }

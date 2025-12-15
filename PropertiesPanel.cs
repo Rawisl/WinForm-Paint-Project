@@ -59,12 +59,6 @@ namespace WinForm_Paint_Gr12
             }
         }
 
-        //Hàm bắt sự kiện thả chuột khi kéo trên trackBar
-        private void trackBar1_MouseUp(object sender, MouseEventArgs e)
-        {
-            showSize_Label.Text = "Size: " + (this.selectedSize + 1);
-        }
-
         //Nút ẩn hiện trackBar
         private void btnTrackbarSize_Click(object sender, EventArgs e)
         {
@@ -85,16 +79,6 @@ namespace WinForm_Paint_Gr12
             {
                 btnTrackbarSize.BackColor = Color.White;
             }
-        }
-
-        //Chỉnh sửa Size cọ bằng cách kéo trackbar 
-        private void trackBar1_Scroll(object sender, EventArgs e)
-        {
-            // 1. Cập nhật dữ liệu
-            this.selectedSize = (float)trackBar1.Value;
-
-            // 2. BẮN SỰ KIỆN RA NGOÀI
-            sizeChanged?.Invoke(this, EventArgs.Empty);
         }
 
         private void btnFont_Click(object sender, EventArgs e)
@@ -203,6 +187,18 @@ namespace WinForm_Paint_Gr12
             // Cập nhật giao diện cho nút hiện màu
             pnlPreviewColor.BackColor = this.selectedColor;
 
+        }
+
+        private void trackBar1_ValueChanged(object sender, EventArgs e)
+        {
+            //Cập nhật dữ liệu
+            this.selectedSize = (float)trackBar1.Value;
+
+            //Cập nhật giao diện Size
+            showSize_Label.Text = "Size: " + (trackBar1.Value + 1);
+
+            //BẮN SỰ KIỆN RA NGOÀI (Kích hoạt cho Main Form)
+            sizeChanged?.Invoke(this, EventArgs.Empty);
         }
     }
 }
