@@ -85,7 +85,7 @@ namespace WinForm_Paint_Gr12
             // 
             // toolStrip
             // 
-            this.toolStrip.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.toolStrip.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.toolStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileButton,
@@ -205,6 +205,7 @@ namespace WinForm_Paint_Gr12
             // headerPanel
             // 
             this.headerPanel.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.headerPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.headerPanel.Controls.Add(this.separatorPanel);
             this.headerPanel.Controls.Add(this.propertiesPanel1);
             this.headerPanel.Controls.Add(this.toolsPanel1);
@@ -220,7 +221,7 @@ namespace WinForm_Paint_Gr12
             this.separatorPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.separatorPanel.Location = new System.Drawing.Point(598, 0);
             this.separatorPanel.Name = "separatorPanel";
-            this.separatorPanel.Size = new System.Drawing.Size(2, 122);
+            this.separatorPanel.Size = new System.Drawing.Size(2, 120);
             this.separatorPanel.TabIndex = 2;
             this.separatorPanel.Visible = false;
             // 
@@ -230,7 +231,7 @@ namespace WinForm_Paint_Gr12
             this.propertiesPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.propertiesPanel1.Location = new System.Drawing.Point(598, 0);
             this.propertiesPanel1.Name = "propertiesPanel1";
-            this.propertiesPanel1.Size = new System.Drawing.Size(884, 122);
+            this.propertiesPanel1.Size = new System.Drawing.Size(882, 120);
             this.propertiesPanel1.TabIndex = 1;
             this.propertiesPanel1.Visible = false;
             // 
@@ -241,7 +242,7 @@ namespace WinForm_Paint_Gr12
             this.toolsPanel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.toolsPanel1.Location = new System.Drawing.Point(0, 0);
             this.toolsPanel1.Name = "toolsPanel1";
-            this.toolsPanel1.Size = new System.Drawing.Size(598, 122);
+            this.toolsPanel1.Size = new System.Drawing.Size(598, 120);
             this.toolsPanel1.TabIndex = 0;
             // 
             // statusPanel1
