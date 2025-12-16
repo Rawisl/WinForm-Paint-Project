@@ -48,9 +48,9 @@ namespace WinForm_Paint_Gr12
             this.resizeButton = new System.Windows.Forms.ToolStripButton();
             this.headerPanel = new System.Windows.Forms.Panel();
             this.separatorPanel = new System.Windows.Forms.Panel();
+            this.statusPanel1 = new WinForm_Paint_Gr12.StatusPanel();
             this.propertiesPanel1 = new WinForm_Paint_Gr12.PropertiesPanel();
             this.toolsPanel1 = new WinForm_Paint_Gr12.ToolsPanel();
-            this.statusPanel1 = new WinForm_Paint_Gr12.StatusPanel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.canvasContainer_panel.SuspendLayout();
             this.toolStrip.SuspendLayout();
@@ -78,10 +78,10 @@ namespace WinForm_Paint_Gr12
             this.canvasContainer_panel.BackColor = System.Drawing.Color.LightGray;
             this.canvasContainer_panel.Controls.Add(this.pictureBox1);
             this.canvasContainer_panel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.canvasContainer_panel.Location = new System.Drawing.Point(0, 152);
+            this.canvasContainer_panel.Location = new System.Drawing.Point(0, 153);
             this.canvasContainer_panel.Name = "canvasContainer_panel";
-            this.canvasContainer_panel.Size = new System.Drawing.Size(1482, 574);
-            this.canvasContainer_panel.TabIndex = 5;
+            this.canvasContainer_panel.Size = new System.Drawing.Size(1463, 573);
+            this.canvasContainer_panel.TabIndex = 3;
             // 
             // toolStrip
             // 
@@ -97,8 +97,9 @@ namespace WinForm_Paint_Gr12
             this.resizeButton});
             this.toolStrip.Location = new System.Drawing.Point(0, 0);
             this.toolStrip.Name = "toolStrip";
-            this.toolStrip.Size = new System.Drawing.Size(1482, 30);
-            this.toolStrip.TabIndex = 6;
+            this.toolStrip.Size = new System.Drawing.Size(1463, 31);
+            this.toolStrip.TabIndex = 0;
+            this.toolStrip.TabStop = true;
             this.toolStrip.Text = "toolStrip1";
             // 
             // fileButton
@@ -113,7 +114,7 @@ namespace WinForm_Paint_Gr12
             this.fileButton.Image = ((System.Drawing.Image)(resources.GetObject("fileButton.Image")));
             this.fileButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.fileButton.Name = "fileButton";
-            this.fileButton.Size = new System.Drawing.Size(49, 27);
+            this.fileButton.Size = new System.Drawing.Size(49, 28);
             this.fileButton.Text = "&File";
             this.fileButton.Click += new System.EventHandler(this.file_menu_Click);
             // 
@@ -153,7 +154,7 @@ namespace WinForm_Paint_Gr12
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 30);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 31);
             // 
             // quickSaveButton
             // 
@@ -161,7 +162,7 @@ namespace WinForm_Paint_Gr12
             this.quickSaveButton.Image = ((System.Drawing.Image)(resources.GetObject("quickSaveButton.Image")));
             this.quickSaveButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.quickSaveButton.Name = "quickSaveButton";
-            this.quickSaveButton.Size = new System.Drawing.Size(29, 27);
+            this.quickSaveButton.Size = new System.Drawing.Size(29, 28);
             this.quickSaveButton.Text = "Quick save";
             this.quickSaveButton.Click += new System.EventHandler(this.save_menu_Click);
             // 
@@ -172,7 +173,7 @@ namespace WinForm_Paint_Gr12
             this.quickUndoButton.Image = ((System.Drawing.Image)(resources.GetObject("quickUndoButton.Image")));
             this.quickUndoButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.quickUndoButton.Name = "quickUndoButton";
-            this.quickUndoButton.Size = new System.Drawing.Size(29, 27);
+            this.quickUndoButton.Size = new System.Drawing.Size(29, 28);
             this.quickUndoButton.Text = "Undo";
             this.quickUndoButton.Click += new System.EventHandler(this.quickUndoButton_Click);
             // 
@@ -183,14 +184,14 @@ namespace WinForm_Paint_Gr12
             this.quickRedoButton.Image = ((System.Drawing.Image)(resources.GetObject("quickRedoButton.Image")));
             this.quickRedoButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.quickRedoButton.Name = "quickRedoButton";
-            this.quickRedoButton.Size = new System.Drawing.Size(29, 27);
+            this.quickRedoButton.Size = new System.Drawing.Size(29, 28);
             this.quickRedoButton.Text = "Redo";
             this.quickRedoButton.Click += new System.EventHandler(this.quickRedoButton_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 30);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 31);
             // 
             // resizeButton
             // 
@@ -198,7 +199,7 @@ namespace WinForm_Paint_Gr12
             this.resizeButton.Image = global::WinForm_Paint_Gr12.Properties.Resources.Resize_Icon;
             this.resizeButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.resizeButton.Name = "resizeButton";
-            this.resizeButton.Size = new System.Drawing.Size(29, 27);
+            this.resizeButton.Size = new System.Drawing.Size(29, 28);
             this.resizeButton.Text = "Resize";
             this.resizeButton.Click += new System.EventHandler(this.resizeButton_Click);
             // 
@@ -210,9 +211,9 @@ namespace WinForm_Paint_Gr12
             this.headerPanel.Controls.Add(this.propertiesPanel1);
             this.headerPanel.Controls.Add(this.toolsPanel1);
             this.headerPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.headerPanel.Location = new System.Drawing.Point(0, 30);
+            this.headerPanel.Location = new System.Drawing.Point(0, 31);
             this.headerPanel.Name = "headerPanel";
-            this.headerPanel.Size = new System.Drawing.Size(1482, 122);
+            this.headerPanel.Size = new System.Drawing.Size(1463, 122);
             this.headerPanel.TabIndex = 4;
             // 
             // separatorPanel
@@ -225,14 +226,24 @@ namespace WinForm_Paint_Gr12
             this.separatorPanel.TabIndex = 2;
             this.separatorPanel.Visible = false;
             // 
+            // statusPanel1
+            // 
+            this.statusPanel1.AutoSize = true;
+            this.statusPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.statusPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.statusPanel1.Location = new System.Drawing.Point(0, 726);
+            this.statusPanel1.Name = "statusPanel1";
+            this.statusPanel1.Size = new System.Drawing.Size(1463, 27);
+            this.statusPanel1.TabIndex = 1;
+            // 
             // propertiesPanel1
             // 
             this.propertiesPanel1.BackColor = System.Drawing.Color.WhiteSmoke;
             this.propertiesPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.propertiesPanel1.Location = new System.Drawing.Point(598, 0);
             this.propertiesPanel1.Name = "propertiesPanel1";
-            this.propertiesPanel1.Size = new System.Drawing.Size(882, 120);
-            this.propertiesPanel1.TabIndex = 1;
+            this.propertiesPanel1.Size = new System.Drawing.Size(863, 120);
+            this.propertiesPanel1.TabIndex = 2;
             this.propertiesPanel1.Visible = false;
             // 
             // toolsPanel1
@@ -243,24 +254,14 @@ namespace WinForm_Paint_Gr12
             this.toolsPanel1.Location = new System.Drawing.Point(0, 0);
             this.toolsPanel1.Name = "toolsPanel1";
             this.toolsPanel1.Size = new System.Drawing.Size(598, 120);
-            this.toolsPanel1.TabIndex = 0;
-            // 
-            // statusPanel1
-            // 
-            this.statusPanel1.AutoSize = true;
-            this.statusPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.statusPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.statusPanel1.Location = new System.Drawing.Point(0, 726);
-            this.statusPanel1.Name = "statusPanel1";
-            this.statusPanel1.Size = new System.Drawing.Size(1482, 27);
-            this.statusPanel1.TabIndex = 0;
+            this.toolsPanel1.TabIndex = 1;
             // 
             // mainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1482, 753);
+            this.ClientSize = new System.Drawing.Size(1463, 753);
             this.Controls.Add(this.canvasContainer_panel);
             this.Controls.Add(this.statusPanel1);
             this.Controls.Add(this.headerPanel);

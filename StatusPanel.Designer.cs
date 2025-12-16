@@ -28,8 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.lblMousePosition = new System.Windows.Forms.Label();
             this.StatusLabel = new System.Windows.Forms.Label();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.SuspendLayout();
             // 
             // lblMousePosition
@@ -40,6 +42,7 @@
             this.lblMousePosition.Size = new System.Drawing.Size(44, 16);
             this.lblMousePosition.TabIndex = 1;
             this.lblMousePosition.Text = "label1";
+            this.toolTip1.SetToolTip(this.lblMousePosition, "Tọa độ");
             // 
             // StatusLabel
             // 
@@ -68,5 +71,6 @@
 
         private System.Windows.Forms.Label StatusLabel;
         private System.Windows.Forms.Label lblMousePosition;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }
