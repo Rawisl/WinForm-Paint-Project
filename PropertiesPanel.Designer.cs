@@ -61,7 +61,7 @@
             this.trackBar1.Location = new System.Drawing.Point(6, 87);
             this.trackBar1.Name = "trackBar1";
             this.trackBar1.Size = new System.Drawing.Size(547, 56);
-            this.trackBar1.TabIndex = 7;
+            this.trackBar1.TabIndex = 2;
             this.toolTip1.SetToolTip(this.trackBar1, "Chỉnh độ dày");
             this.trackBar1.Visible = false;
             this.trackBar1.ValueChanged += new System.EventHandler(this.trackBar1_ValueChanged);
