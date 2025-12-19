@@ -48,9 +48,9 @@ namespace WinForm_Paint_Gr12
             this.resizeButton = new System.Windows.Forms.ToolStripButton();
             this.headerPanel = new System.Windows.Forms.Panel();
             this.separatorPanel = new System.Windows.Forms.Panel();
-            this.statusPanel1 = new WinForm_Paint_Gr12.StatusPanel();
             this.propertiesPanel1 = new WinForm_Paint_Gr12.PropertiesPanel();
             this.toolsPanel1 = new WinForm_Paint_Gr12.ToolsPanel();
+            this.statusPanel1 = new WinForm_Paint_Gr12.StatusPanel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.canvasContainer_panel.SuspendLayout();
             this.toolStrip.SuspendLayout();
@@ -99,7 +99,6 @@ namespace WinForm_Paint_Gr12
             this.toolStrip.Name = "toolStrip";
             this.toolStrip.Size = new System.Drawing.Size(1463, 31);
             this.toolStrip.TabIndex = 0;
-            this.toolStrip.TabStop = true;
             this.toolStrip.Text = "toolStrip1";
             // 
             // fileButton
@@ -116,7 +115,6 @@ namespace WinForm_Paint_Gr12
             this.fileButton.Name = "fileButton";
             this.fileButton.Size = new System.Drawing.Size(49, 28);
             this.fileButton.Text = "&File";
-            this.fileButton.Click += new System.EventHandler(this.file_menu_Click);
             // 
             // openFileButton
             // 
@@ -226,16 +224,6 @@ namespace WinForm_Paint_Gr12
             this.separatorPanel.TabIndex = 2;
             this.separatorPanel.Visible = false;
             // 
-            // statusPanel1
-            // 
-            this.statusPanel1.AutoSize = true;
-            this.statusPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.statusPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.statusPanel1.Location = new System.Drawing.Point(0, 726);
-            this.statusPanel1.Name = "statusPanel1";
-            this.statusPanel1.Size = new System.Drawing.Size(1463, 27);
-            this.statusPanel1.TabIndex = 1;
-            // 
             // propertiesPanel1
             // 
             this.propertiesPanel1.BackColor = System.Drawing.Color.WhiteSmoke;
@@ -256,6 +244,16 @@ namespace WinForm_Paint_Gr12
             this.toolsPanel1.Size = new System.Drawing.Size(598, 120);
             this.toolsPanel1.TabIndex = 1;
             // 
+            // statusPanel1
+            // 
+            this.statusPanel1.AutoSize = true;
+            this.statusPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.statusPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.statusPanel1.Location = new System.Drawing.Point(0, 726);
+            this.statusPanel1.Name = "statusPanel1";
+            this.statusPanel1.Size = new System.Drawing.Size(1463, 27);
+            this.statusPanel1.TabIndex = 1;
+            // 
             // mainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -273,7 +271,6 @@ namespace WinForm_Paint_Gr12
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Paint";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.mainForm_FormClosing);
-            this.Load += new System.EventHandler(this.mainForm_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.mainForm_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.canvasContainer_panel.ResumeLayout(false);

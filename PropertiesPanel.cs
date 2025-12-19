@@ -33,8 +33,6 @@ namespace WinForm_Paint_Gr12
 
         private void PropertiesPanel_Load(object sender, EventArgs e)
         {
-            //btnPickColor.BackColor = this.SelectedColor;
-
             //Panel hiển thị màu mặc định
             pnlPreviewColor.BackColor = this.selectedColor;
 
@@ -106,7 +104,6 @@ namespace WinForm_Paint_Gr12
         }
 
         // Xử lý nút BOLD
-
         private void btnBold_Click(object sender, EventArgs e)
         {
             // Đảo ngược trạng thái
@@ -117,7 +114,6 @@ namespace WinForm_Paint_Gr12
         }
 
         // Xử lý nút ITALIC 
-
         private void btnItalic_Click(object sender, EventArgs e)
         {
             this.IsItalic = !this.IsItalic;
@@ -125,7 +121,6 @@ namespace WinForm_Paint_Gr12
         }
 
         // Xử lý nút UNDERLINE
-
         private void btnUnderline_Click(object sender, EventArgs e)
         {
             this.IsUnderline = !this.IsUnderline;

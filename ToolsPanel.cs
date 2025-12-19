@@ -10,13 +10,14 @@ using System.Windows.Forms;
 
 namespace WinForm_Paint_Gr12
 {
+    //Khai báo enum tooltype để quản lý
     public enum ToolType
     {
         Eraser, Pencil, Brush, Text, Line, Rectangle, Oval, Triangle, Fill, ColorPicker, Properties
     }
     public partial class ToolsPanel : UserControl
     {
-        // 1. KHAI BÁO SỰ KIỆN (EVENT)
+        //KHAI BÁO SỰ KIỆN
         public event EventHandler toolChanged;
 
         // Sự kiện ẩn hiện propertiesPanel
@@ -33,7 +34,7 @@ namespace WinForm_Paint_Gr12
 
         private void OnToolSelected()
         {
-            // 2. KÍCH HOẠT SỰ KIỆN (BẮN TIN)
+            //KÍCH HOẠT SỰ KIỆN
             toolChanged?.Invoke(this, EventArgs.Empty);
         }
 
@@ -43,10 +44,21 @@ namespace WinForm_Paint_Gr12
             propertiesToggled?.Invoke(this, EventArgs.Empty);
         }
 
-        private void pencilButton_CheckedChanged(object sender, EventArgs e)
+        //Hàm xử lý chọn tẩy
+        private void eraserButton_CheckedChanged(object sender, EventArgs e)
         {
             // Chỉ xử lý khi nút được CHỌN (Checked = true)
             // (Vì RadioButton có 2 lần nhảy event: 1 lần bỏ chọn cũ, 1 lần chọn mới)
+            if (eraserButton.Checked)
+            {
+                currentTool = ToolType.Eraser;
+                OnToolSelected();
+            }
+        }
+
+        //Hàm xử lý chọn bút chì
+        private void pencilButton_CheckedChanged(object sender, EventArgs e)
+        {
             if (pencilButton.Checked)
             {
                 currentTool = ToolType.Pencil;
@@ -54,41 +66,17 @@ namespace WinForm_Paint_Gr12
             }
         }
 
+        //Hàm xử lý chọn cọ
         private void brushButton_CheckedChanged(object sender, EventArgs e)
         {
             if (brushButton.Checked)
             {
                 currentTool = ToolType.Brush;
-                OnToolSelected(); // Báo tin ngay!
+                OnToolSelected(); // Báo tin
             }
         }
 
-        private void lineButton_CheckedChanged(object sender, EventArgs e)
-        {
-            if (lineButton.Checked)
-            {
-                currentTool = ToolType.Line;
-                OnToolSelected();
-            }
-        }
-
-        private void rectangleButton_CheckedChanged(object sender, EventArgs e)
-        {
-            if (rectangleButton.Checked)
-            {
-                currentTool = ToolType.Rectangle;
-                OnToolSelected();
-            }
-        }
-
-        private void ellipseButton_CheckedChanged(object sender, EventArgs e)
-        {
-            if (ellipseButton.Checked)
-            {
-                currentTool = ToolType.Oval;
-                OnToolSelected();
-            }
-        }
+        //Hàm xử lý chọn textbox
         private void textButton_CheckedChanged(object sender, EventArgs e)
         {
             if (((RadioButton)sender).Checked)
@@ -98,15 +86,37 @@ namespace WinForm_Paint_Gr12
             }
         }
 
-        private void eraserButton_CheckedChanged(object sender, EventArgs e)
+        //Hàm xử lý chọn line
+        private void lineButton_CheckedChanged(object sender, EventArgs e)
         {
-            if (eraserButton.Checked)
+            if (lineButton.Checked)
             {
-                currentTool = ToolType.Eraser;
+                currentTool = ToolType.Line;
                 OnToolSelected();
             }
         }
 
+        //Hàm xử lý chọn hình chữ nhật
+        private void rectangleButton_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rectangleButton.Checked)
+            {
+                currentTool = ToolType.Rectangle;
+                OnToolSelected();
+            }
+        }
+
+        //Hàm xử lý chọn hình ellipse
+        private void ellipseButton_CheckedChanged(object sender, EventArgs e)
+        {
+            if (ellipseButton.Checked)
+            {
+                currentTool = ToolType.Oval;
+                OnToolSelected();
+            }
+        }
+
+        //Hàm xử lý chọn hình tam giác
         private void triangleButton_CheckedChanged(object sender, EventArgs e)
         {
             if (triangleButton.Checked)
@@ -116,6 +126,7 @@ namespace WinForm_Paint_Gr12
             }
         }
 
+        //Hàm xử lý chọn fill màu
         private void fillButton_CheckedChanged(object sender, EventArgs e)
         {
             if (fillButton.Checked)
@@ -125,6 +136,7 @@ namespace WinForm_Paint_Gr12
             }
         }
 
+        //Hàm xử lý chọn hình colorpicker
         private void colorpickerButton_CheckedChanged(object sender, EventArgs e)
         {
             if(colorpickerButton.Checked)

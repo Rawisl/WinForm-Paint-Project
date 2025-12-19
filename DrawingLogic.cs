@@ -15,8 +15,11 @@ namespace WinForm_Paint_Gr12
 {
     internal class DrawingLogic
     {
-        //Chứa các hàm toán học: g.DrawRectangle(...), g.DrawLine(...), tính toán tọa độ x, y, w, h.
+        /*=============================================*/
+        /*=============CÁC HÀM VẼ THỦ CÔNG=============*/
+        /*=============================================*/
 
+        /*HÀM VẼ BÚT CHÌ*/
         public static void DrawPencil(Graphics g, Point p1, Point p2, Color color, float width)
         {
             // Tắt làm mịn để vẽ nét sắc cạnh
@@ -31,6 +34,7 @@ namespace WinForm_Paint_Gr12
             pen.Dispose(); // Dispose để giải phóng tài nguyên tăng hiệu suất tránh lãng phí
         }
 
+        /*HÀM VẼ CỌ*/
         public static void DrawBrush(Graphics g, Point p1, Point p2, Color color, float width)
         {
             // Bật làm mịn để vẽ nét to liền
@@ -46,48 +50,12 @@ namespace WinForm_Paint_Gr12
             brushPen.Dispose(); // Dispose để giải phóng tài nguyên tăng hiệu suất tránh lãng phí
         }
 
-        // Hàm để căn giữa canvas
-        public static void CenterPictureBox(Control control, Control form)
-        {
-            // công thức căn chỉnh cho picturebox ở giữa
-            int x = (form.Width - control.Width) / 2;
-            int y = (form.Height - control.Height) / 2;
 
-            if (x < 0) x = 0;
-            if (y < 0) y = 0;
-
-            control.Location = new Point(x, y);
-        }
-
-        public static void DrawLine(Graphics g, Point p1, Point p2, Color color, float width)
-        {
-            // Với công cụ hình học (Line), ta nên bật làm mịn (AntiAlias) để đường thẳng đẹp hơn
-            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-
-            // Sử dụng 'using' để tự động Dispose pen sau khi dùng xong (Code gọn và an toàn hơn)
-            using (Pen pen = new Pen(color, width))
-            {
-                // Bo tròn 2 đầu mút của đoạn thẳng cho đẹp (đỡ bị cụt lủn nếu nét to)
-                pen.StartCap = System.Drawing.Drawing2D.LineCap.Round;
-                pen.EndCap = System.Drawing.Drawing2D.LineCap.Round;
-
-                // Vẽ đường thẳng từ điểm đầu (MouseDown) đến điểm cuối (MouseUp)
-                g.DrawLine(pen, p1, p2);
-            }
-        }
-
-        public static void DrawRectangle(Graphics g, Rectangle r, Color color, float width)
-        {
-            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-
-            using (Pen pen = new Pen(color, width))
-            {
-                g.DrawRectangle(pen, r);
-            }
-        }
-
-
-        // Hàm tính kích cỡ và toạ độ của hình chữ nhật
+        /*=============================================*/
+        /*===============CÁC HÀM VẼ SHAPE==============*/
+        /*=============================================*/
+        
+        /*HÀM TÍNH KÍCH CỠ TAM GIÁC VÀ TỌA ĐỘ THEO FIRSTPOINT, LASTPOINT*/
         public static Rectangle GetRectangle(Point p1, Point p2)
         {
             // tính toạ độ x, y bên góc trái của hình chữ nhật
@@ -101,34 +69,7 @@ namespace WinForm_Paint_Gr12
             return new Rectangle(x, y, width, height);
         }
 
-        public static void DrawEllipse(Graphics g, Rectangle rect, Color color, float width)
-        {
-            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-
-            using (Pen pen = new Pen(color, width))
-            {
-                g.DrawEllipse(pen, rect);
-            }
-        }
-
-        public static void DrawTriangle(Graphics g, Rectangle rect, Color color, float width)
-        {
-            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-
-            using (Pen pen = new Pen(color, width))
-            {
-                //bo tròn các góc nối để hình nhìn mềm hơn
-                pen.LineJoin = System.Drawing.Drawing2D.LineJoin.Round;
-
-                Point p1 = new Point(rect.X + rect.Width / 2, rect.Y); //tính tọa độ đỉnh giữa
-                Point p2 = new Point(rect.X, rect.Bottom); //góc trái (Dưới)
-                Point p3 = new Point(rect.Right, rect.Bottom); //góc phải (dưới)
-
-                g.DrawPolygon(pen, new Point[] { p1, p2, p3 });
-            }
-        }
-
-        // Hàm tính lại kích cỡ và toạ độ để vẽ hình vuông hay tròn tỉ lệ 1:1
+        /*HÀM TÍNH LẠI KÍCH CỠ VÀ TỌA ĐỘ ĐỂ VẼ HÌNH VUÔNG HAY TRÒN TỈ LỆ 1:1*/
         public static Rectangle GetPerfectShape(Point p1, Point p2)
         {
             int x = Math.Min(p1.X, p2.X);
@@ -149,6 +90,67 @@ namespace WinForm_Paint_Gr12
 
             return new Rectangle(x, y, width, height);
         }
+
+
+        /*HÀM VẼ ĐƯỜNG THẲNG*/
+        public static void DrawLine(Graphics g, Point p1, Point p2, Color color, float width)
+        {
+            // Với công cụ hình học (Line), ta nên bật làm mịn (AntiAlias) để đường thẳng đẹp hơn
+            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+
+            // Sử dụng 'using' để tự động Dispose pen sau khi dùng xong
+            using (Pen pen = new Pen(color, width))
+            {
+                // Bo tròn 2 đầu mút của đoạn thẳng cho đẹp (đỡ bị cụt lủn nếu nét to)
+                pen.StartCap = System.Drawing.Drawing2D.LineCap.Round;
+                pen.EndCap = System.Drawing.Drawing2D.LineCap.Round;
+
+                // Vẽ đường thẳng từ điểm đầu (MouseDown) đến điểm cuối (MouseUp)
+                g.DrawLine(pen, p1, p2);
+            }
+        }
+
+        /*HÀM VẼ HÌNH CHỮ NHẬT*/
+        public static void DrawRectangle(Graphics g, Rectangle r, Color color, float width)
+        {
+            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+
+            using (Pen pen = new Pen(color, width))
+            {
+                g.DrawRectangle(pen, r);
+            }
+        }
+
+        /*HÀM VẼ HÌNH ELLIPSE*/
+        public static void DrawEllipse(Graphics g, Rectangle rect, Color color, float width)
+        {
+            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+
+            using (Pen pen = new Pen(color, width))
+            {
+                g.DrawEllipse(pen, rect);
+            }
+        }
+
+        /*HÀM VẼ HÌNH TAM GIÁC*/
+        public static void DrawTriangle(Graphics g, Rectangle rect, Color color, float width)
+        {
+            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+
+            using (Pen pen = new Pen(color, width))
+            {
+                //bo tròn các góc nối để hình nhìn mềm hơn
+                pen.LineJoin = System.Drawing.Drawing2D.LineJoin.Round;
+
+                Point p1 = new Point(rect.X + rect.Width / 2, rect.Y); //tính tọa độ đỉnh giữa
+                Point p2 = new Point(rect.X, rect.Bottom); //góc trái (Dưới)
+                Point p3 = new Point(rect.Right, rect.Bottom); //góc phải (dưới)
+
+                g.DrawPolygon(pen, new Point[] { p1, p2, p3 });
+            }
+        }
+
+        /*HÀM CỤC TẨY - BẢN CHẤT LÀ VẼ ĐÈ MÀU TRẮNG LÊN*/
         public static void DrawEraser(Graphics g, Point start, Point end, float size)
         {
             //tính toán tọa độ và khoảng cách

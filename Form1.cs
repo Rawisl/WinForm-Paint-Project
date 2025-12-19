@@ -13,19 +13,26 @@ namespace WinForm_Paint_Gr12
 {
     public partial class mainForm : Form
     {
+        /*=============================================*/
+        /*================PHẦN TẠO BIẾN================*/
+        /*=============================================*/
         private Bitmap _mainbitmap; //giấy vẽ chính
-        private HistoryManager historyManager;
         private bool isChanged = false; //tạo cờ đánh dấu giấy đó bị vẽ nét mới lên chưa
-        private string currentFilePath = "";//khởi tạo đường dẫn file ban đầu là rỗng
+        bool isDrawing = false; //cờ để đánh dấu có phải người dùng đang vẽ hay không
 
-        bool isDrawing = false;
-        Point firstPoint; // dùng cho hình học, cần có điểm đầu tiên
-        Point lastPoint;
-
+        //các giá trị mặc định tự thiết lập
         ToolType currentTool = ToolType.Pencil;
         Color currentColor = Color.Black;
+        private string currentFilePath = "";//khởi tạo đường dẫn file ban đầu là rỗng
         float currentSize = 1.0f;
         float sizeBrush = 2.0f;
+
+        //thiết lập lịch sử để undo, redo
+        private HistoryManager historyManager;
+
+        //các điểm đầu và cuối phục vụ cho việc vẽ shape
+        Point firstPoint;
+        Point lastPoint;
 
         // Biến theo dõi trạng thái Text Tool
         private bool isDrawingTextBounds = false; // Cờ báo đang vẽ vùng Text
@@ -39,7 +46,12 @@ namespace WinForm_Paint_Gr12
         private Bitmap pastedImage = null; // Chứa ảnh lấy từ Clipboard
         private Point pasteLocation;       // Vị trí để vẽ ảnh preview
 
-        //hàm riêng để tạo tờ giấy vẽ mới
+
+        /*=============================================*/
+        /*================PHẦN HÀM RIÊNG===============*/
+        /*=============================================*/
+
+        /*HÀM RIÊNG ĐỂ TẠO RA GIẤY VẼ MỚI*/
         private void createNewCanvas(int width, int height)
         {
             //nếu đã tồn tại giấy vẽ nào trước thì xóa để giải phóng RAM
@@ -64,10 +76,11 @@ namespace WinForm_Paint_Gr12
             updateUnReButton();
         }
 
-        //hàm riêng để lưu file xuống đường dẫn filePath
+
+        /*HÀM RIÊNG ĐỂ LƯU FILE XUỐNG ĐƯỜNG DẪN PATH*/
         private void saveImages(string path)
         {
-            string ext = System.IO.Path.GetExtension(path).ToLower(); //lấy phần đuôi định dạng của file
+            string ext = System.IO.Path.GetExtension(path).ToLower(); //lấy phần đuôi định dạng của file bằng hàm có sẵn trong system
             ImageFormat format = ImageFormat.Png; //mặc định lưu dưới dạng png
             switch (ext)
             {
@@ -86,17 +99,19 @@ namespace WinForm_Paint_Gr12
             currentFilePath = path; //lưu thành đường dẫn mới
             isChanged = false; //lưu xong thì set lại cờ thay đổi
 
+            //set lại dòng text hiển thị trên đầu app để hiển thị tên file + tên app
             this.Text = System.IO.Path.GetFileName(path) + " - Paint App";
         }
 
-        //hàm riêng để xử lý resize
+        /*HÀM RIÊNG ĐỂ XỬ LÝ RESIZE*/
         private void resizeCanvas(int newWidth, int newHeight)
         {
-            //lưu vô lịch sử để lỡ resize lộn size còn undo được
+            //lưu vô lịch sử để lỡ resize nhầm size thì còn undo được
             if (historyManager != null)
             {
                 historyManager.saveSnapshot(_mainbitmap);
             }
+
             //tạo giấy mới
             Bitmap newCanvas = new Bitmap(newWidth, newHeight);
 
@@ -121,7 +136,7 @@ namespace WinForm_Paint_Gr12
             isChanged = true;
         }
 
-        //hàm riêng để xử lý trạng thái của 2 nút undo/redo
+        /*HÀM RIÊNG ĐỂ CẬP NHẬT TRẠNG THÁI NÚT UNDO/REDO*/
         private void updateUnReButton()
         {
             if (historyManager != null)
@@ -132,7 +147,7 @@ namespace WinForm_Paint_Gr12
             }
         }
 
-        //hàm riêng để xử lý vẽ, tránh bị lặp code ở sự kiện paint và mouseup
+        /*HÀM RIÊNG ĐỂ XỬ LÝ LOGIC VẼ SHAPRE, TRÁNH BỊ LẶP CODE Ở SỰ KIỆN PAINT VÀ MOUSEUP*/
         private void processDrawing(Graphics g, Point firstPoint, Point lastPoint, ToolType currentTool)
         {
             // Khai báo biến bool dùng để kiểm tra phím Shift
@@ -171,7 +186,7 @@ namespace WinForm_Paint_Gr12
             {
                 if (isShiftDown)
                 {
-                    // --- LOGIC TAM GIÁC ĐỀU ---
+                    // --- LOGIC VẼ TAM GIÁC ĐỀU ---
 
                     // 1. Lấy cạnh dựa trên khoảng cách kéo chuột theo chiều ngang
                     int width = Math.Abs(lastPoint.X - firstPoint.X);
@@ -180,11 +195,22 @@ namespace WinForm_Paint_Gr12
                     // 0.866 chính là căn 3 chia 2
                     int height = (int)(width * 0.866f);
 
-                    // 3. Xác định tọa độ góc trái trên (để vẽ được mọi hướng)
-                    int x = Math.Min(firstPoint.X, lastPoint.X);
-                    int y = Math.Min(firstPoint.Y, lastPoint.Y);
+                    // 3. Xác định tọa độ (X, Y) dựa trên điểm gốc (firstPoint) và hướng kéo
+                    int x, y;
 
-                    // 4. Tạo hình chữ nhật có tỉ lệ chuẩn tam giác đều
+                    // Xử lý chiều ngang (Trái/Phải)
+                    if (lastPoint.X < firstPoint.X)
+                        x = firstPoint.X - width; // Kéo sang trái -> Gốc X lùi về bên trái
+                    else
+                        x = firstPoint.X;         // Kéo sang phải -> Gốc X là điểm bắt đầu
+
+                    // Xử lý chiều dọc (Lên/Xuống) - KHÚC QUAN TRỌNG FIX LỖI
+                    if (lastPoint.Y < firstPoint.Y)
+                        y = firstPoint.Y - height; // Kéo lên trên -> Gốc Y phải lùi lên trên theo chiều cao ĐÃ TÍNH
+                    else
+                        y = firstPoint.Y;          // Kéo xuống dưới -> Gốc Y là điểm bắt đầu
+
+                    // 4. Tạo hình chữ nhật chuẩn
                     Rectangle triRect = new Rectangle(x, y, width, height);
 
                     // 5. Vẽ
@@ -198,20 +224,27 @@ namespace WinForm_Paint_Gr12
             }
         }
 
-        //Các hàm xử lý thay đổi từ màu, size từ properties panel
+        /*CÁC HÀM RIÊNG ĐỂ XỬ LÝ THAY ĐỔI TỪ CÁC PANEL*/
         private void propertiesPanel1_colorChanged(object sender, EventArgs e)
         {
             // Cập nhật biến màu cục bộ ngay lập tức
             this.currentColor = propertiesPanel1.selectedColor;
         }
-
         private void propertiesPanel1_sizeChanged(object sender, EventArgs e)
         {
             // Cập nhật biến size cục bộ ngay lập tức
             this.currentSize = propertiesPanel1.selectedSize;
         }
-
-        //Hàm xử lý thay đổi công cụ từ tools panel
+        private void propertiesPanel1_FontChanged(object sender, EventArgs e)
+        {
+            // Cập nhật Font và Màu cho TextBox đang hoạt động ngay lập tức (nếu có)
+            if (activeTextBox != null)
+            {
+                // Lấy Font đã được cập nhật (bao gồm Bold/Italic/Underline) từ PropertiesPanel
+                activeTextBox.Font = propertiesPanel1.selectedFont;
+                activeTextBox.ForeColor = propertiesPanel1.selectedColor;
+            }
+        }
         private void toolsPanel1_toolChanged(object sender, EventArgs e)
         {
             //Cập nhật biến Tooltype cục bộ
@@ -223,6 +256,21 @@ namespace WinForm_Paint_Gr12
             //Cập nhật lại con trỏ ngay lập tức
             pictureBox1.Invalidate();
         }
+        /*HÀM RIÊNG ĐỂ XỬ LÝ ẨN HIỆN PROPERTIES PANEL*/
+        private void toolsPanel1_propertiesToggled(object sender, EventArgs e)
+        {
+            // Đảo ngược trạng thái Visible của propertiesPanel1
+            if (propertiesPanel1 != null)
+            {
+                propertiesPanel1.Visible = !propertiesPanel1.Visible;
+                separatorPanel.Visible = !separatorPanel.Visible;
+            }
+        }
+
+
+        /*=============================================*/
+        /*=======LẬP TRÌNH LIÊN QUAN ĐẾN MAINFORM======*/
+        /*=============================================*/
 
         public mainForm()
         {
@@ -233,11 +281,11 @@ namespace WinForm_Paint_Gr12
 
             int defaultWidth = 800;
             int defaultHeight = 400;
+
             //tạo giấy vẽ mới có kích thước mặc định tự set
             createNewCanvas(defaultWidth, defaultHeight);
 
-            // --- ĐẤU DÂY SỰ KIỆN (QUAN TRỌNG) ---
-            // Khi propertiesPanel1 hét lên "ColorChanged", chạy hàm PropertiesPanel1_ColorChanged
+            // Khi propertiesPanel1 gọi eventhandler colorchanged, chạy hàm PropertiesPanel1_ColorChanged
             if (propertiesPanel1 != null)
             {
                 propertiesPanel1.colorChanged += propertiesPanel1_colorChanged;
@@ -245,7 +293,7 @@ namespace WinForm_Paint_Gr12
                 propertiesPanel1.FontChanged += propertiesPanel1_FontChanged;
             }
 
-            // Tương tự cho ToolsPanel của Đức nếu có
+            // Tương tự cho ToolsPanel khi gọi eventhandler
             if (toolsPanel1 != null)
             {
                 toolsPanel1.toolChanged += toolsPanel1_toolChanged;
@@ -257,44 +305,119 @@ namespace WinForm_Paint_Gr12
                 toolsPanel1_toolChanged(this, EventArgs.Empty);
             }
         }
-
-        // Hàm xử lý sự kiện PropertiesPanel Toggled
-        private void toolsPanel1_propertiesToggled(object sender, EventArgs e)
+        /*HÀM XỬ LÝ SỰ KIỆN KEYDOWN*/
+        private void mainForm_KeyDown(object sender, KeyEventArgs e)
         {
-            // Đảo ngược trạng thái Visible của propertiesPanel1
-            if (propertiesPanel1 != null)
+            // 1. Xử lý Paste (Ctrl + V)
+            if (e.Control && e.KeyCode == Keys.V)
             {
-                propertiesPanel1.Visible = !propertiesPanel1.Visible;
-                separatorPanel.Visible = !separatorPanel.Visible;
+                // Kiểm tra xem trong Clipboard có chứa ảnh không
+                if (Clipboard.ContainsImage())
+                {
+                    // Lấy ảnh từ Clipboard ra
+                    Image img = Clipboard.GetImage();
+
+                    // Chuyển sang Bitmap để dễ xử lý (và dispose cái cũ nếu có)
+                    if (pastedImage != null) pastedImage.Dispose();
+                    pastedImage = new Bitmap(img);
+
+                    // Tạm dừng việc vẽ vời linh tinh khác
+                    isDrawing = false;
+
+                    // Đổi con trỏ chuột thành hình 4 mũi tên cho dễ nhận biết
+                    pictureBox1.Cursor = Cursors.SizeAll;
+
+                    // Trigger vẽ lại để hiện ảnh lên
+                    pictureBox1.Invalidate();
+                }
+            }
+
+            // 2. Xử lý Copy (Ctrl + C) - Làm luôn cho đủ bộ (Bonus)
+            if (e.Control && e.KeyCode == Keys.C)
+            {
+                if (_mainbitmap != null)
+                {
+                    Clipboard.SetImage(_mainbitmap);
+                }
+            }
+
+            // Kiểm tra phím tắt cho Undo (Ctrl + Z)
+            if (e.Control && e.KeyCode == Keys.Z)
+            {
+                // Gọi hàm xử lý Undo
+                quickUndoButton_Click(sender, e);
+            }
+            // Kiểm tra phím tắt cho Redo (Ctrl + Y)
+            if (e.Control && e.KeyCode == Keys.Y)
+            {
+                // Gọi hàm xử lý Redo
+                quickRedoButton_Click(sender, e);
             }
         }
 
-        private void mainForm_Load(object sender, EventArgs e)
+        /*HÀM XỬ LÝ SỰ KIỆN ĐÓNG FORM*/
+        private void mainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
+            // Chỉ hỏi khi hình CÓ thay đổi
+            if (isChanged == true)
+            {
+                DialogResult res = MessageBox.Show(
+                    "Hình chưa được lưu. Bạn có muốn lưu trước khi thoát không?",
+                    "Cảnh báo",
+                    MessageBoxButtons.YesNoCancel, // Phải dùng 3 nút: Yes, No, Cancel
+                    MessageBoxIcon.Warning);
 
-
+                if (res == DialogResult.Yes)
+                {
+                    // Bấm Yes -> Lưu file -> Sau đó để Form tự đóng
+                    save_menu_Click(sender, e);
+                }
+                else if (res == DialogResult.Cancel)
+                {
+                    // Bấm Cancel -> Hủy lệnh đóng form -> Ở lại
+                    e.Cancel = true;
+                }
+                // Nếu bấm No -> Không làm gì cả -> Form tự đóng (Mất hình cũ)
+            }
         }
 
-        //Các thành phần liên quan đến tác vụ file
-        private void file_menu_Click(object sender, EventArgs e)
-        {
 
-        }
+        /*=============================================*/
+        /*======CÁC HÀM XỬ LÝ CÁC NÚT TÁC VỤ FILE======*/
+        /*=============================================*/
 
+        /*HÀM XỬ LÝ SỰ KIỆN CLICK VÀO NÚT OPEN*/
         private void open_menu_Click(object sender, EventArgs e)
         {
+            if (isChanged) //kiểm tra xem người dùng đã vẽ gì trước đó mà chưa lưu không, nếu có thì xuất ra dialog để hỏi lại
+            {
+                DialogResult res = MessageBox.Show(
+                    "Bạn có muốn mở ảnh mới không? Hình vẽ hiện tại sẽ mất nếu chưa được lưu!",
+                    "Xác nhận",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning);
+
+                // Nếu người dùng chọn "No" -> Thoát hàm ngay lập tức
+                if (res == DialogResult.No)
+                {
+                    return;
+                }
+            }
+
+            //winform có hỗ trợ sẵn dialog để open file, khai báo biến và dùng
             OpenFileDialog ofd = new OpenFileDialog();
+
+            //set filter để lọc ra những ảnh có định dạng trên và cho phép chọn ảnh đó trong dialog
             ofd.Filter = "Image Files|*.png;*.jpg;*.bmp";
+
+            //set title hiển thị trên đầu dialog
             ofd.Title = "Mở ảnh có sẵn";
 
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 try
                 {
-                    // Mẹo quan trọng: Không mở trực tiếp bằng new Bitmap(filename)
-                    // Vì nó sẽ KHÓA cái file ảnh đó lại, không cho save đè lên.
-
-                    // Cách chuẩn: Mở file -> Copy sang Bitmap mới -> Đóng file gốc ngay.
+                    //Mở file -> Copy sang Bitmap mới -> Đóng file gốc ngay.
                     using (Bitmap tempImage = new Bitmap(ofd.FileName))
                     {
                         // Tạo tờ giấy mới bằng đúng kích thước ảnh vừa mở
@@ -307,23 +430,34 @@ namespace WinForm_Paint_Gr12
                         }
                     }
 
-                    // Cập nhật lại khung tranh
+                    //cập nhật lại khung tranh
                     pictureBox1.Image = _mainbitmap;
 
+                    //cập nhật lại đường dẫn hiện tại thành đường dẫn vào file mới open
                     currentFilePath = ofd.FileName;
+
+                    //đổi lại dòng text hiển thị trên đầu app
                     this.Text = System.IO.Path.GetFileName(currentFilePath) + " - Paint App";
+
+                    //lưu lại hình vừa cập nhật vào lịch sử và cập nhật nút undo/redo
+                    historyManager.saveSnapshot(_mainbitmap);
+                    updateUnReButton();
+
+                    //cập nhật lại cờ changed
                     isChanged = false;
                 }
-                catch (Exception ex)
+                catch (Exception ex) //tính tới trường hợp không mở được file nào đó thì xuất ra thông báo
                 {
                     MessageBox.Show("Không mở được file này: " + ex.Message);
                 }
             }
+            ofd.Dispose(); //giải phóng dialog đỡ nặng RAM
         }
 
+        /*HÀM XỬ LÝ SỰ KIỆN CLICK VÀO NÚT NEW*/
         private void new_menu_Click(object sender, EventArgs e)
         {
-            if (isChanged)
+            if (isChanged) //kiểm tra trạng thái hình, nếu có thay đổi mà chưa lưu thì hỏi lại người dùng
             {
                 DialogResult res = MessageBox.Show(
                     "Bạn có muốn tạo trang mới không? Hình cũ sẽ mất nếu chưa được lưu!",
@@ -352,9 +486,9 @@ namespace WinForm_Paint_Gr12
                     isChanged = false;
                 }
             }
-
         }
 
+        /*HÀM XỬ LÝ SỰ KIỆN CLICK VÀO NÚT SAVE*/
         private void save_menu_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(currentFilePath))
@@ -366,6 +500,8 @@ namespace WinForm_Paint_Gr12
                 saveImages(currentFilePath); //đã tồn tại đường dẫn thì lưu đè, không cần hỏi lại
             }
         }
+
+        /*HÀM XỬ LÝ SỰ KIỆN CLICK VÀO NÚT SAVEAS*/
         private void saveAsMenu_Click(object sender, EventArgs e)
         {
             SaveFileDialog sfd = new SaveFileDialog();
@@ -376,59 +512,173 @@ namespace WinForm_Paint_Gr12
             {
                 saveImages(sfd.FileName);
             }
+            sfd.Dispose(); //giải phóng dialog
         }
 
-        private void mainForm_FormClosing(object sender, FormClosingEventArgs e)
+        /*HÀM XỬ LÝ NÚT REDO*/
+        private void quickRedoButton_Click(object sender, EventArgs e)
         {
-            // Chỉ hỏi khi hình CÓ thay đổi
-            if (isChanged == true)
+            Bitmap futureImage = historyManager.redo(_mainbitmap);
+            if (futureImage != null)
             {
-                DialogResult res = MessageBox.Show(
-                    "Hình chưa được lưu. Bạn có muốn lưu trước khi thoát không?",
-                    "Cảnh báo",
-                    MessageBoxButtons.YesNoCancel, // Phải dùng 3 nút: Yes, No, Cancel
-                    MessageBoxIcon.Warning);
+                if (_mainbitmap != null) _mainbitmap.Dispose();
 
-                if (res == DialogResult.Yes)
-                {
-                    // Bấm Yes -> Lưu file -> Sau đó để Form tự đóng
-                    save_menu_Click(sender, e);
-                }
-                else if (res == DialogResult.Cancel)
-                {
-                    // Bấm Cancel -> Hủy lệnh đóng form -> Ở lại
-                    e.Cancel = true;
-                }
-                // Nếu bấm No -> Không làm gì cả -> Form tự đóng (Mất hình cũ, đúng ý người dùng)
+                _mainbitmap = futureImage;
+                pictureBox1.Image = _mainbitmap;
+                pictureBox1.Invalidate();
+                updateUnReButton();
             }
         }
 
+        /*HÀM XỬ LÝ NÚT UNDO*/
+        private void quickUndoButton_Click(object sender, EventArgs e)
+        {
+            // Gọi hàm Undo, nó sẽ trả về bức ảnh cũ (nếu có)
+            Bitmap oldImage = historyManager.undo(_mainbitmap);
+
+            if (oldImage != null)
+            {
+                // Thay thế ảnh hiện tại bằng ảnh cũ
+                // Nhớ Dispose ảnh hiện tại để tránh rò rỉ RAM trước khi gán cái mới
+                if (_mainbitmap != null) _mainbitmap.Dispose();
+
+                _mainbitmap = oldImage;
+                pictureBox1.Image = _mainbitmap; // Cập nhật lên khung tranh
+                pictureBox1.Invalidate(); // Vẽ lại ngay
+                updateUnReButton();
+            }
+
+            // 3. Dọn dẹp và xóa TextBox tạm thời
+            CleanupActiveTextBox();
+
+            // Yêu cầu PictureBox vẽ lại để hiển thị văn bản cố định
+            pictureBox1.Invalidate();
+
+        }
+
+        /*HÀM XỬ LÝ NÚT RESIZE*/
+        private void resizeButton_Click(object sender, EventArgs e)
+        {
+            using (resizeCanvasDialog dlg = new resizeCanvasDialog())
+            {
+                dlg.setLabel_CurrentSize(_mainbitmap.Width, _mainbitmap.Height);
+                if (dlg.ShowDialog() == DialogResult.OK)
+                {
+                    resizeCanvas(dlg.CanvasWidth, dlg.CanvasHeight);
+                }
+            }
+        }
+
+
+        /*=============================================*/
+        /*===CÁC HÀM XỬ LÝ SỰ KIỆN TRONG PICTUREBOX====*/
+        /*=============================================*/
+
+        /*HÀM XỬ LÝ SỰ KIỆN MOUSECLICK CỦA PICTUREBOX*/
+        private void pictureBox1_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (currentTool == ToolType.Fill) //xử lý riêng cho chức năng fill
+            {
+                DrawingLogic.Fill(_mainbitmap, e.Location, currentColor, 50);
+                pictureBox1.Invalidate();
+            }
+        }
+
+        /*HÀM XỬ LÝ SỰ KIỆN MOUSEMOVE CỦA PICTUREBOX*/
+        private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
+        {
+            //cập nhật tọa độ chuột cho status panel 
+            if (statusPanel1 != null)
+                statusPanel1.updateMousePosition(e.X, e.Y);
+
+            //Phần hiện vị trí hình chạy theo trỏ chuột để preview cho người dùng thấy
+            if (pastedImage != null) //nếu đang có ảnh trong clipboard
+            {
+                // Cập nhật vị trí ảnh (để tâm ảnh nằm ngay trỏ chuột)
+                pasteLocation = new Point(e.X - pastedImage.Width / 2, e.Y - pastedImage.Height / 2);
+
+                pictureBox1.Invalidate(); // Vẽ lại liên tục để ảnh chạy theo
+                return; //Return luôn để không dính logic vẽ hình khác
+            }
+
+            //Phần liên quan đến chức năng vẽ
+            if (isDrawingTextBounds) // Đang vẽ vùng Text (Preview)
+            {
+                // Cập nhật kích thước vùng chọn (vùng chữ nhật)
+                int x = Math.Min(startPoint.X, e.X);
+                int y = Math.Min(startPoint.Y, e.Y);
+                int width = Math.Abs(startPoint.X - e.X);
+                int height = Math.Abs(startPoint.Y - e.Y);
+                textBounds = new Rectangle(x, y, width, height);
+
+                // Yêu cầu PictureBox vẽ lại để hiển thị khung chữ nhật preview cho Text
+                pictureBox1.Invalidate();
+            }
+            else if (isDrawing)
+            {
+                using (Graphics g = Graphics.FromImage(_mainbitmap))
+                {
+                    // Áp dụng khử răng cưa cho nét vẽ mượt hơn
+                    g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+
+                    if (currentTool == ToolType.Pencil) //vẽ bút chì
+                    {
+                        // Pencil thường không khử răng cưa
+                        g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None;
+                        DrawingLogic.DrawPencil(g, lastPoint, e.Location, currentColor, currentSize);
+                    }
+                    else if (currentTool == ToolType.Brush) //vẽ cọ
+                    {
+                        //Brush thì áp dụng antialias để nhìn nét cho mềm
+                        g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+                        DrawingLogic.DrawBrush(g, lastPoint, e.Location, currentColor, currentSize);
+                    }
+                    else if (currentTool == ToolType.Eraser) //cục tẩy, về bản chất là vẽ màu trắng
+                    {
+                        DrawingLogic.DrawEraser(g, lastPoint, e.Location, currentSize * 10);
+                        //để size = currentSize * 10 vì tẩy lúc nào cũng nên to hơn cọ
+                    }
+                }
+
+                lastPoint = e.Location; // Cập nhật vị trí cũ
+                pictureBox1.Invalidate(); // Yêu cầu PictureBox vẽ lại tờ giấy ra màn hình
+                isChanged = true; // Đánh dấu là hình đã thay đổi
+
+            }
+        }
+
+        /*HÀM XỬ LÝ SỰ KIỆN MOUSEDOWN*/
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
-            // Nếu đang ở chế độ Paste và bấm chuột trái
+            // Nếu đang có sẵn ảnh trong clipboard và bấm chuột trái
             if (pastedImage != null && e.Button == MouseButtons.Left)
             {
-                // 1. In thật xuống giấy
+                //In hình trong clipboard xuống giấy
                 using (Graphics g = Graphics.FromImage(_mainbitmap))
                 {
                     g.DrawImage(pastedImage, pasteLocation);
                 }
 
-                // 2. Lưu lịch sử Undo (Quan trọng)
+                //Lưu lịch sử và cập nhật trạng thái nút unre
                 historyManager.saveSnapshot(_mainbitmap);
                 updateUnReButton();
 
-                // 3. Dọn dẹp: Hủy ảnh tạm
+                //Dọn dẹp ảnh tạm để giải phóng RAM
                 pastedImage.Dispose();
                 pastedImage = null;
 
-                // 4. Reset trạng thái
-                pictureBox1.Cursor = CursorManager.GetCursor(currentTool); // Trả lại con trỏ cũ
+                //Reset trạng thái trỏ chuột
+                pictureBox1.Cursor = CursorManager.GetCursor(currentTool);
+
+                //vẽ lại
                 pictureBox1.Invalidate();
+                //đánh dấu đã thay đổi
                 isChanged = true;
 
-                return; // Return để không bị vẽ chấm mực dính vào
+                return; // Return để không bị dính các logic khác vào
             }
+
+            //Nếu chỉ bấm chuột trái
             if (e.Button == MouseButtons.Left)
             {
 
@@ -446,10 +696,10 @@ namespace WinForm_Paint_Gr12
                     // Đảm bảo không kích hoạt logic vẽ khác khi đang ở chế độ Text
                     isDrawing = false;
                 }
-                else if(currentTool == ToolType.ColorPicker) //logic nếu chọn pick màu
+                else if (currentTool == ToolType.ColorPicker) //logic nếu chọn pick màu
                 {
                     //Phải đảm bảo tọa độ click nằm trong canvas
-                    if(e.X >= 0 && e.X < _mainbitmap.Width && e.Y >= 0 && e.Y < _mainbitmap.Height)
+                    if (e.X >= 0 && e.X < _mainbitmap.Width && e.Y >= 0 && e.Y < _mainbitmap.Height)
                     {
                         //lấy màu tại pixel đó
                         Color pickedColor = _mainbitmap.GetPixel(e.X, e.Y);
@@ -457,7 +707,6 @@ namespace WinForm_Paint_Gr12
                         currentColor = pickedColor;
                         //cập nhật lại giao diện của cái nút hiện màu trong properties panel
                         propertiesPanel1.UpdateColor(pickedColor);
-
                     }
                     return;
                 }
@@ -473,93 +722,10 @@ namespace WinForm_Paint_Gr12
             }
         }
 
-        private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (pastedImage != null)
-            {
-                // Cập nhật vị trí ảnh (để tâm ảnh nằm ngay con chuột)
-                pasteLocation = new Point(e.X - pastedImage.Width / 2, e.Y - pastedImage.Height / 2);
-
-                pictureBox1.Invalidate(); // Vẽ lại liên tục để ảnh chạy theo
-                return; // Quan trọng: Return luôn để không dính logic vẽ hình khác
-            }
-
-            //cập nhật tọa độ chuột cho status panel 
-            if (statusPanel1 != null)
-                statusPanel1.updateMousePosition(e.X, e.Y);
-
-            bool isShiftDown = (Control.ModifierKeys & Keys.Shift) == Keys.Shift;
-
-            if (isDrawingTextBounds) // Đang vẽ vùng Text (Preview)
-            {
-                // Cập nhật kích thước vùng chọn (vùng chữ nhật)
-                int x = Math.Min(startPoint.X, e.X);
-                int y = Math.Min(startPoint.Y, e.Y);
-                int width = Math.Abs(startPoint.X - e.X);
-                int height = Math.Abs(startPoint.Y - e.Y);
-                textBounds = new Rectangle(x, y, width, height);
-
-                // Yêu cầu PictureBox vẽ lại để hiển thị khung chữ nhật preview cho Text
-                pictureBox1.Invalidate();
-            }
-
-            else if (isDrawing)
-            {
-
-                // Tạo Graphics từ tờ giấy chính (_mainbitmap)
-                using (Graphics g = Graphics.FromImage(_mainbitmap)) //không dùng using thì dùng dispose cũng được, mà dùng using cho tiện
-                {
-                    // Áp dụng khử răng cưa cho nét vẽ mượt (tùy chọn)
-                    g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-
-                    // Gọi logic vẽ của Đức
-                    if (currentTool == ToolType.Pencil)
-                    {
-                        // Pencil thường không khử răng cưa và size nhỏ (1px)
-                        g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None;
-                        DrawingLogic.DrawPencil(g, lastPoint, e.Location, currentColor, currentSize);
-                    }
-                    else if (currentTool == ToolType.Brush)
-                    {
-                        //Brush thì áp dụng antialias để nhìn nét cho mềm
-                        g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-                        DrawingLogic.DrawBrush(g, lastPoint, e.Location, currentColor, currentSize);
-                    }
-                    else if (currentTool == ToolType.Eraser)
-                    {
-                        DrawingLogic.DrawEraser(g, lastPoint, e.Location, currentSize * 10);
-                        //để size = 10 vì tẩy lúc nào cũng nên to hơn cọ
-                    }
-                    // Các hình học khác (Line, Rect) sẽ xử lý khác (vẽ preview), chưa làm ở đây
-                    else if (currentTool == ToolType.Line)
-                    {
-
-                    }
-                    else if (currentTool == ToolType.Rectangle)
-                    {
-
-                    }
-                    else if (currentTool == ToolType.Oval)
-                    {
-
-                    }
-                    else if (currentTool == ToolType.Triangle)
-                    {
-
-                    }
-
-                }
-
-                lastPoint = e.Location; // Cập nhật vị trí cũ
-                pictureBox1.Invalidate(); // Yêu cầu PictureBox vẽ lại tờ giấy ra màn hình
-                isChanged = true; // Đánh dấu là hình đã thay đổi
-
-            }
-        }
-
+        /*HÀM XỬ LÝ SỰ KIỆN MOUSEUP*/
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
-
+            //Code liên quan đến textbox
             if (isDrawingTextBounds)
             {
                 isDrawingTextBounds = false; // Kết thúc chế độ vẽ vùng
@@ -595,12 +761,14 @@ namespace WinForm_Paint_Gr12
                 pictureBox1.Invalidate();
                 return;
             }
+
+            //Code liên quan đến vẽ
             if (isDrawing)
             {
                 isDrawing = false;
                 //// === THÊM ĐOẠN NÀY ĐỂ IN HÌNH CHÍNH THỨC VÀO GIẤY ===
                 if (currentTool == ToolType.Line || currentTool == ToolType.Rectangle || currentTool == ToolType.Oval || currentTool == ToolType.Triangle)
-                    // dùng if else ở đây là để tách hình học với pencil, brush ra riêng không bị dính vào nhau
+                    // dùng if else ở đây là để tách hình học với pencil, brush ra riêng
                     using (Graphics g = Graphics.FromImage(_mainbitmap))
                     {
                         processDrawing(g, firstPoint, e.Location, currentTool);
@@ -615,85 +783,7 @@ namespace WinForm_Paint_Gr12
             isChanged = true;
         }
 
-
-        private void propertiesPanel1_FontChanged(object sender, EventArgs e)
-        {
-            // Cập nhật Font và Màu cho TextBox đang hoạt động ngay lập tức (nếu có)
-            if (activeTextBox != null)
-            {
-                // Lấy Font đã được cập nhật (bao gồm Bold/Italic/Underline) từ PropertiesPanel
-                activeTextBox.Font = propertiesPanel1.selectedFont;
-                activeTextBox.ForeColor = propertiesPanel1.selectedColor;
-            }
-        }
-
-        // --- CÁC HÀM XỬ LÝ TEXTBOX ĐỘNG ---
-
-        // Hàm dọn dẹp chung để xóa TextBox và reset trạng thái
-        private void CleanupActiveTextBox()
-        {
-            if (activeTextBox != null)
-            {
-                // Gỡ các sự kiện
-                activeTextBox.LostFocus -= ActiveTextBox_LostFocus;
-                activeTextBox.KeyDown -= ActiveTextBox_KeyDown;
-
-                // Gỡ và hủy đối tượng
-                pictureBox1.Controls.Remove(activeTextBox);
-                activeTextBox.Dispose();
-                activeTextBox = null;
-                textBounds = Rectangle.Empty; // Reset vùng
-            }
-        }
-
-        // Xử lý khi TextBox mất focus (Người dùng click ra ngoài)
-        private void ActiveTextBox_LostFocus(object sender, EventArgs e)
-        {
-            // Đảm bảo chỉ xử lý khi TextBox là đối tượng đang bị mất focus
-            if (activeTextBox == null || activeTextBox != sender) return;
-
-            // Nếu có văn bản, thực hiện vẽ cố định
-            if (!string.IsNullOrEmpty(activeTextBox.Text))
-            {
-                // 1. Lấy Graphics từ tờ giấy chính (_mainbitmap)
-                using (Graphics g = Graphics.FromImage(_mainbitmap))
-                {
-                    // Cài đặt chất lượng Text
-                    g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAliasGridFit;
-
-                    // Tạo SolidBrush với màu văn bản
-                    using (SolidBrush brush = new SolidBrush(activeTextBox.ForeColor))
-                    {
-                        // 2. Vẽ chuỗi văn bản lên _mainbitmap
-                        g.DrawString(
-                            activeTextBox.Text,
-                            activeTextBox.Font,
-                            brush,
-                            activeTextBox.Location.X,
-                            activeTextBox.Location.Y
-                        );
-                    }
-                    historyManager.saveSnapshot(_mainbitmap);
-                }
-            }
-            // Dọn dẹp và xóa TextBox tạm thời
-            CleanupActiveTextBox();
-            // Yêu cầu PictureBox vẽ lại để hiển thị văn bản cố định
-            pictureBox1.Invalidate();
-        }
-
-        // Xử lý phím Enter/Esc để kết thúc nhập liệu
-        private void ActiveTextBox_KeyDown(object sender, KeyEventArgs e)
-        {
-            // Bấm ESC để kết thúc nhập liệu và chuyển sang trạng thái LostFocus
-            if (e.KeyCode == Keys.Escape)
-            {
-                // Khi bấm ESC, ép PictureBox focus để kích hoạt sự kiện LostFocus
-                pictureBox1.Focus();
-                e.SuppressKeyPress = true; // Ngăn không cho ký tự ESC xuất hiện trong TextBox
-            }
-        }
-
+        /*HÀM XỬ LÝ SỰ KIỆN PAINT*/
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
             // Vẽ Bitmap chính
@@ -703,7 +793,7 @@ namespace WinForm_Paint_Gr12
             }
 
             // Vẽ cái ảnh đang trong clipboard vô canvas
-            if(pastedImage != null)
+            if (pastedImage != null)
             {
                 //vẽ ảnh tại vị trí chuột
                 e.Graphics.DrawImage(pastedImage, pasteLocation);
@@ -760,115 +850,77 @@ namespace WinForm_Paint_Gr12
                     }
                 }
             }
-
-
         }
-        private void quickRedoButton_Click(object sender, EventArgs e)
+
+
+        /*=============================================*/
+        /*================TEXTBOX ĐỘNG=================*/
+        /*=============================================*/
+
+        /*HÀM RIÊNG DỌN DẸP ĐỂ XÓA TEXTBOX VÀ RESET TRẠNG THÁI*/
+        private void CleanupActiveTextBox()
         {
-            Bitmap futureImage = historyManager.redo(_mainbitmap);
-            if (futureImage != null)
+            if (activeTextBox != null)
             {
-                if (_mainbitmap != null) _mainbitmap.Dispose();
+                // Gỡ các sự kiện
+                activeTextBox.LostFocus -= ActiveTextBox_LostFocus;
+                activeTextBox.KeyDown -= ActiveTextBox_KeyDown;
 
-                _mainbitmap = futureImage;
-                pictureBox1.Image = _mainbitmap;
-                pictureBox1.Invalidate();
-                updateUnReButton();
+                // Gỡ và hủy đối tượng
+                pictureBox1.Controls.Remove(activeTextBox);
+                activeTextBox.Dispose();
+                activeTextBox = null;
+                textBounds = Rectangle.Empty; // Reset vùng
             }
-
         }
-        private void quickUndoButton_Click(object sender, EventArgs e)
+
+        /*XỬ LÝ LOSTFOCUS*/
+        private void ActiveTextBox_LostFocus(object sender, EventArgs e)
         {
-            // Gọi hàm Undo, nó sẽ trả về bức ảnh cũ (nếu có)
-            Bitmap oldImage = historyManager.undo(_mainbitmap);
+            // Đảm bảo chỉ xử lý khi TextBox là đối tượng đang bị mất focus
+            if (activeTextBox == null || activeTextBox != sender) return;
 
-            if (oldImage != null)
+            // Nếu có văn bản, thực hiện vẽ cố định
+            if (!string.IsNullOrEmpty(activeTextBox.Text))
             {
-                // Thay thế ảnh hiện tại bằng ảnh cũ
-                // Nhớ Dispose ảnh hiện tại để tránh rò rỉ RAM trước khi gán cái mới
-                if (_mainbitmap != null) _mainbitmap.Dispose();
+                // 1. Lấy Graphics từ tờ giấy chính (_mainbitmap)
+                using (Graphics g = Graphics.FromImage(_mainbitmap))
+                {
+                    // Cài đặt chất lượng Text
+                    g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAliasGridFit;
 
-                _mainbitmap = oldImage;
-                pictureBox1.Image = _mainbitmap; // Cập nhật lên khung tranh
-                pictureBox1.Invalidate(); // Vẽ lại ngay
-                updateUnReButton();
+                    // Tạo SolidBrush với màu văn bản
+                    using (SolidBrush brush = new SolidBrush(activeTextBox.ForeColor))
+                    {
+                        // 2. Vẽ chuỗi văn bản lên _mainbitmap
+                        g.DrawString(
+                            activeTextBox.Text,
+                            activeTextBox.Font,
+                            brush,
+                            activeTextBox.Location.X,
+                            activeTextBox.Location.Y
+                        );
+                    }
+                    historyManager.saveSnapshot(_mainbitmap);
+                }
             }
-
-            // 3. Dọn dẹp và xóa TextBox tạm thời
+            // Dọn dẹp và xóa TextBox tạm thời
             CleanupActiveTextBox();
-
             // Yêu cầu PictureBox vẽ lại để hiển thị văn bản cố định
             pictureBox1.Invalidate();
-
         }
-        private void mainForm_KeyDown(object sender, KeyEventArgs e)
+
+        /*XỬ LÝ PHÍM ENTER/ESC ĐỂ HOÀN THÀNH NHẬP LIỆU*/
+        private void ActiveTextBox_KeyDown(object sender, KeyEventArgs e)
         {
-            // 1. Xử lý Paste (Ctrl + V)
-            if (e.Control && e.KeyCode == Keys.V)
+            // Bấm ESC để kết thúc nhập liệu và chuyển sang trạng thái LostFocus
+            if (e.KeyCode == Keys.Escape)
             {
-                // Kiểm tra xem trong Clipboard có chứa ảnh không
-                if (Clipboard.ContainsImage())
-                {
-                    // Lấy ảnh từ Clipboard ra
-                    Image img = Clipboard.GetImage();
-
-                    // Chuyển sang Bitmap để dễ xử lý (và dispose cái cũ nếu có)
-                    if (pastedImage != null) pastedImage.Dispose();
-                    pastedImage = new Bitmap(img);
-
-                    // Tạm dừng việc vẽ vời linh tinh khác
-                    isDrawing = false;
-
-                    // Đổi con trỏ chuột thành hình 4 mũi tên cho dễ nhận biết
-                    pictureBox1.Cursor = Cursors.SizeAll;
-
-                    // Trigger vẽ lại để hiện ảnh lên
-                    pictureBox1.Invalidate();
-                }
-            }
-
-            // 2. Xử lý Copy (Ctrl + C) - Làm luôn cho đủ bộ (Bonus)
-            if (e.Control && e.KeyCode == Keys.C)
-            {
-                if (_mainbitmap != null)
-                {
-                    Clipboard.SetImage(_mainbitmap);
-                }
-            }
-
-            // Kiểm tra phím tắt cho Undo (Ctrl + Z)
-            if (e.Control && e.KeyCode == Keys.Z)
-            {
-                // Gọi hàm xử lý Undo
-                quickUndoButton_Click(sender, e);
-            }
-            // Kiểm tra phím tắt cho Redo (Ctrl + Y)
-            if (e.Control && e.KeyCode == Keys.Y)
-            {
-                // Gọi hàm xử lý Redo
-                quickRedoButton_Click(sender, e);
+                // Khi bấm ESC, ép PictureBox focus để kích hoạt sự kiện LostFocus
+                pictureBox1.Focus();
+                e.SuppressKeyPress = true; // Ngăn không cho ký tự ESC xuất hiện trong TextBox
             }
         }
 
-        private void resizeButton_Click(object sender, EventArgs e)
-        {
-            using (resizeCanvasDialog dlg = new resizeCanvasDialog())
-            {
-                dlg.setLabel_CurrentSize(_mainbitmap.Width, _mainbitmap.Height);
-                if (dlg.ShowDialog() == DialogResult.OK)
-                {
-                    resizeCanvas(dlg.CanvasWidth, dlg.CanvasHeight);
-                }
-            }
-        }
-
-        private void pictureBox1_MouseClick(object sender, MouseEventArgs e)
-        {
-            if (currentTool == ToolType.Fill)
-            {
-                DrawingLogic.Fill(_mainbitmap, e.Location, currentColor, 50);
-                pictureBox1.Invalidate();
-            }
-        }
     }
 }
