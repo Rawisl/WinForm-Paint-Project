@@ -247,6 +247,12 @@ namespace WinForm_Paint_Gr12
         }
         private void toolsPanel1_toolChanged(object sender, EventArgs e)
         {
+            // Ép TextBox hiện tại lưu lại chữ trước khi đổi công cụ
+            if (activeTextBox != null)
+            {
+                pictureBox1.Focus(); // Kích hoạt LostFocus để lưu chữ
+            }
+
             //Cập nhật biến Tooltype cục bộ
             this.currentTool = toolsPanel1.currentTool;
 
@@ -743,11 +749,29 @@ namespace WinForm_Paint_Gr12
                     activeTextBox.Font = propertiesPanel1.selectedFont;
                     activeTextBox.ForeColor = propertiesPanel1.selectedColor;
 
-                    // 3. Thêm sự kiện để xử lý khi người dùng nhập xong
+                    // 3. Tự động mwor khung khi paste văn bản hoặc nhập dài
+                    activeTextBox.TextChanged += (s, ev) => {
+                        TextBox tb = s as TextBox;
+                        if (tb != null)
+                        {
+                            // Đo chiều cao thực tế của chữ dựa trên chiều rộng hiện tại của khung
+                            Size size = TextRenderer.MeasureText(tb.Text, tb.Font,
+                                        new Size(tb.Width, int.MaxValue),
+                                        TextFormatFlags.WordBreak | TextFormatFlags.TextBoxControl);
+
+                            // Nếu chữ dài hơn khung, nới rộng chiều cao khung ra
+                            if (size.Height + 10 > tb.Height)
+                            {
+                                tb.Height = size.Height + 10;
+                            }
+                        }
+                    };
+
+                    // 4. Thêm sự kiện để xử lý khi người dùng nhập xong
                     activeTextBox.LostFocus += ActiveTextBox_LostFocus;
                     activeTextBox.KeyDown += ActiveTextBox_KeyDown;
 
-                    // 4. Thêm TextBox vào PictureBox và focus vào nó
+                    // 5. Thêm TextBox vào PictureBox và focus vào nó
                     pictureBox1.Controls.Add(activeTextBox);
                     activeTextBox.Focus();
                     isChanged = true; // Đánh dấu là đã thay đổi (bắt đầu nhập text)
@@ -883,24 +907,23 @@ namespace WinForm_Paint_Gr12
             // Nếu có văn bản, thực hiện vẽ cố định
             if (!string.IsNullOrEmpty(activeTextBox.Text))
             {
-                // 1. Lấy Graphics từ tờ giấy chính (_mainbitmap)
+                // 1. Lấy Graphics từ tờ    w giấy chính (_mainbitmap)
                 using (Graphics g = Graphics.FromImage(_mainbitmap))
                 {
-                    // Cài đặt chất lượng Text
+                    // Cài đặt chế độ khử răng cưa cho chữ:
                     g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAliasGridFit;
 
-                    // Tạo SolidBrush với màu văn bản
-                    using (SolidBrush brush = new SolidBrush(activeTextBox.ForeColor))
-                    {
-                        // 2. Vẽ chuỗi văn bản lên _mainbitmap
-                        g.DrawString(
-                            activeTextBox.Text,
-                            activeTextBox.Font,
-                            brush,
-                            activeTextBox.Location.X,
-                            activeTextBox.Location.Y
-                        );
-                    }
+                    // Thiết lập các cờ (Flags) định dạng cho văn bản:
+                    // WordBreak: Tự động xuống dòng khi chữ chạm cạnh phải của khung.
+                    // TextBoxControl: Quan trọng nhất! Nó ép hàm vẽ phải canh lề, khoảng cách dòng y hệt như cái TextBox bạn đang nhìn thấy.
+                    // NoPadding: Loại bỏ các khoảng trắng thừa ở biên để vị trí chữ in xuống khớp hoàn toàn với vị trí TextBox trên màn hình.
+                    TextFormatFlags flags = TextFormatFlags.WordBreak | TextFormatFlags.TextBoxControl | TextFormatFlags.NoPadding;
+
+                    // Thực hiện vẽ văn bản chính thức xuống ảnh bằng công cụ TextRenderer:
+                    // TextRenderer sử dụng công nghệ GDI của Windows
+                    // Lấy nội dung (Text), phông chữ (Font), vùng vẽ (Bounds) và màu sắc (ForeColor) trực tiếp từ cái TextBox đang dùng
+                    TextRenderer.DrawText(g, activeTextBox.Text, activeTextBox.Font, activeTextBox.Bounds, activeTextBox.ForeColor,flags);
+
                     historyManager.saveSnapshot(_mainbitmap);
                 }
             }
@@ -910,7 +933,7 @@ namespace WinForm_Paint_Gr12
             pictureBox1.Invalidate();
         }
 
-        /*XỬ LÝ PHÍM ENTER/ESC ĐỂ HOÀN THÀNH NHẬP LIỆU*/
+        // xử lý phim enter/esc để nhập liệu
         private void ActiveTextBox_KeyDown(object sender, KeyEventArgs e)
         {
             // Bấm ESC để kết thúc nhập liệu và chuyển sang trạng thái LostFocus
