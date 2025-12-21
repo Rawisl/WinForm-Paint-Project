@@ -80,27 +80,34 @@ namespace WinForm_Paint_Gr12
         /*HÀM RIÊNG ĐỂ LƯU FILE XUỐNG ĐƯỜNG DẪN PATH*/
         private void saveImages(string path)
         {
-            string ext = System.IO.Path.GetExtension(path).ToLower(); //lấy phần đuôi định dạng của file bằng hàm có sẵn trong system
-            ImageFormat format = ImageFormat.Png; //mặc định lưu dưới dạng png
-            switch (ext)
+            try
             {
-                case ".jpg":
-                case ".jpeg":
-                    format = ImageFormat.Jpeg;
-                    break;
-                case ".bmp":
-                    format = ImageFormat.Bmp;
-                    break;
+                string ext = System.IO.Path.GetExtension(path).ToLower(); //lấy phần đuôi định dạng của file bằng hàm có sẵn trong system
+                ImageFormat format = ImageFormat.Png; //mặc định lưu dưới dạng png
+                switch (ext)
+                {
+                    case ".jpg":
+                    case ".jpeg":
+                        format = ImageFormat.Jpeg;
+                        break;
+                    case ".bmp":
+                        format = ImageFormat.Bmp;
+                        break;
+                }
+                //lưu ảnh
+                _mainbitmap.Save(path, format);
+
+                //cập nhật trạng thái
+                currentFilePath = path; //lưu thành đường dẫn mới
+                isChanged = false; //lưu xong thì set lại cờ thay đổi
+
+                //set lại dòng text hiển thị trên đầu app để hiển thị tên file + tên app
+                this.Text = System.IO.Path.GetFileName(path) + " - Paint App";
             }
-            //lưu ảnh
-            _mainbitmap.Save(path, format);
-
-            //cập nhật trạng thái
-            currentFilePath = path; //lưu thành đường dẫn mới
-            isChanged = false; //lưu xong thì set lại cờ thay đổi
-
-            //set lại dòng text hiển thị trên đầu app để hiển thị tên file + tên app
-            this.Text = System.IO.Path.GetFileName(path) + " - Paint App";
+            catch (Exception ex)
+            {
+                MessageBox.Show("Không thể lưu file: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         /*HÀM RIÊNG ĐỂ XỬ LÝ RESIZE*/
@@ -253,6 +260,16 @@ namespace WinForm_Paint_Gr12
                 pictureBox1.Focus(); // Kích hoạt LostFocus để lưu chữ
             }
 
+            //Kiểm tra có ảnh đang paste dở không, nếu có mà đổi tool thì hủy ảnh
+            if (pastedImage != null)
+            {
+                //hủy ảnh
+                pastedImage.Dispose();
+                pastedImage = null;
+                //vẽ lại để xóa hình preview đi
+                pictureBox1.Invalidate();
+            }
+
             //Cập nhật biến Tooltype cục bộ
             this.currentTool = toolsPanel1.currentTool;
 
@@ -311,6 +328,15 @@ namespace WinForm_Paint_Gr12
                 toolsPanel1_toolChanged(this, EventArgs.Empty);
             }
         }
+
+        /*HÀM XỬ LÝ SỰ KIỆN LOAD*/
+        private void mainForm_Load(object sender, EventArgs e)
+        {
+            //code để hiện intro form
+            Intro intro = new Intro();
+            intro.Show(this);
+        }
+
         /*HÀM XỬ LÝ SỰ KIỆN KEYDOWN*/
         private void mainForm_KeyDown(object sender, KeyEventArgs e)
         {
@@ -410,21 +436,13 @@ namespace WinForm_Paint_Gr12
                 }
             }
 
-            //winform có hỗ trợ sẵn dialog để open file, khai báo biến và dùng
-            OpenFileDialog ofd = new OpenFileDialog();
-
-            //set filter để lọc ra những ảnh có định dạng trên và cho phép chọn ảnh đó trong dialog
-            ofd.Filter = "Image Files|*.png;*.jpg;*.bmp";
-
-            //set title hiển thị trên đầu dialog
-            ofd.Title = "Mở ảnh có sẵn";
-
-            if (ofd.ShowDialog() == DialogResult.OK)
+            //mở openFiledialog ra
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 try
                 {
                     //Mở file -> Copy sang Bitmap mới -> Đóng file gốc ngay.
-                    using (Bitmap tempImage = new Bitmap(ofd.FileName))
+                    using (Bitmap tempImage = new Bitmap(openFileDialog.FileName))
                     {
                         // Tạo tờ giấy mới bằng đúng kích thước ảnh vừa mở
                         createNewCanvas(tempImage.Width, tempImage.Height);
@@ -440,7 +458,7 @@ namespace WinForm_Paint_Gr12
                     pictureBox1.Image = _mainbitmap;
 
                     //cập nhật lại đường dẫn hiện tại thành đường dẫn vào file mới open
-                    currentFilePath = ofd.FileName;
+                    currentFilePath = openFileDialog.FileName;
 
                     //đổi lại dòng text hiển thị trên đầu app
                     this.Text = System.IO.Path.GetFileName(currentFilePath) + " - Paint App";
@@ -457,7 +475,6 @@ namespace WinForm_Paint_Gr12
                     MessageBox.Show("Không mở được file này: " + ex.Message);
                 }
             }
-            ofd.Dispose(); //giải phóng dialog đỡ nặng RAM
         }
 
         /*HÀM XỬ LÝ SỰ KIỆN CLICK VÀO NÚT NEW*/
@@ -510,15 +527,10 @@ namespace WinForm_Paint_Gr12
         /*HÀM XỬ LÝ SỰ KIỆN CLICK VÀO NÚT SAVEAS*/
         private void saveAsMenu_Click(object sender, EventArgs e)
         {
-            SaveFileDialog sfd = new SaveFileDialog();
-            sfd.Filter = "PNG Image|*.png|JPEG Image|*.jpg|Bitmap Image|*.bmp"; //bộ lọc file
-            sfd.Title = "Lưu tác phẩm của bạn";
-            sfd.FileName = "NewPaint.png"; //tên mặc định
-            if (sfd.ShowDialog() == DialogResult.OK)
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
-                saveImages(sfd.FileName);
+                saveImages(saveFileDialog.FileName);
             }
-            sfd.Dispose(); //giải phóng dialog
         }
 
         /*HÀM XỬ LÝ NÚT REDO*/
@@ -750,7 +762,8 @@ namespace WinForm_Paint_Gr12
                     activeTextBox.ForeColor = propertiesPanel1.selectedColor;
 
                     // 3. Tự động mwor khung khi paste văn bản hoặc nhập dài
-                    activeTextBox.TextChanged += (s, ev) => {
+                    activeTextBox.TextChanged += (s, ev) =>
+                    {
                         TextBox tb = s as TextBox;
                         if (tb != null)
                         {
@@ -922,7 +935,7 @@ namespace WinForm_Paint_Gr12
                     // Thực hiện vẽ văn bản chính thức xuống ảnh bằng công cụ TextRenderer:
                     // TextRenderer sử dụng công nghệ GDI của Windows
                     // Lấy nội dung (Text), phông chữ (Font), vùng vẽ (Bounds) và màu sắc (ForeColor) trực tiếp từ cái TextBox đang dùng
-                    TextRenderer.DrawText(g, activeTextBox.Text, activeTextBox.Font, activeTextBox.Bounds, activeTextBox.ForeColor,flags);
+                    TextRenderer.DrawText(g, activeTextBox.Text, activeTextBox.Font, activeTextBox.Bounds, activeTextBox.ForeColor, flags);
 
                     historyManager.saveSnapshot(_mainbitmap);
                 }
@@ -944,6 +957,5 @@ namespace WinForm_Paint_Gr12
                 e.SuppressKeyPress = true; // Ngăn không cho ký tự ESC xuất hiện trong TextBox
             }
         }
-
     }
 }

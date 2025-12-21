@@ -32,7 +32,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ToolsPanel));
             this.IconList = new System.Windows.Forms.ImageList(this.components);
             this.PropertiesButton = new System.Windows.Forms.Button();
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.brushButton = new System.Windows.Forms.RadioButton();
             this.lineButton = new System.Windows.Forms.RadioButton();
             this.pencilButton = new System.Windows.Forms.RadioButton();
@@ -44,6 +43,7 @@
             this.fillButton = new System.Windows.Forms.RadioButton();
             this.colorpickerButton = new System.Windows.Forms.RadioButton();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -74,6 +74,7 @@
             this.PropertiesButton.Padding = new System.Windows.Forms.Padding(0, 0, 1, 0);
             this.PropertiesButton.Size = new System.Drawing.Size(28, 35);
             this.PropertiesButton.TabIndex = 1;
+            this.toolTip1.SetToolTip(this.PropertiesButton, "Thu/Phóng tùy chọn");
             this.PropertiesButton.UseVisualStyleBackColor = true;
             this.PropertiesButton.Click += new System.EventHandler(this.PropertiesButton_Click);
             // 
@@ -182,7 +183,7 @@
             this.textButton.Size = new System.Drawing.Size(45, 45);
             this.textButton.TabIndex = 3;
             this.textButton.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.toolTip1.SetToolTip(this.textButton, "Thêm chữ");
+            this.toolTip1.SetToolTip(this.textButton, "Văn bản");
             this.textButton.UseVisualStyleBackColor = true;
             this.textButton.CheckedChanged += new System.EventHandler(this.textButton_CheckedChanged);
             // 
@@ -203,7 +204,7 @@
             this.ellipseButton.Size = new System.Drawing.Size(45, 45);
             this.ellipseButton.TabIndex = 6;
             this.ellipseButton.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.toolTip1.SetToolTip(this.ellipseButton, "Hình oval");
+            this.toolTip1.SetToolTip(this.ellipseButton, "Hình ellipse");
             this.ellipseButton.UseVisualStyleBackColor = true;
             this.ellipseButton.CheckedChanged += new System.EventHandler(this.ellipseButton_CheckedChanged);
             // 
@@ -225,7 +226,7 @@
             this.eraserButton.Size = new System.Drawing.Size(45, 45);
             this.eraserButton.TabIndex = 0;
             this.eraserButton.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.toolTip1.SetToolTip(this.eraserButton, "Xóa");
+            this.toolTip1.SetToolTip(this.eraserButton, "Tẩy");
             this.eraserButton.UseVisualStyleBackColor = true;
             this.eraserButton.CheckedChanged += new System.EventHandler(this.eraserButton_CheckedChanged);
             // 
@@ -327,7 +328,6 @@
         #endregion
         private System.Windows.Forms.ImageList IconList;
         private System.Windows.Forms.Button PropertiesButton;
-        private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.RadioButton brushButton;
         private System.Windows.Forms.RadioButton lineButton;
         private System.Windows.Forms.RadioButton pencilButton;
@@ -339,5 +339,6 @@
         private System.Windows.Forms.RadioButton fillButton;
         private System.Windows.Forms.RadioButton colorpickerButton;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }

@@ -145,7 +145,8 @@ namespace WinForm_Paint_Gr12
                 OnToolSelected();
             }
         }
-
+        
+        //Hàm xử lý khi click vào nút thu phóng properties panel
         private void PropertiesButton_Click(object sender, EventArgs e)
         {
             //Kích hoạt sự kiện Toggled
