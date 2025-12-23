@@ -231,7 +231,9 @@ namespace WinForm_Paint_Gr12
             }
         }
 
-        /*CÁC HÀM RIÊNG ĐỂ XỬ LÝ THAY ĐỔI TỪ CÁC PANEL*/
+        /*=============================================*/
+        /*==========XỬ LÝ SỰ KIỆN TỪ CÁC PANEL=========*/
+        /*=============================================*/
         private void propertiesPanel1_colorChanged(object sender, EventArgs e)
         {
             // Cập nhật biến màu cục bộ ngay lập tức
@@ -242,7 +244,7 @@ namespace WinForm_Paint_Gr12
             // Cập nhật biến size cục bộ ngay lập tức
             this.currentSize = propertiesPanel1.selectedSize;
         }
-        private void propertiesPanel1_FontChanged(object sender, EventArgs e)
+        private void propertiesPanel1_fontChanged(object sender, EventArgs e)
         {
             // Cập nhật Font và Màu cho TextBox đang hoạt động ngay lập tức (nếu có)
             if (activeTextBox != null)
@@ -308,22 +310,8 @@ namespace WinForm_Paint_Gr12
             //tạo giấy vẽ mới có kích thước mặc định tự set
             createNewCanvas(defaultWidth, defaultHeight);
 
-            // Khi propertiesPanel1 gọi eventhandler colorchanged, chạy hàm PropertiesPanel1_ColorChanged
-            if (propertiesPanel1 != null)
-            {
-                propertiesPanel1.colorChanged += propertiesPanel1_colorChanged;
-                propertiesPanel1.sizeChanged += propertiesPanel1_sizeChanged;
-                propertiesPanel1.FontChanged += propertiesPanel1_FontChanged;
-            }
-
-            // Tương tự cho ToolsPanel khi gọi eventhandler
             if (toolsPanel1 != null)
             {
-                toolsPanel1.toolChanged += toolsPanel1_toolChanged;
-
-                // Đấu dây sự kiện Properties Toggled
-                toolsPanel1.propertiesToggled += toolsPanel1_propertiesToggled;
-
                 //Gọi hàm xử lý sự kiện để thiết lập con trỏ dựa trên ToolType mặc định
                 toolsPanel1_toolChanged(this, EventArgs.Empty);
             }

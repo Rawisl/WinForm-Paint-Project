@@ -15,7 +15,7 @@ namespace WinForm_Paint_Gr12
         // --- 1. SỰ KIỆN (EVENTS) ---
         public event EventHandler colorChanged;
         public event EventHandler sizeChanged;
-        public event EventHandler FontChanged;
+        public event EventHandler fontChanged;
 
         // --- 2. THUỘC TÍNH PUBLIC (DATA) ---
         public Color selectedColor { get; private set; } = Color.Black;
@@ -99,7 +99,7 @@ namespace WinForm_Paint_Gr12
                 lblFontPreview.Text = "Font: " + this.selectedFont.Name + "\n" + "Font Size: " + this.selectedFont.Size + "\n" + "FontStyle: " + this.selectedFont.Style;
 
                 //Bắn tín hiệu ra ngoài để cho Main bắn được tín hiệu
-                FontChanged?.Invoke(this, EventArgs.Empty);
+                fontChanged?.Invoke(this, EventArgs.Empty);
             }
         }
 
@@ -170,7 +170,7 @@ namespace WinForm_Paint_Gr12
             lblFontPreview.Text = "Font: " + this.selectedFont.Name + "\n" + "Font Size: " + this.selectedFont.Size + "\n" + "FontStyle: " + this.selectedFont.Style;
 
             // Bắn tín hiệu ra ngoài
-            FontChanged?.Invoke(this, EventArgs.Empty);
+            fontChanged?.Invoke(this, EventArgs.Empty);
         }
 
         //hàm cập nhật cái khung màu hiện tại theo màu mới pick trong color picker
@@ -187,7 +187,7 @@ namespace WinForm_Paint_Gr12
         private void trackBar1_ValueChanged(object sender, EventArgs e)
         {
             //Cập nhật dữ liệu
-            this.selectedSize = (float)trackBar1.Value;
+            this.selectedSize = (float)trackBar1.Value + 1;
 
             //Cập nhật giao diện Size
             showSize_Label.Text = "Size: " + (trackBar1.Value + 1);
