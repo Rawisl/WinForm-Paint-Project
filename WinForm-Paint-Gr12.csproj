@@ -159,12 +159,6 @@
     <None Include="Resources\cursor_PNG111.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Textbox.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\line1.png" />
-  </ItemGroup>
-  <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
       <Visible>False</Visible>
       <ProductName>Microsoft .NET Framework 4.7.2 %28x86 and x64%29</ProductName>
