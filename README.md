@@ -9,6 +9,7 @@ Trong suốt quá trình trình học tập và trao đổi, nhờ có sự đ�
 Dù đã có nhiều cố gắng để hoàn thiện đồ án một cách tốt nhất, nhưng do kiến thức còn hạn chế, chắc chắn sản phẩm không tránh khỏi những thiếu sót. Chúng em rất mong tiếp tục nhận được những ý kiến đóng góp của thầy để kiến thức của chúng em ngày càng hoàn thiện hơn.
 
 Một lần nữa, nhóm em xin kính chúc thầy sẽ có thật nhiều sức khỏe, hạnh phúc và có thêm nhiều thành công nữa trong tương lai sắp tới của mình!
+
 Trân trọng,
 ## 🧑‍🏫 Giới thiệu đồ án và sơ lược chức năng
 ## 📚 Ngôn ngữ sử dụng, công cụ tham khảo 
