@@ -32,3 +32,6 @@ Trân trọng,
 ### Trần Thị Hoài Ngọc - Team Leader & System Architect
 ### Lê Nguyễn Hữu Khang - UI/UX & Text Engine Developer
 ### Phạm Minh Đức - Graphics Logic & Algorithms Developer
+
+## 📸 Screenshots
+<img width="1371" height="765" alt="Paint 19_12_2025 11_18_31 SA" src="https://github.com/user-attachments/assets/e2a2f6c7-c2ab-499c-90d9-8e87421fad7e" />
