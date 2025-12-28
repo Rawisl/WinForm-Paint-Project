@@ -6,9 +6,7 @@ Lời đầu tiên, nhóm em xin gửi lời cảm ơn chân thành và sâu s�
 
 Nhờ có sự định hướng về tư duy lập trình và những góp ý quý báu của thầy, nhóm em đã quyết định sẽ chọn "Paint" là chủ đề và sẽ là "đứa con tinh thần" của cả nhóm.
 
-Với chủ đề mình đã chọn, nhóm em không chỉ học được cách tạo ra các công cụ vẽ hình đơn giản mà còn được tìm hiểu thêm được nhiều kiến thức về quản lý bộ nhớ trong GDI+,... và đặc biệt là tạo nên 1 công cụ mà nhóm em tâm đắc nhất: FillBucket.
-
-Và sau cùng, nhóm em xin kính chúc thầy sẽ có thêm thật nhiều thành công nữa trong tương lai sắp tới của mình!
+Nhóm em xin kính chúc thầy sẽ có thêm thật nhiều thành công nữa trong tương lai sắp tới của mình!
 
 Trân trọng,
 
