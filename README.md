@@ -2,13 +2,11 @@
 
 ## 👨‍🎓 Lời cảm ơn đến ThS. Võ Tuấn Kiệt
 
-Lời đầu tiên, nhóm em xin gửi lời cảm ơn chân thành và sâu sắc nhất của nhóm chúng em đến thạc sĩ Võ Tuấn Kiệt đã đồng hành, hướng dẫn nhóm em trong suốt quá trình học tập ở trường.
+Lời đầu tiên, nhóm em xin gửi lời cảm ơn chân thành và sâu sắc nhất của nhóm chúng em đến thạc sĩ Võ Tuấn Kiệt đã đồng hành, hướng dẫn nhóm em trong việc thực hiện đồ án ở môn học này.
 
-Trong suốt quá trình trình học tập và trao đổi, nhờ có sự định hướng về tư duy lập trình và những góp ý quý báu của thầy về việc nên chọn những chủ đề nào để đề tài của nhóm em sẽ có nhiều ứng dụng, giúp cho việc nghiên cứu sau này của nhóm, nhóm em đã quyết định sẽ chọn "Paint" sẽ là chủ đề của nhóm mình và sẽ là "đứa con tinh thần" của toàn nhóm. Với chủ đề mình đã chọn, nhóm em không chỉ tìm tòi ra được cách tạo ra các công cụ vẽ hình đơn giản mà còn tìm hiểu thêm được nhiều kiến thức về quản lý bộ nhớ trong GDI+, cách tạo ra các con trỏ cho từng công cụ mình đã chọn, và đặc biệt là kỹ thuật tối ưu hóa thuật toán như Flood fill để tạo nên 1 công cụ mà nhóm em tâm đắc nhất: FillBucket
+Trong quá trình trình học tập và trao đổi, nhờ có sự định hướng về tư duy lập trình và những góp ý quý báu của thầy, nhóm em đã quyết định sẽ chọn "Paint" là chủ đề và sẽ là "đứa con tinh thần" của cả nhóm. Với chủ đề mình đã chọn, nhóm em không chỉ học được cách tạo ra các công cụ vẽ hình đơn giản mà còn được tìm hiểu thêm được nhiều kiến thức về quản lý bộ nhớ trong GDI+, cách tạo ra các con trỏ cho từng công cụ mình đã chọn, và đặc biệt là tạo nên 1 công cụ mà nhóm em tâm đắc nhất: FillBucket
 
-Dù đã có nhiều cố gắng để hoàn thiện đồ án một cách tốt nhất, nhưng do kiến thức còn hạn chế, chắc chắn sản phẩm không tránh khỏi những thiếu sót. Chúng em rất mong tiếp tục nhận được những ý kiến đóng góp của thầy để kiến thức của chúng em ngày càng hoàn thiện hơn.
-
-Một lần nữa, nhóm em xin kính chúc thầy sẽ có thật nhiều sức khỏe, hạnh phúc và có thêm nhiều thành công nữa trong tương lai sắp tới của mình!
+Một lần nữa, nhóm em xin kính chúc thầy sẽ có thật nhiều sức khỏe và có thêm nhiều thành công nữa trong tương lai sắp tới của mình!
 
 Trân trọng,
 ## 🧑‍🏫 Giới thiệu đồ án và sơ lược chức năng
