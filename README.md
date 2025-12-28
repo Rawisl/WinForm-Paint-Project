@@ -4,13 +4,14 @@
 
 Lời đầu tiên, nhóm em xin gửi lời cảm ơn chân thành và sâu sắc nhất của nhóm chúng em đến thạc sĩ Võ Tuấn Kiệt đã đồng hành, hướng dẫn nhóm em trong việc thực hiện đồ án ở môn học này.
 
-Trong quá trình trình học tập và trao đổi, nhờ có sự định hướng về tư duy lập trình và những góp ý quý báu của thầy, nhóm em đã quyết định sẽ chọn "Paint" là chủ đề và sẽ là "đứa con tinh thần" của cả nhóm.
+Nhờ có sự định hướng về tư duy lập trình và những góp ý quý báu của thầy, nhóm em đã quyết định sẽ chọn "Paint" là chủ đề và sẽ là "đứa con tinh thần" của cả nhóm.
 
-Với chủ đề mình đã chọn, nhóm em không chỉ học được cách tạo ra các công cụ vẽ hình đơn giản mà còn được tìm hiểu thêm được nhiều kiến thức về quản lý bộ nhớ trong GDI+, cách tạo ra các con trỏ cho từng công cụ mình đã chọn, và đặc biệt là tạo nên 1 công cụ mà nhóm em tâm đắc nhất: FillBucket.
+Với chủ đề mình đã chọn, nhóm em không chỉ học được cách tạo ra các công cụ vẽ hình đơn giản mà còn được tìm hiểu thêm được nhiều kiến thức về quản lý bộ nhớ trong GDI+,... và đặc biệt là tạo nên 1 công cụ mà nhóm em tâm đắc nhất: FillBucket.
 
-Và sau cùng, nhóm em xin kính chúc thầy sẽ có thật nhiều sức khỏe và có thêm nhiều thành công nữa trong tương lai sắp tới của mình!
+Và sau cùng, nhóm em xin kính chúc thầy sẽ có thêm thật nhiều thành công nữa trong tương lai sắp tới của mình!
 
 Trân trọng,
+
 ## 🧑‍🏫 Giới thiệu đồ án và sơ lược chức năng
 - Đồ án này tập trung phát triển một phần mềm hỗ trợ vẽ kỹ thuật số 2D, mô phỏng lại phần mềm MS Paint truyền thống.
 - Ứng dụng mô phỏng lại bộ công cụ vẽ truyền thống (như bút, tẩy, bảng màu) lên môi trường máy tính thông qua một giao diện thân thiện.
