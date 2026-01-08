@@ -352,7 +352,7 @@ namespace WinForm_Paint_Gr12
                 }
             }
 
-            // 2. Xử lý Copy (Ctrl + C) - Làm luôn cho đủ bộ (Bonus)
+            // 2. Xử lý Copy (Ctrl + C)
             if (e.Control && e.KeyCode == Keys.C)
             {
                 if (_mainbitmap != null)
@@ -524,6 +524,7 @@ namespace WinForm_Paint_Gr12
         /*HÀM XỬ LÝ NÚT REDO*/
         private void quickRedoButton_Click(object sender, EventArgs e)
         {
+            //Gọi redo, nó trả về bức ảnh trước khi undo
             Bitmap futureImage = historyManager.redo(_mainbitmap);
             if (futureImage != null)
             {
@@ -554,7 +555,7 @@ namespace WinForm_Paint_Gr12
                 updateUnReButton();
             }
 
-            // 3. Dọn dẹp và xóa TextBox tạm thời
+            //Dọn dẹp và xóa TextBox tạm thời
             CleanupActiveTextBox();
 
             // Yêu cầu PictureBox vẽ lại để hiển thị văn bản cố định
@@ -567,6 +568,7 @@ namespace WinForm_Paint_Gr12
         {
             using (resizeCanvasDialog dlg = new resizeCanvasDialog())
             {
+                //Gọi hàm ghi làm label hiển thị size
                 dlg.setLabel_CurrentSize(_mainbitmap.Width, _mainbitmap.Height);
                 if (dlg.ShowDialog() == DialogResult.OK)
                 {
@@ -791,7 +793,7 @@ namespace WinForm_Paint_Gr12
             if (isDrawing)
             {
                 isDrawing = false;
-                //// === THÊM ĐOẠN NÀY ĐỂ IN HÌNH CHÍNH THỨC VÀO GIẤY ===
+                //IN HÌNH CHÍNH THỨC VÀO GIẤY
                 if (currentTool == ToolType.Line || currentTool == ToolType.Rectangle || currentTool == ToolType.Oval || currentTool == ToolType.Triangle)
                     // dùng if else ở đây là để tách hình học với pencil, brush ra riêng
                     using (Graphics g = Graphics.FromImage(_mainbitmap))
@@ -840,7 +842,7 @@ namespace WinForm_Paint_Gr12
                 }
             }
 
-            //Thêm code logic vẽ review Line, Rectangle trong tương lai
+            //Thêm code logic vẽ review
             if (isDrawing)
             {
                 processDrawing(e.Graphics, firstPoint, lastPoint, currentTool);
@@ -865,7 +867,7 @@ namespace WinForm_Paint_Gr12
                             // lastPoint chính là vị trí chuột hiện tại trong sự kiện Paint
                             Point textPos = new Point(lastPoint.X + 15, lastPoint.Y + 15);
 
-                            // Vẽ nền mờ bên dưới chữ cho dễ đọc (Tùy chọn)
+                            // Vẽ nền mờ bên dưới chữ cho dễ đọc
                             SizeF textSize = e.Graphics.MeasureString(hintText, font);
                             e.Graphics.FillRectangle(bgBrush, textPos.X, textPos.Y, textSize.Width, textSize.Height);
 
@@ -908,7 +910,7 @@ namespace WinForm_Paint_Gr12
             // Nếu có văn bản, thực hiện vẽ cố định
             if (!string.IsNullOrEmpty(activeTextBox.Text))
             {
-                // 1. Lấy Graphics từ tờ    w giấy chính (_mainbitmap)
+                // 1. Lấy Graphics từ tờ giấy chính (_mainbitmap)
                 using (Graphics g = Graphics.FromImage(_mainbitmap))
                 {
                     // Cài đặt chế độ khử răng cưa cho chữ:

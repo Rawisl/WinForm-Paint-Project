@@ -28,7 +28,7 @@ namespace WinForm_Paint_Gr12
         public void saveSnapshot(Bitmap currentImage)
         {
             // Ví dụ cho ý tưởng: Đang có Bitmap[1, 2, 3, 4], Undo về 2, vẽ nét mới -> Xóa 3, 4 -> Thành [1, 2, Mới]
-            if (currentIndex < history.Count - 1)
+            if (CanRedo)
             {
                 for (int i = history.Count - 1; i > currentIndex; i--)
                 {
@@ -39,10 +39,11 @@ namespace WinForm_Paint_Gr12
 
             //thêm clone của bitmap hiện tại vào list
             history.Add((Bitmap)currentImage.Clone());
+
             //tăng biến index
             currentIndex++;
 
-            //trường hợp trong list đã chứa quá 19 bitmap rồi thì bắt đầu xóa từ đầu [0] đi (xóa cái bitmap cũ nhất)
+            //trường hợp trong list đã chứa quá 20 bitmap rồi thì bắt đầu xóa từ đầu [0] đi (xóa cái bitmap cũ nhất)
             if (history.Count > maxHistorySize)
             {
                 history[0].Dispose();
@@ -55,7 +56,7 @@ namespace WinForm_Paint_Gr12
         //hàm xử lý undo
         public Bitmap undo(Bitmap currentImage)
         {
-            if (currentIndex > 0)
+            if (CanUndo)
             {
                 currentIndex--;
                 return (Bitmap)history[currentIndex].Clone();
@@ -66,7 +67,7 @@ namespace WinForm_Paint_Gr12
         //hàm xử lý redo
         public Bitmap redo(Bitmap currentImage)
         {
-            if (currentIndex < history.Count - 1)
+            if (CanRedo)
             {
                 currentIndex++;
                 return (Bitmap)history[currentIndex].Clone();
