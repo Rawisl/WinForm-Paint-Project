@@ -1,15 +1,5 @@
 # 🎨 DỰ ÁN MÔ PHỎNG ỨNG DỤNG PAINT CỦA WINDOWS – IT008
 
-## 👨‍🎓 Lời cảm ơn đến ThS. Võ Tuấn Kiệt
-
-Lời đầu tiên, nhóm em xin gửi lời cảm ơn chân thành và sâu sắc nhất của nhóm chúng em đến thạc sĩ Võ Tuấn Kiệt đã đồng hành, hướng dẫn nhóm em trong việc thực hiện đồ án ở môn học này.
-
-Nhờ có sự định hướng về tư duy lập trình và những góp ý quý báu của thầy, nhóm em đã quyết định sẽ chọn "Paint" là chủ đề và sẽ là "đứa con tinh thần" của cả nhóm.
-
-Nhóm em xin kính chúc thầy sẽ có thêm thật nhiều thành công nữa trong tương lai sắp tới của mình!
-
-Trân trọng,
-
 ## 🧑‍🏫 Giới thiệu đồ án và sơ lược chức năng
 - Đồ án này tập trung phát triển một phần mềm hỗ trợ vẽ kỹ thuật số 2D, mô phỏng lại phần mềm MS Paint truyền thống.
 - Ứng dụng mô phỏng lại bộ công cụ vẽ truyền thống (như bút, tẩy, bảng màu) lên môi trường máy tính thông qua một giao diện thân thiện.
